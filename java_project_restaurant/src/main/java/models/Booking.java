@@ -1,5 +1,8 @@
 package models;
 
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +14,7 @@ public class Booking {
     private RestaurantTable restaurantTable;
     private Date dateTime;
     private int bookingLength;
+    private Bill bill;
 
     public Booking(){
     }
@@ -61,5 +65,15 @@ public class Booking {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 }
