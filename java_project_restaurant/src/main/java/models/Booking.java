@@ -2,19 +2,20 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Booking {
 
     private Restaurant restaurant;
     private ArrayList<Customer> customers;
     private RestaurantTable restaurantTable;
-    private Calendar dateTime;
+    private Date dateTime;
     private int bookingLength;
 
     public Booking(){
     }
 
-    public Booking(Restaurant restaurant, ArrayList<Customer> customers, RestaurantTable restaurantTable, Calendar dateTime, int bookingLength) {
+    public Booking(Restaurant restaurant, ArrayList<Customer> customers, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
         this.restaurant = restaurant;
         this.customers = customers;
         this.restaurantTable = restaurantTable;
@@ -22,11 +23,11 @@ public class Booking {
         this.bookingLength = bookingLength;
     }
 
-    public ArrayList<Customer> getCustomer() {
+    public ArrayList<Customer> getCustomers() {
         return customers;
     }
 
-    public void setCustomer(ArrayList<Customer> customers) {
+    public void setCustomers(ArrayList<Customer> customers) {
         this.customers = customers;
     }
 
@@ -38,11 +39,11 @@ public class Booking {
         this.restaurantTable = restaurantTable;
     }
 
-    public Calendar getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Calendar dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
