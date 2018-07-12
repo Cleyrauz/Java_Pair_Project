@@ -13,7 +13,6 @@ import static org.junit.Assert.assertEquals;
 
 public class BookingTest {
     Booking booking;
-    List<RestaurantTable> tables;
     RestaurantTable table1;
     RestaurantTable table2;
     RestaurantTable table3;
@@ -31,16 +30,12 @@ public class BookingTest {
 
     @Before
     public void setUp() throws Exception {
-        tables = new ArrayList<RestaurantTable>();
-        table1 = new RestaurantTable(1, 4);
-        table2 = new RestaurantTable(2, 2);
-        table3 = new RestaurantTable(3, 2);
-        table4 = new RestaurantTable(4, 6);
-        tables.add(table1);
-        tables.add(table2);
-        tables.add(table3);
-        tables.add(table4);
-        restaurant = new Restaurant("Del Arepas", tables);
+
+        restaurant = new Restaurant("Del Arepas");
+        table1 = new RestaurantTable(1, 4, restaurant);
+        table2 = new RestaurantTable(2, 2, restaurant);
+        table3 = new RestaurantTable(3, 2, restaurant);
+        table4 = new RestaurantTable(4, 6, restaurant);
 
         customers = new ArrayList<Customer>();
         customer1 = new Customer("Matthew", "Bryce", 100);
