@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tables")
@@ -10,7 +11,7 @@ public class RestaurantTable {
     private int id;
     private int tableNumber;
     private int capacity;
-    private ArrayList<Booking> bookings;
+    private List<Booking> bookings;
     private Restaurant restaurant;
 
     public RestaurantTable() {
@@ -52,11 +53,11 @@ public class RestaurantTable {
     }
 
     @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.EAGER)
-    public ArrayList<Booking> getBookings() {
+    public List<Booking> getBookings() {
         return bookings;
     }
 
-    public void setBookings(ArrayList<Booking> bookings) {
+    public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
 
