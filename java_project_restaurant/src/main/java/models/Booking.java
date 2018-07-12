@@ -67,8 +67,7 @@ public class Booking {
         this.restaurant = restaurant;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+
     public Bill getBill() {
         return bill;
     }

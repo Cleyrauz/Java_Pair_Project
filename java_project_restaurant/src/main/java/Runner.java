@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class Runner {
     public static void main(String[] args) {
-        Item item = new Item(ItemType.FAJITAS);
-        DBHelper.save(item);
+        ArrayList<RestaurantTable> tables = new ArrayList<>();
+        Restaurant restaurant = new Restaurant("Del Arepas", tables);
+        DBHelper.save(restaurant);
     }
 }

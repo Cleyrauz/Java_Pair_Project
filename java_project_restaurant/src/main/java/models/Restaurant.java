@@ -3,7 +3,7 @@ package models;
 import java.util.List;
 
 public class Restaurant {
-
+    
     private String name;
     private List<Booking> bookings;
     private List<RestaurantTable> restaurantTables;
@@ -11,9 +11,8 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(String name, List<RestaurantTable> restaurantTables) {
+    public Restaurant(String name) {
         this.name = name;
-        this.restaurantTables = restaurantTables;
     }
 
     public String getName() {
