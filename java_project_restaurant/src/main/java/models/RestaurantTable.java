@@ -7,6 +7,7 @@ public class RestaurantTable {
     private int tableNumber;
     private int capacity;
     private ArrayList<Booking> bookings;
+    private Restaurant restaurant;
 
     public RestaurantTable() {
     }
@@ -38,5 +39,13 @@ public class RestaurantTable {
 
     public void setBookings(ArrayList<Booking> bookings) {
         this.bookings = bookings;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }
