@@ -1,16 +1,18 @@
 package models;
 
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import org.hibernate.annotations.Cascade;
 
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name = "bookings")
 public class Booking {
 
+    private int id;
     private Restaurant restaurant;
-    private ArrayList<Customer> customers;
+    private List<Customer> customers;
     private RestaurantTable restaurantTable;
     private Date dateTime;
     private int bookingLength;
@@ -19,7 +21,7 @@ public class Booking {
     public Booking(){
     }
 
-    public Booking(Restaurant restaurant, ArrayList<Customer> customers, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
+    public Booking(Restaurant restaurant, List<Customer> customers, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
         this.restaurant = restaurant;
         this.customers = customers;
         this.restaurantTable = restaurantTable;
@@ -27,14 +29,33 @@ public class Booking {
         this.bookingLength = bookingLength;
     }
 
-    public ArrayList<Customer> getCustomers() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ManyToMany
+    @JoinTable(name="booking_customer",
+            joinColumns = {@JoinColumn(name="booking_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="customer_id", nullable =false, updatable = false)})
+    public List<Customer> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(ArrayList<Customer> customers) {
+    public void setCustomers(List<Customer> customers) {
         this.customers = customers;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_table_id")
     public RestaurantTable getRestaurantTable() {
         return restaurantTable;
     }
@@ -43,6 +64,7 @@ public class Booking {
         this.restaurantTable = restaurantTable;
     }
 
+    @Column(name = "date_time")
     public Date getDateTime() {
         return dateTime;
     }
@@ -51,6 +73,7 @@ public class Booking {
         this.dateTime = dateTime;
     }
 
+    @Column(name = "booking_length")
     public int getBookingLength() {
         return bookingLength;
     }
@@ -59,6 +82,8 @@ public class Booking {
         this.bookingLength = bookingLength;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
     public Restaurant getRestaurant() {
         return restaurant;
     }
@@ -67,6 +92,7 @@ public class Booking {
         this.restaurant = restaurant;
     }
 
+//    not really sure how to do a One to One here :S
 
     public Bill getBill() {
         return bill;
