@@ -6,8 +6,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name="tables")
 public class RestaurantTable {
 
     private int id;
@@ -25,18 +23,6 @@ public class RestaurantTable {
         this.bookings = new ArrayList<Booking>();
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Column(name="tableNumber")
     public int getTableNumber() {
         return tableNumber;
     }
@@ -45,7 +31,6 @@ public class RestaurantTable {
         this.tableNumber = tableNumber;
     }
 
-    @Column(name="capacity")
     public int getCapacity() {
         return capacity;
     }
@@ -54,7 +39,6 @@ public class RestaurantTable {
         this.capacity = capacity;
     }
 
-    @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.LAZY)
     public List<Booking> getBookings() {
         return bookings;
     }
