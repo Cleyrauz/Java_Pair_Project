@@ -1,26 +1,19 @@
 package models;
 
-import org.hibernate.annotations.Cascade;
-
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RestaurantTable {
 
-    private int id;
     private int tableNumber;
     private int capacity;
-    private List<Booking> bookings;
+    private ArrayList<Booking> bookings;
 
-    public RestaurantTable(){
-
+    public RestaurantTable() {
     }
 
     public RestaurantTable(int tableNumber, int capacity) {
         this.tableNumber = tableNumber;
         this.capacity = capacity;
-        this.bookings = new ArrayList<Booking>();
     }
 
     public int getTableNumber() {
@@ -39,15 +32,11 @@ public class RestaurantTable {
         this.capacity = capacity;
     }
 
-    public List<Booking> getBookings() {
+    public ArrayList<Booking> getBookings() {
         return bookings;
     }
 
-    public void setBookings(List<Booking> bookings) {
+    public void setBookings(ArrayList<Booking> bookings) {
         this.bookings = bookings;
-    }
-
-    public void addBooking(Booking booking){
-        this.bookings.add(booking);
     }
 }

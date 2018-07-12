@@ -1,23 +1,21 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
 
     private String firstName;
     private String lastName;
-    private int totalBooked;
     private List<Booking> bookings;
+    private double budget;
 
     public Customer(){
     }
 
-    public Customer(String firstName, String lastName, int totalBooked) {
+    public Customer(String firstName, String lastName, double budget) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.totalBooked = totalBooked;
-        this.bookings = new ArrayList<Booking>();
+        this.budget = budget;
     }
 
     public String getFirstName() {
@@ -36,14 +34,6 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public int getTotalBooked() {
-        return totalBooked;
-    }
-
-    public void setTotalBooked(int totalBooked) {
-        this.totalBooked = totalBooked;
-    }
-
     public List<Booking> getBookings() {
         return bookings;
     }
@@ -52,7 +42,11 @@ public class Customer {
         this.bookings = bookings;
     }
 
-    public void addBooking(Booking booking){
-        this.bookings.add(booking);
+    public double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(double budget) {
+        this.budget = budget;
     }
 }

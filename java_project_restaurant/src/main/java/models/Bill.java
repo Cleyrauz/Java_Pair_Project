@@ -6,35 +6,30 @@ import java.util.List;
 public class Bill {
 
     private List<Item> items;
-    private double totalPrice;
+    private Booking booking;
 
     public Bill(){
-
     }
 
-    public Bill(double totalPrice) {
-        this.items = new ArrayList<Item>();
-        this.totalPrice = totalPrice;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public Bill(ArrayList<Item> items, Booking booking) {
+        this.items = items;
+        this.booking = booking;
     }
 
     public List<Item> getItems() {
         return items;
     }
 
-    public void setItems() {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
-    public void addItemsToBill(Item item){
-        this.items.add(item);
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }
 

@@ -1,37 +1,25 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Item {
 
-    private String name;
-    private double price;
+    private ItemType itemType;
     private List<Bill> bills;
 
     public Item(){
     }
 
-    public Item(String name, double price) {
-        this.name = name;
-        this.price = price;
-        this.bills = new ArrayList<Bill>();
+    public Item(ItemType type) {
+        this.itemType = type;
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return itemType.getName();
     }
 
     public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+        return itemType.getPrice();
     }
 
     public List<Bill> getBills() {

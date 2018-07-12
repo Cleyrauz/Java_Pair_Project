@@ -6,12 +6,14 @@ public class Restaurant {
 
     private String name;
     private List<Booking> bookings;
+    private List<RestaurantTable> restaurantTables;
 
     public Restaurant() {
     }
 
-    public Restaurant(String name) {
+    public Restaurant(String name, List<RestaurantTable> restaurantTables) {
         this.name = name;
+        this.restaurantTables = restaurantTables;
     }
 
     public String getName() {
@@ -30,7 +32,11 @@ public class Restaurant {
         this.bookings = bookings;
     }
 
-    public void addBooking(Booking booking){
-        this.bookings.add(booking);
+    public List<RestaurantTable> getRestaurantTables() {
+        return restaurantTables;
+    }
+
+    public void setRestaurantTables(List<RestaurantTable> restaurantTables) {
+        this.restaurantTables = restaurantTables;
     }
 }
