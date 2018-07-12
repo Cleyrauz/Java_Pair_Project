@@ -15,7 +15,7 @@
         <mapping class="models.Bill"/>
         <mapping class="models.Booking"/>
         <mapping class="models.Customer"/>
-        <mapping class="models.Items"/>
+        <mapping class="models.Item"/>
         <mapping class="models.RestaurantTable"/>
     </session-factory>
 </hibernate-configuration>
