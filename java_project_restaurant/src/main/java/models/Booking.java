@@ -67,7 +67,7 @@ public class Booking {
         this.restaurantTable = restaurantTable;
     }
 
-    @Column(name="dataTime")
+    @Column(name="date_time")
     public Date getDateTime() {
         return dateTime;
     }
@@ -96,7 +96,7 @@ public class Booking {
     }
 
     @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
+        fetch = FetchType.LAZY)
     public Bill getBill() {
         return bill;
     }

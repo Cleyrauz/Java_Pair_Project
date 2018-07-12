@@ -42,6 +42,10 @@ public class Bill {
         this.items = items;
     }
 
+    public void addItem(Item item) {
+        this.items.add(item);
+    }
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     public Booking getBooking() {
