@@ -13,7 +13,7 @@ import java.util.List;
 public class Bill {
 
     private int id;
-    private List<Items> items;
+    private List<Item> items;
     private int totalPrice;
 
     public Bill(){
@@ -21,7 +21,7 @@ public class Bill {
     }
 
     public Bill(int totalPrice) {
-        this.items = new ArrayList<Items>();
+        this.items = new ArrayList<Item>();
         this.totalPrice = totalPrice;
     }
 
@@ -49,17 +49,17 @@ public class Bill {
     @ManyToMany
     @JoinTable(name="items_bill",
             joinColumns = {@JoinColumn(name="bill_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="items_id", nullable =false, updatable = false)})
-    public List<Items> getItems() {
+            inverseJoinColumns = {@JoinColumn(name="item_id", nullable =false, updatable = false)})
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Items> items) {
+    public void setItems() {
         this.items = items;
     }
 
-    public void addItemsToBill(Items items){
-        this.items.add(items);
+    public void addItemsToBill(Item item){
+        this.items.add(item);
     }
 }
 
