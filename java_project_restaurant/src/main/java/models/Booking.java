@@ -1,16 +1,18 @@
 package models;
 
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name="bookings")
 public class Booking {
 
+    private int id;
     private Restaurant restaurant;
-    private ArrayList<Customer> customers;
+    private List<Customer> customers;
     private RestaurantTable restaurantTable;
     private Date dateTime;
     private int bookingLength;
@@ -27,11 +29,22 @@ public class Booking {
         this.bookingLength = bookingLength;
     }
 
-    public ArrayList<Customer> getCustomers() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Customer> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(ArrayList<Customer> customers) {
+    public void setCustomers(List<Customer> customers) {
         this.customers = customers;
     }
 

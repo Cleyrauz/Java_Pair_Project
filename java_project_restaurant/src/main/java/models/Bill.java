@@ -9,15 +9,15 @@ import java.util.List;
 public class Bill {
 
     private int id;
-    private ArrayList<Item> items;
+    private List<Item> items;
     private Booking booking;
 
     public Bill(){
     }
 
-    public Bill(ArrayList<Item> items, Booking booking) {
-        this.items = items;
+    public Bill(Booking booking) {
         this.booking = booking;
+        this.items = new ArrayList<Item>();
     }
 
     @Id
@@ -32,15 +32,15 @@ public class Bill {
     }
 
     @OneToMany(mappedBy = "bill", fetch = FetchType.LAZY)
-    public ArrayList<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Item> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
-    @OneToOne(mappedBy = "bill")
+    @OneToOne(mappedBy = "booking")
     public Booking getBooking() {
         return booking;
     }

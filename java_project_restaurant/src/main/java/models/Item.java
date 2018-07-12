@@ -9,7 +9,7 @@ public class Item {
 
     private int id;
     private ItemType itemType;
-    private List<Bill> bills;
+    private Bill bill;
 
     public Item(){
     }
@@ -41,11 +41,11 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "bill_id")
-    public List<Bill> getBills() {
-        return bills;
+    public Bill getBill() {
+        return bill;
     }
 
-    public void setBills(List<Bill> bills) {
-        this.bills = bills;
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 }
