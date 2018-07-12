@@ -3,6 +3,7 @@ package models;
 import com.sun.tools.javah.Gen;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
