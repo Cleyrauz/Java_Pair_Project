@@ -2,7 +2,6 @@ package models;
 
 
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
