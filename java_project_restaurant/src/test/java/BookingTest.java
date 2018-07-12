@@ -49,7 +49,7 @@ public class BookingTest {
 
         dateTime = new Date(2018, 2,4, 21,0);
 
-        booking = new Booking(restaurant, customers, table1, dateTime, 120);
+        booking = new Booking(restaurant, table1, dateTime, 120);
     }
 
     @Test

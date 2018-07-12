@@ -20,6 +20,6 @@ public class BillTest {
         item = new Item(ItemType.FAJITAS);
         items = new ArrayList<>();
         items.add(item);
-        bill = new Bill(items, booking);
+        bill = new Bill(booking);
     }
 }
