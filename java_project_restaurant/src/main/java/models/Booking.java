@@ -1,59 +1,36 @@
 package models;
 
-import javax.annotation.Generated;
-import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
-@Entity
-@Table(name="bookings")
 public class Booking {
 
-//    Calendar cal = Calendar.getInstance(); // creates calendar
-//        cal.setTime(new Date()); // sets calendar time/date
-//        cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
-//        cal.getTime();
-
-    private int id;
     private Restaurant restaurant;
-    private Customer customer;
+    private ArrayList<Customer> customers;
     private RestaurantTable restaurantTable;
-    private Calendar dateTime;
+    private Date dateTime;
     private int bookingLength;
 
     public Booking(){
     }
 
-    public Booking(Restaurant restaurant, Customer customer, RestaurantTable restaurantTable, Calendar dateTime, int bookingLength) {
+    public Booking(Restaurant restaurant, ArrayList<Customer> customers, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
         this.restaurant = restaurant;
-        this.customer = customer;
+        this.customers = customers;
         this.restaurantTable = restaurantTable;
         this.dateTime = dateTime;
         this.bookingLength = bookingLength;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    public int getId() {
-        return id;
+    public ArrayList<Customer> getCustomers() {
+        return customers;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCustomers(ArrayList<Customer> customers) {
+        this.customers = customers;
     }
 
-    @ManyToOne
-    @JoinColumn(name="customer_id", nullable = false)
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    @ManyToOne
-    @JoinColumn(name="restaurant_table_id", nullable = false)
     public RestaurantTable getRestaurantTable() {
         return restaurantTable;
     }
@@ -62,16 +39,14 @@ public class Booking {
         this.restaurantTable = restaurantTable;
     }
 
-    @Column(name = "dateTime")
-    public Calendar getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Calendar dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
-    @Column(name = "bookingLength")
     public int getBookingLength() {
         return bookingLength;
     }
@@ -80,8 +55,6 @@ public class Booking {
         this.bookingLength = bookingLength;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id", nullable = false)
     public Restaurant getRestaurant() {
         return restaurant;
     }

@@ -1,42 +1,22 @@
 package models;
 
-import org.hibernate.annotations.Cascade;
-
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
 
-@Entity
-@Table(name="tables")
 public class RestaurantTable {
 
-    private int id;
     private int tableNumber;
     private int capacity;
-    private List<Booking> bookings;
+    private ArrayList<Booking> bookings;
+    private Restaurant restaurant;
 
-    public RestaurantTable(){
-
+    public RestaurantTable() {
     }
 
     public RestaurantTable(int tableNumber, int capacity) {
         this.tableNumber = tableNumber;
         this.capacity = capacity;
-        this.bookings = new ArrayList<Booking>();
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Column(name="tableNumber")
     public int getTableNumber() {
         return tableNumber;
     }
@@ -45,7 +25,6 @@ public class RestaurantTable {
         this.tableNumber = tableNumber;
     }
 
-    @Column(name="capacity")
     public int getCapacity() {
         return capacity;
     }
@@ -54,16 +33,19 @@ public class RestaurantTable {
         this.capacity = capacity;
     }
 
-    @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.LAZY)
-    public List<Booking> getBookings() {
+    public ArrayList<Booking> getBookings() {
         return bookings;
     }
 
-    public void setBookings(List<Booking> bookings) {
+    public void setBookings(ArrayList<Booking> bookings) {
         this.bookings = bookings;
     }
 
-    public void addBooking(Booking booking){
-        this.bookings.add(booking);
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

@@ -1,37 +1,21 @@
 package models;
 
-import com.sun.tools.javah.Gen;
-
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "restaurants")
 public class Restaurant {
 
-    private int id;
     private String name;
     private List<Booking> bookings;
+    private List<RestaurantTable> restaurantTables;
 
     public Restaurant() {
     }
 
-    public Restaurant(String name) {
+    public Restaurant(String name, List<RestaurantTable> restaurantTables) {
         this.name = name;
+        this.restaurantTables = restaurantTables;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Column(name = "restaurant_name")
     public String getName() {
         return name;
     }
@@ -40,7 +24,6 @@ public class Restaurant {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     public List<Booking> getBookings() {
         return bookings;
     }
@@ -49,7 +32,11 @@ public class Restaurant {
         this.bookings = bookings;
     }
 
-    public void addBooking(Booking booking){
-        this.bookings.add(booking);
+    public List<RestaurantTable> getRestaurantTables() {
+        return restaurantTables;
+    }
+
+    public void setRestaurantTables(List<RestaurantTable> restaurantTables) {
+        this.restaurantTables = restaurantTables;
     }
 }
