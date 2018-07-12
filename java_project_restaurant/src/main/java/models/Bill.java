@@ -4,8 +4,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "bills")
 public class Bill {
 
     private int id;
@@ -20,20 +18,12 @@ public class Bill {
         this.items = new ArrayList<Item>();
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @OneToMany(mappedBy = "bill", fetch = FetchType.LAZY)
-    public List<Item> getItems() {
-        return items;
     }
 
     public void setItems(List<Item> items) {
