@@ -13,7 +13,7 @@ public class RestaurantTable {
     private int id;
     private int tableNumber;
     private int capacity;
-    private List<Customer> customers;
+    private List<Booking> bookings;
 
     public RestaurantTable(){
 
@@ -22,7 +22,7 @@ public class RestaurantTable {
     public RestaurantTable(int tableNumber, int capacity) {
         this.tableNumber = tableNumber;
         this.capacity = capacity;
-        this.customers = new ArrayList<Customer>();
+        this.bookings = new ArrayList<Booking>();
     }
 
     @Id
@@ -54,16 +54,12 @@ public class RestaurantTable {
         this.capacity = capacity;
     }
 
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany
-    @JoinTable(name="customer_table",
-            joinColumns = {@JoinColumn(name="table_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="customer_id", nullable = false, updatable = false)})
-    public List<Customer> getCustomers() {
-        return customers;
+    @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.LAZY)
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }
