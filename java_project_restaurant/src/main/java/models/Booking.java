@@ -3,11 +3,13 @@ package models;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import org.hibernate.annotations.Cascade;
+
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="bookings")
+@Table(name = "bookings")
 public class Booking {
 
     private int id;
@@ -17,8 +19,7 @@ public class Booking {
     private Date dateTime;
     private int bookingLength;
 
-    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
+
     private Bill bill;
 
     public Booking(){
@@ -34,7 +35,7 @@ public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -43,6 +44,11 @@ public class Booking {
         this.id = id;
     }
 
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ManyToMany
+    @JoinTable(name="booking_customer",
+            joinColumns = {@JoinColumn(name="booking_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="customer_id", nullable =false, updatable = false)})
     public List<Customer> getCustomers() {
         return customers;
     }
@@ -51,6 +57,8 @@ public class Booking {
         this.customers = customers;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_table_id")
     public RestaurantTable getRestaurantTable() {
         return restaurantTable;
     }
@@ -68,7 +76,7 @@ public class Booking {
         this.dateTime = dateTime;
     }
 
-    @Column(name="bookingLength")
+    @Column(name = "booking_length")
     public int getBookingLength() {
         return bookingLength;
     }
@@ -77,6 +85,8 @@ public class Booking {
         this.bookingLength = bookingLength;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
     public Restaurant getRestaurant() {
         return restaurant;
     }
@@ -85,7 +95,10 @@ public class Booking {
         this.restaurant = restaurant;
     }
 
+//    not really sure how to do a One to One here :S
 
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY, optional = false)
     public Bill getBill() {
         return bill;
     }

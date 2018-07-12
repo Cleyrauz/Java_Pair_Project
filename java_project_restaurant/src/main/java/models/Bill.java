@@ -11,8 +11,7 @@ public class Bill {
     private int id;
     private List<Item> items;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id")
+
     private Booking booking;
 
     public Bill(){
@@ -38,7 +37,8 @@ public class Bill {
         this.items = items;
     }
 
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id")
     public Booking getBooking() {
         return booking;
     }
