@@ -16,14 +16,17 @@ public class Booking {
     private RestaurantTable restaurantTable;
     private Date dateTime;
     private int bookingLength;
+
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
     private Bill bill;
 
     public Booking(){
     }
 
-    public Booking(Restaurant restaurant, ArrayList<Customer> customers, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
+    public Booking(Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
         this.restaurant = restaurant;
-        this.customers = customers;
+        this.customers = new ArrayList<Customer>();
         this.restaurantTable = restaurantTable;
         this.dateTime = dateTime;
         this.bookingLength = bookingLength;
@@ -56,6 +59,7 @@ public class Booking {
         this.restaurantTable = restaurantTable;
     }
 
+    @Column(name="dataTime")
     public Date getDateTime() {
         return dateTime;
     }
@@ -64,6 +68,7 @@ public class Booking {
         this.dateTime = dateTime;
     }
 
+    @Column(name="bookingLength")
     public int getBookingLength() {
         return bookingLength;
     }

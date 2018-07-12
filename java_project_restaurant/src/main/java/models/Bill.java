@@ -4,10 +4,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name="bills")
 public class Bill {
 
     private int id;
     private List<Item> items;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id")
     private Booking booking;
 
     public Bill(){
@@ -18,6 +23,9 @@ public class Bill {
         this.items = new ArrayList<Item>();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     public int getId() {
         return id;
     }
@@ -30,7 +38,7 @@ public class Bill {
         this.items = items;
     }
 
-    @OneToOne(mappedBy = "booking")
+
     public Booking getBooking() {
         return booking;
     }
