@@ -14,6 +14,7 @@ public class Booking {
 //        cal.getTime();
 
     private int id;
+    private Restaurant restaurant;
     private Customer customer;
     private RestaurantTable restaurantTable;
     private Calendar dateTime;
@@ -22,7 +23,8 @@ public class Booking {
     public Booking(){
     }
 
-    public Booking(Customer customer, RestaurantTable restaurantTable, Calendar dateTime, int bookingLength) {
+    public Booking(Restaurant restaurant, Customer customer, RestaurantTable restaurantTable, Calendar dateTime, int bookingLength) {
+        this.restaurant = restaurant;
         this.customer = customer;
         this.restaurantTable = restaurantTable;
         this.dateTime = dateTime;
@@ -51,7 +53,7 @@ public class Booking {
     }
 
     @ManyToOne
-    @JoinColumn(name="restaurantTable_id", nullable = false)
+    @JoinColumn(name="restaurant_table_id", nullable = false)
     public RestaurantTable getRestaurantTable() {
         return restaurantTable;
     }
@@ -78,4 +80,13 @@ public class Booking {
         this.bookingLength = bookingLength;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }
