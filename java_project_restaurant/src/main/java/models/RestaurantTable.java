@@ -1,9 +1,13 @@
 package models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 
+@Entity
+@Table(name = "tables")
 public class RestaurantTable {
 
+    private int id;
     private int tableNumber;
     private int capacity;
     private ArrayList<Booking> bookings;
@@ -12,11 +16,24 @@ public class RestaurantTable {
     public RestaurantTable() {
     }
 
-    public RestaurantTable(int tableNumber, int capacity) {
+    public RestaurantTable(int tableNumber, int capacity, Restaurant restaurant) {
         this.tableNumber = tableNumber;
         this.capacity = capacity;
+        this.restaurant = restaurant;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Column(name = "table_number")
     public int getTableNumber() {
         return tableNumber;
     }
@@ -25,6 +42,7 @@ public class RestaurantTable {
         this.tableNumber = tableNumber;
     }
 
+    @Column(name = "capacity")
     public int getCapacity() {
         return capacity;
     }
@@ -33,6 +51,7 @@ public class RestaurantTable {
         this.capacity = capacity;
     }
 
+    @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.EAGER)
     public ArrayList<Booking> getBookings() {
         return bookings;
     }
@@ -41,6 +60,8 @@ public class RestaurantTable {
         this.bookings = bookings;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
     public Restaurant getRestaurant() {
         return restaurant;
     }

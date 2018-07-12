@@ -1,11 +1,13 @@
 package models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bill {
 
-    private List<Item> items;
+    private int id;
+    private ArrayList<Item> items;
     private Booking booking;
 
     public Bill(){
@@ -16,11 +18,19 @@ public class Bill {
         this.booking = booking;
     }
 
-    public List<Item> getItems() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
 

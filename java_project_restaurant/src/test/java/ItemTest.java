@@ -16,11 +16,11 @@ public class ItemTest {
 
     @Test
     public void hasName() {
-        assertEquals("Fajitas", item.getName());
+        assertEquals("Fajitas", item.getItemType().getName());
     }
 
     @Test
     public void hasCost() {
-        assertEquals(10.50, item.getPrice(), 0.01);
+        assertEquals(10.50, item.getItemType().getPrice(), 0.01);
     }
 }
