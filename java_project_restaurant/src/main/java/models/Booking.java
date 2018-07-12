@@ -67,7 +67,7 @@ public class Booking {
         this.restaurantTable = restaurantTable;
     }
 
-    @Column(name="dataTime")
+    @Column(name="date_time")
     public Date getDateTime() {
         return dateTime;
     }
@@ -95,10 +95,8 @@ public class Booking {
         this.restaurant = restaurant;
     }
 
-//    not really sure how to do a One to One here :S
-
     @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY, optional = false)
+        fetch = FetchType.LAZY)
     public Bill getBill() {
         return bill;
     }
