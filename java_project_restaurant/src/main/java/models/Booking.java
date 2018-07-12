@@ -8,14 +8,25 @@ import java.util.Calendar;
 @Table(name="bookings")
 public class Booking {
 
+//    Calendar cal = Calendar.getInstance(); // creates calendar
+//        cal.setTime(new Date()); // sets calendar time/date
+//        cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
+//        cal.getTime();
+
     private int id;
     private Customer customer;
     private RestaurantTable restaurantTable;
-//    private Calendar dateTime;
-//    private int bookLength;
+    private Calendar dateTime;
+    private int bookingLength;
 
     public Booking(){
+    }
 
+    public Booking(Customer customer, RestaurantTable restaurantTable, Calendar dateTime, int bookingLength) {
+        this.customer = customer;
+        this.restaurantTable = restaurantTable;
+        this.dateTime = dateTime;
+        this.bookingLength = bookingLength;
     }
 
     @Id
@@ -48,4 +59,23 @@ public class Booking {
     public void setRestaurantTable(RestaurantTable restaurantTable) {
         this.restaurantTable = restaurantTable;
     }
+
+    @Column(name = "dateTime")
+    public Calendar getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Calendar dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    @Column(name = "bookingLength")
+    public int getBookingLength() {
+        return bookingLength;
+    }
+
+    public void setBookingLength(int bookingLength) {
+        this.bookingLength = bookingLength;
+    }
+
 }
