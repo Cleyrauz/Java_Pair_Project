@@ -1,6 +1,7 @@
 package models;
 
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Entity;
 
 import javax.persistence.*;
@@ -35,15 +36,6 @@ public class Bill {
         this.id = id;
     }
 
-    @Column(name="items")
-    public List<Items> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Items> items) {
-        this.items = items;
-    }
-
     @Column(name="totalPrice")
     public int getTotalPrice() {
         return totalPrice;
@@ -53,7 +45,21 @@ public class Bill {
         this.totalPrice = totalPrice;
     }
 
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ManyToMany
+    @JoinTable(name="items_bill",
+            joinColumns = {@JoinColumn(name="bill_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="items_id", nullable =false, updatable = false)})
+    public List<Items> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Items> items) {
+        this.items = items;
+    }
+
     public void addItemsToBill(Items items){
         this.items.add(items);
     }
 }
+
