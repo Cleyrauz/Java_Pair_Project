@@ -95,8 +95,6 @@ public class Booking {
         this.restaurant = restaurant;
     }
 
-//    not really sure how to do a One to One here :S
-
     @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL,
         fetch = FetchType.LAZY, optional = false)
     public Bill getBill() {

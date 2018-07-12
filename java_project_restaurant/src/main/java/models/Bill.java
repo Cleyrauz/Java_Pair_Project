@@ -1,5 +1,7 @@
 package models;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,6 +31,11 @@ public class Bill {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @OneToMany(mappedBy = "bill")
+    public List<Item> getItems() {
+        return items;
     }
 
     public void setItems(List<Item> items) {

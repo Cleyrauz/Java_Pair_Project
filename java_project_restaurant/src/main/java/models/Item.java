@@ -3,7 +3,8 @@ package models;
 import javax.persistence.*;
 import java.util.List;
 
-
+@Entity
+@Table(name = "items")
 public class Item {
 
     private int id;
@@ -18,6 +19,9 @@ public class Item {
         this.itemType = type;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -26,6 +30,7 @@ public class Item {
         this.id = id;
     }
 
+    @Enumerated(value = EnumType.STRING)
     public ItemType getItemType() {
         return itemType;
     }
