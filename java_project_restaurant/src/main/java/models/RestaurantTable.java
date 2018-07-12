@@ -20,6 +20,7 @@ public class RestaurantTable {
     public RestaurantTable(int tableNumber, int capacity, Restaurant restaurant) {
         this.tableNumber = tableNumber;
         this.capacity = capacity;
+        this.bookings = new ArrayList<Booking>();
         this.restaurant = restaurant;
     }
 

@@ -2,20 +2,27 @@ package models;
 
 import java.util.List;
 
+@Entity
+@Table(name="bills")
 public class Bill {
 
     private int id;
     private List<Item> items;
+
+
     private Booking booking;
 
     public Bill(){
     }
 
-    public Bill(List<Item> items, Booking booking) {
-        this.items = items;
+    public Bill(Booking booking) {
         this.booking = booking;
+        this.items = new ArrayList<Item>();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     public int getId() {
         return id;
     }
@@ -24,14 +31,12 @@ public class Bill {
         this.id = id;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
-
     public void setItems(List<Item> items) {
         this.items = items;
     }
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id")
     public Booking getBooking() {
         return booking;
     }

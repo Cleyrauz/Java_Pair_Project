@@ -1,8 +1,10 @@
 package models;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 import org.hibernate.annotations.Cascade;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -16,14 +18,16 @@ public class Booking {
     private RestaurantTable restaurantTable;
     private Date dateTime;
     private int bookingLength;
+
+
     private Bill bill;
 
     public Booking(){
     }
 
-    public Booking(Restaurant restaurant, List<Customer> customers, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
+    public Booking(Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
         this.restaurant = restaurant;
-        this.customers = customers;
+        this.customers = new ArrayList<Customer>();
         this.restaurantTable = restaurantTable;
         this.dateTime = dateTime;
         this.bookingLength = bookingLength;
@@ -39,7 +43,6 @@ public class Booking {
     public void setId(int id) {
         this.id = id;
     }
-
 
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @ManyToMany
@@ -64,7 +67,7 @@ public class Booking {
         this.restaurantTable = restaurantTable;
     }
 
-    @Column(name = "date_time")
+    @Column(name="dataTime")
     public Date getDateTime() {
         return dateTime;
     }
@@ -94,6 +97,8 @@ public class Booking {
 
 //    not really sure how to do a One to One here :S
 
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY, optional = false)
     public Bill getBill() {
         return bill;
     }
