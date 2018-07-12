@@ -16,9 +16,8 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(String name, List<Booking> bookings) {
+    public Restaurant(String name) {
         this.name = name;
-        this.bookings = bookings;
     }
 
     @Id
