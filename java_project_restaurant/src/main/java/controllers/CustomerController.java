@@ -44,5 +44,17 @@ public class CustomerController {
             model.put("customer", customer);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        post("/customers", (req,res) -> {
+//            String firstName, String lastName, double budget
+            String firstName = req.queryParams("firstName");
+            String lastName = req.queryParams("lastName");
+            double budget = Double.parseDouble(req.queryParams("budget"));
+
+            Customer customer = new Customer(firstName, lastName, budget);
+            DBHelper.save(customer);
+            res.redirect("/customers");
+            return null;
+        }, new VelocityTemplateEngine());
     }
 }
