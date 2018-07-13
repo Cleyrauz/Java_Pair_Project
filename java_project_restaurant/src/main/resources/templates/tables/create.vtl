@@ -1,0 +1,21 @@
+<p class="pageHeader">New Table</p>
+
+<form action="/tables" method="post">
+    <label for="tableNumber">Table Number:</label>
+    <input class="inputbox" type="text" name="tableNumber" id = "tableNumber" required="true">
+
+    <label for="capacity">Capacity:</label>
+    <input class="inputbox" type="text" name="capacity" id = "capacity" required="true">
+
+    <label for="restaurant">Restaurant"</label>
+    <select id="restaurant" name="restaurant">
+        #foreach( $restaurant in $restaurants )
+        <option value="$restaurant.getId()">$restaurant.getName()</option>
+        #end
+    </select>
+
+    <input type="submit" value="Save" class="button">
+</form>
+
+<a href="/managers" class="button center">Cancel</a>
+

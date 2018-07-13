@@ -1,0 +1,11 @@
+<div>
+    <p> Table Number: $table.getTableNumber()</p>
+    <p> Capacity: $table.getCapacity() people </p>
+    <p> Restaurant: $table.getRestaurant().getName()</p>
+</div>
+
+<a href="/tables/$table.getId()/edit" class="button center">Edit</a>
+<form action="/tables/$table.getId()/delete" method="post">
+    <input type="submit" value="Delete" class="button center">
+</form>
+<a href="/tables" class="button center">Back to list</a>
