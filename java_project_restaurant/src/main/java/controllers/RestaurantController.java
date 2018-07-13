@@ -1,10 +1,13 @@
 package controllers;
 
 import db.DBHelper;
+import db.DBRestaurant;
 import models.Restaurant;
+import models.RestaurantTable;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,6 +49,15 @@ public class RestaurantController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/restaurants/:num/tables", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
+            List<RestaurantTable> tables = DBRestaurant.getRestaurantsTables(restaurant);
+            model.put("template", "templates/tables/index.vtl");
+            model.put("tables", tables);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
         post("/restaurants", (req,res) -> {
 //          String name
 
@@ -54,6 +66,14 @@ public class RestaurantController {
             Restaurant restaurant = new Restaurant(name);
             DBHelper.save(restaurant);
 
+            res.redirect("/restaurants");
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("/restaurants/:num/edit", (req, res) -> {
+            String name = req.queryParams("name");
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
+            restaurant.setName(name);
             res.redirect("/restaurants");
             return null;
         }, new VelocityTemplateEngine());
