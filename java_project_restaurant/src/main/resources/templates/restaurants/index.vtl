@@ -11,7 +11,7 @@
         </tr>
         #foreach($restaurant in $restaurants)
         <tr>
-            <td>$table.getName()</td>
+            <td>$restaurant.getName()</td>
             <td><a href="/restaurants/$restaurant.getId()" class="button center">Details</a></td>
         <tr>
             #end
