@@ -61,7 +61,7 @@ public class Booking {
         this.customers.add(customer);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_table_id")
     public RestaurantTable getRestaurantTable() {
         return restaurantTable;
@@ -89,7 +89,7 @@ public class Booking {
         this.bookingLength = bookingLength;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     public Restaurant getRestaurant() {
         return restaurant;
