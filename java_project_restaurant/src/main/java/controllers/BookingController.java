@@ -7,6 +7,8 @@ import models.RestaurantTable;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -54,8 +56,15 @@ public class BookingController {
 //            Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.queryParams("restaurant")));
             RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.queryParams("restaurantTable")));
-//            Date date = Integer.parseInt(req.queryParams("date"));
+            String stringDate = req.queryParams("date");
+            Date date = null;
+            try { date = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss").parse(stringDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             int bookingLength = Integer.parseInt(req.queryParams("bookingLength"));
+            Booking booking = new Booking(restaurant, table, date, bookingLength);
+
             res.redirect("/bookings");
             return null;
         }, new VelocityTemplateEngine());
