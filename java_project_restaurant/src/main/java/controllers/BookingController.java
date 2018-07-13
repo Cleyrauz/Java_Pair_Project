@@ -7,6 +7,7 @@ import models.RestaurantTable;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.awt.print.Book;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -65,6 +66,13 @@ public class BookingController {
             int bookingLength = Integer.parseInt(req.queryParams("bookingLength"));
             Booking booking = new Booking(restaurant, table, date, bookingLength);
 
+            res.redirect("/bookings");
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("/bookings/:num/delete", (req,res) -> {
+            Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num")));
+            DBHelper.delete(booking);
             res.redirect("/bookings");
             return null;
         }, new VelocityTemplateEngine());
