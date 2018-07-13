@@ -56,5 +56,22 @@ public class BillController {
             DBHelper.save(bill);
             return null;
         }, new VelocityTemplateEngine());
+
+//        post("bills/:num/edit", (req,res) -> {
+//            Bill bill = DBHelper.find(Bill.class, Integer.parseInt(req.params(":num")));
+//            bill.setBooking(req.queryParams("booking"));
+//            bill.setItems(req.queryParams("item"));
+//
+//
+//            DBHelper.save(bill);
+//            return null;
+//        }, new VelocityTemplateEngine());
+
+        post("bills/:num/delete", (req,res) -> {
+            Bill bill = DBHelper.find(Bill.class, Integer.parseInt(req.params(":num")));
+            DBHelper.delete(bill);
+            res.redirect("/bills");
+            return null;
+        }, new VelocityTemplateEngine());
     }
 }
