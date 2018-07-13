@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBHelper;
+import models.Restaurant;
 import models.RestaurantTable;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -44,6 +45,19 @@ public class RestaurantTableController {
             model.put("template", "templates/tables/edit.vtl");
             model.put("table", table);
             return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/tables", (req,res) -> {
+//          int tableNumber, int capacity, Restaurant restaurant
+
+            int tableNumber = Integer.parseInt(req.queryParams("tableNumber"));
+            int capacity = Integer.parseInt(req.queryParams("capacity"));
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.queryParams("restaurant")));
+
+            RestaurantTable restaurantTable = new RestaurantTable(tableNumber, capacity, restaurant);
+            DBHelper.save(restaurantTable);
+            res.redirect("/tables");
+            return null;
         }, new VelocityTemplateEngine());
     }
 }

@@ -2,9 +2,13 @@ package controllers;
 
 import db.DBHelper;
 import models.Booking;
+import models.Restaurant;
+import models.RestaurantTable;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,6 +48,16 @@ public class BookingController {
             model.put("template", "templates/bookings/edit.vtl");
             model.put("booking", booking);
             return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/bookings", (req,res) -> {
+//            Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.queryParams("restaurant")));
+            RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.queryParams("restaurantTable")));
+//            Date date = Integer.parseInt(req.queryParams("date"));
+            int bookingLength = Integer.parseInt(req.queryParams("bookingLength"));
+            res.redirect("/bookings");
+            return null;
         }, new VelocityTemplateEngine());
     }
 }
