@@ -1,0 +1,19 @@
+<p class="pageHeader">Restaurants</p>
+
+<div>
+    <a href="/restaurants/new" class="button center">New Restaurant</a>
+</div>
+<div class="container">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        #foreach($restaurant in $restaurants)
+        <tr>
+            <td>$table.getName()</td>
+            <td><a href="/restaurants/$restaurant.getId()" class="button center">Details</a></td>
+        <tr>
+            #end
+    </table>
+</div>
