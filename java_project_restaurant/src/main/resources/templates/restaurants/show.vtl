@@ -1,0 +1,9 @@
+<div>
+    <p> Name: $restaurant.getName()</p>
+</div>
+
+<a href="/restaurants/$restaurant.getId()/edit" class="button center">Edit</a>
+<form action="/restaurants/$restaurant.getId()/delete" method="post">
+    <input type="submit" value="Delete" class="button center">
+</form>
+<a href="/restaurants" class="button center">Back to list</a>
