@@ -63,5 +63,12 @@ public class RestaurantTableController {
             res.redirect("/tables");
             return null;
         }, new VelocityTemplateEngine());
+
+        post("/tables/:num/delete", (req,res) -> {
+            RestaurantTable table = DBHelper.find(RestaurantTable.class, req.params(":num"));
+            DBHelper.delete(table);
+            res.redirect("/tables");
+            return null;
+        }, new VelocityTemplateEngine());
     }
 }

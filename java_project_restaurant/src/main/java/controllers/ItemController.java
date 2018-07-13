@@ -47,7 +47,7 @@ public class ItemController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("items", (req,res) -> {
+        post("/items", (req,res) -> {
 //          ItemType type
 
             String type = req.queryParams("type");
@@ -55,6 +55,13 @@ public class ItemController {
 
             DBHelper.save(item);
             res.redirect("items");
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("/items/:num/delete", (req,res) -> {
+            Item item = DBHelper.find(Item.class, Integer.parseInt(req.params(":num")));
+            DBHelper.delete(item);
+            res.redirect("/items");
             return null;
         }, new VelocityTemplateEngine());
     }

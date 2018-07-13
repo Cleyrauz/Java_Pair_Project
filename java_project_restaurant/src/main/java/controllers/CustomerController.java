@@ -56,5 +56,12 @@ public class CustomerController {
             res.redirect("/customers");
             return null;
         }, new VelocityTemplateEngine());
+
+        post("/customers/:num/delete", (req,res) -> {
+            Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.params(":num")));
+            DBHelper.delete(customer);
+            res.redirect("/customers");
+            return null;
+        }, new VelocityTemplateEngine());
     }
 }

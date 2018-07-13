@@ -16,7 +16,7 @@ public class RestaurantController {
     public RestaurantController(){this.setupEndPoints();}
 
     public void setupEndPoints(){
-        get("/restaraunts", (req, res) -> {
+        get("/restaurants", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
             model.put("template", "templates/restaurants/index.vtl");
@@ -24,13 +24,13 @@ public class RestaurantController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/restaraunts/new", (req,res) -> {
+        get("/restaurants/new", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             model.put("template", "templates/restaurants/new.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/restaraunts/:num", (req,res) -> {
+        get("/restaurants/:num", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
             model.put("template", "templates/restaurants/show.vtl");
@@ -38,7 +38,7 @@ public class RestaurantController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/restaraunts/:num/edit", (req,res) -> {
+        get("/restaurants/:num/edit", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
             model.put("template", "templates/restaurants/edit.vtl");
@@ -54,6 +54,13 @@ public class RestaurantController {
             Restaurant restaurant = new Restaurant(name);
             DBHelper.save(restaurant);
 
+            res.redirect("/restaurants");
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("/restaurants/:num/delete", (req,res) -> {
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
+            DBHelper.delete(restaurant);
             res.redirect("/restaurants");
             return null;
         }, new VelocityTemplateEngine());
