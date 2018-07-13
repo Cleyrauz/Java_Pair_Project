@@ -53,7 +53,7 @@ public class RestaurantTable {
         this.capacity = capacity;
     }
 
-    @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<Booking> getBookings() {
         return bookings;
     }
