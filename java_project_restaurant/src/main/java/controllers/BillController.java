@@ -15,7 +15,7 @@ public class BillController {
     public BillController(){this.setupEndPoints();}
 
     public void setupEndPoints(){
-        get("/tables", (req, res) -> {
+        get("/bills", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             List<Bill> bills = DBHelper.getAll(Bill.class);
             model.put("template", "templates/bills/index.vtl");

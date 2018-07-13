@@ -23,5 +23,12 @@ public class MainController {
             model.put("template", "templates/home.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        BillController billController = new BillController();
+        BookingController bookingController = new BookingController();
+        CustomerController customerController = new CustomerController();
+        ItemController itemController = new ItemController();
+        RestaurantController restaurantController = new RestaurantController();
+        RestaurantTableController restaurantTableController = new RestaurantTableController();
     }
 }
