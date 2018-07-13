@@ -49,7 +49,7 @@ public class RestaurantTableController {
 
         post("/tables", (req,res) -> {
 //          int tableNumber, int capacity, Restaurant restaurant
-            
+
             int tableNumber = Integer.parseInt(req.queryParams("tableNumber"));
             int capacity = Integer.parseInt(req.queryParams("capacity"));
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.queryParams("restaurant")));

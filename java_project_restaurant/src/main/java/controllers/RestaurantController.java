@@ -45,6 +45,18 @@ public class RestaurantController {
             model.put("restaurant", restaurant);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        post("/restaurants", (req,res) -> {
+//          String name
+
+            String name = req.queryParams("name");
+
+            Restaurant restaurant = new Restaurant(name);
+            DBHelper.save(restaurant);
+
+            res.redirect("/restaurants");
+            return null;
+        }, new VelocityTemplateEngine());
     }
 
 }
