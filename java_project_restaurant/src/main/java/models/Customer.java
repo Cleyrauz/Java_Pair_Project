@@ -3,6 +3,7 @@ package models;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,7 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.budget = budget;
+        this.bookings = new ArrayList<>();
     }
 
     @Id
@@ -66,6 +68,10 @@ public class Customer {
         this.bookings = bookings;
     }
 
+    public void addBooking(Booking booking){
+        this.bookings.add(booking);
+    }
+
     @Column(name = "budget")
     public double getBudget() {
         return budget;
@@ -74,4 +80,6 @@ public class Customer {
     public void setBudget(double budget) {
         this.budget = budget;
     }
+
+
 }

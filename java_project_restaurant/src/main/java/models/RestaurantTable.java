@@ -20,7 +20,7 @@ public class RestaurantTable {
     public RestaurantTable(int tableNumber, int capacity, Restaurant restaurant) {
         this.tableNumber = tableNumber;
         this.capacity = capacity;
-        this.bookings = new ArrayList<Booking>();
+        this.bookings = new ArrayList<>();
         this.restaurant = restaurant;
     }
 
@@ -53,13 +53,17 @@ public class RestaurantTable {
         this.capacity = capacity;
     }
 
-    @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "restaurantTable", fetch = FetchType.LAZY)
     public List<Booking> getBookings() {
         return bookings;
     }
 
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
+    }
+
+    public void addBoooking(Booking booking){
+        this.bookings.add(booking);
     }
 
     @ManyToOne

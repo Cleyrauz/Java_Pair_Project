@@ -27,7 +27,7 @@ public class Booking {
 
     public Booking(Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
         this.restaurant = restaurant;
-        this.customers = new ArrayList<Customer>();
+        this.customers = new ArrayList<>();
         this.restaurantTable = restaurantTable;
         this.dateTime = dateTime;
         this.bookingLength = bookingLength;
@@ -55,6 +55,10 @@ public class Booking {
 
     public void setCustomers(List<Customer> customers) {
         this.customers = customers;
+    }
+
+    public void addCustomer(Customer customer) {
+        this.customers.add(customer);
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -104,4 +108,6 @@ public class Booking {
     public void setBill(Bill bill) {
         this.bill = bill;
     }
+
+
 }

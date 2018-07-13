@@ -78,6 +78,7 @@ public class DBHelper {
         List<T> results = null;
         try {
             Criteria cr = session.createCriteria(classType);
+            cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             results = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();

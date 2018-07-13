@@ -41,5 +41,23 @@ public class Runner {
 
         item.setBill(bill);
         DBHelper.save(item);
+
+        restaurant.addBooking(booking);
+        DBHelper.save(restaurant);
+
+        restaurant.addRestaurantTable(restaurantTable);
+        DBHelper.save(restaurant);
+
+        customer.addBooking(booking);
+        DBHelper.save(customer);
+
+        restaurantTable.addBoooking(booking);
+        DBHelper.save(restaurantTable);
+
+        booking.setBill(bill);
+        DBHelper.save(booking);
+
+        booking.addCustomer(customer);
+        DBHelper.save(booking);
     }
 }

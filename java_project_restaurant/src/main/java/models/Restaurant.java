@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,8 @@ public class Restaurant {
 
     public Restaurant(String name) {
         this.name = name;
+        this.bookings = new ArrayList<>();
+        this.restaurantTables = new ArrayList<>();
     }
 
     @Id
@@ -48,6 +51,10 @@ public class Restaurant {
         this.bookings = bookings;
     }
 
+    public void addBooking(Booking booking){
+        this.bookings.add(booking);
+    }
+
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     public List<RestaurantTable> getRestaurantTables() {
         return restaurantTables;
@@ -55,5 +62,9 @@ public class Restaurant {
 
     public void setRestaurantTables(List<RestaurantTable> restaurantTables) {
         this.restaurantTables = restaurantTables;
+    }
+
+    public void addRestaurantTable(RestaurantTable restaurantTable){
+        this.restaurantTables.add(restaurantTable);
     }
 }
