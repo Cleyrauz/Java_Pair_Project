@@ -1,3 +1,4 @@
+import db.DBBooking;
 import db.DBCustomer;
 import db.DBHelper;
 import models.*;
@@ -15,7 +16,6 @@ public class Runner {
 //        DBHelper.deleteAll(Booking.class);
 //        DBHelper.deleteAll(RestaurantTable.class);
 //        DBHelper.deleteAll(Restaurant.class);
-//
 //
 //
 //        Restaurant restaurant = new Restaurant("Del Arepas");
@@ -61,5 +61,8 @@ public class Runner {
 //
 //        booking.addCustomer(customer);
 //        DBHelper.save(booking);
-    }
-
+//
+//        List<Booking> customerBookings = DBCustomer.findCustomerBookings(customer);
+//        List<Customer> bookingCustomers = DBBooking.findBookingCustomers(booking);
+//    }
+}
