@@ -19,6 +19,9 @@ public class Seeds {
         Restaurant restaurant = new Restaurant("Del Arepas");
         DBHelper.save(restaurant);
 
+        Restaurant restaurant2 = new Restaurant("Del Pie");
+        DBHelper.save(restaurant2);
+
         Customer customer1 = new Customer("Matthew", "Bryce", 100.50);
         Customer customer2 = new Customer("Cleyra", "Uzcategui", 200.80);
         Customer customer3 = new Customer("Adri", "Florence", 90.20);

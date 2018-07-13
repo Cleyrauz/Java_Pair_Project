@@ -1,13 +1,20 @@
 package controllers;
 
+import db.DBHelper;
+import db.DBRestaurant;
 import db.Seeds;
+import models.Restaurant;
+import models.RestaurantTable;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
+
 import static spark.Spark.get;
 
+import static spark.Spark.post;
 import static spark.SparkBase.staticFileLocation;
 
 public class MainController {
@@ -20,7 +27,18 @@ public class MainController {
 
         get("/home", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
+            List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
             model.put("template", "templates/home.vtl");
+            model.put("restaurants", restaurants);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/home/restaurant", (req, res) -> {
+            int restaurantId = Integer.parseInt(req.queryParams("restaurant_id"));
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
+            model.put("template", "templates/home_restaurant.vtl");
+            model.put("restaurant", restaurant);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 

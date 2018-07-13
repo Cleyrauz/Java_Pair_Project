@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBHelper;
+import db.DBRestaurant;
 import models.Restaurant;
 import models.RestaurantTable;
 import spark.ModelAndView;
@@ -20,7 +21,19 @@ public class RestaurantTableController {
         get("/tables", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             List<RestaurantTable> tables = DBHelper.getAll(RestaurantTable.class);
+            List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
             model.put("template", "templates/tables/index.vtl");
+            model.put("tables", tables);
+            model.put("restaurants",restaurants);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("/tables/restaurant/:id", (req, res) -> {
+            int restaurantId = Integer.parseInt(req.params(":id"));
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
+            List<RestaurantTable> tables = DBRestaurant.getRestaurantsTables(restaurant);
+            model.put("template", "templates/tables/tables_by_restaurant.vtl");
             model.put("tables", tables);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
