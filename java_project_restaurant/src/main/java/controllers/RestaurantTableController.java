@@ -65,7 +65,7 @@ public class RestaurantTableController {
         }, new VelocityTemplateEngine());
 
         post("/tables/:num/delete", (req,res) -> {
-            RestaurantTable table = DBHelper.find(RestaurantTable.class, req.params(":num"));
+            RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.params(":num")));
             DBHelper.delete(table);
             res.redirect("/tables");
             return null;
