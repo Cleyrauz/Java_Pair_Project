@@ -6,11 +6,15 @@ import java.util.Date;
 
 public class Runner {
     public static void main(String[] args) {
+
+        DBHelper.deleteAll(Item.class);
+        DBHelper.deleteAll(Bill.class);
+        DBHelper.deleteAll(Customer.class);
+        DBHelper.deleteAll(Booking.class);
         DBHelper.deleteAll(RestaurantTable.class);
         DBHelper.deleteAll(Restaurant.class);
-        DBHelper.deleteAll(Customer.class);
-        DBHelper.deleteAll(Item.class);
-        DBHelper.deleteAll(Booking.class);
+
+
 
         Restaurant restaurant = new Restaurant("Del Arepas");
         DBHelper.save(restaurant);
@@ -33,6 +37,9 @@ public class Runner {
         DBHelper.save(bill);
 
         bill.addItem(item);
+        DBHelper.save(bill);
+
+        item.setBill(bill);
         DBHelper.save(item);
     }
 }
