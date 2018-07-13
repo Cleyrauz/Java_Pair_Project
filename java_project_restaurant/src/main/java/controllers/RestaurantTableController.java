@@ -27,7 +27,9 @@ public class RestaurantTableController {
 
         get("/tables/new", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
+            List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
             model.put("template", "templates/tables/new.vtl");
+            model.put("restaurants", restaurants);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
@@ -42,8 +44,10 @@ public class RestaurantTableController {
         get("/tables/:num/edit", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.params(":num")));
+            List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
             model.put("template", "templates/tables/edit.vtl");
             model.put("table", table);
+            model.put("restaurants", restaurants);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
