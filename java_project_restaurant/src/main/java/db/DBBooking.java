@@ -1,5 +1,6 @@
 package db;
 
+import models.Bill;
 import models.Booking;
 import models.Customer;
 import org.hibernate.Criteria;
@@ -27,6 +28,37 @@ public class DBBooking {
             e.printStackTrace();
         } finally {
             session.close();
+        }
+        return results;
+    }
+
+    public static List<Customer> findBookingsCustomers(List<Booking> bookings){
+        List<Customer> results = null;
+        for (Booking booking : bookings) {
+            results.addAll(findBookingCustomers(booking));
+        }
+        return results;
+    }
+
+    public static Bill findBookingBill(Booking booking){
+        session = HibernateUtil.getSessionFactory().openSession();
+        Bill result = null;
+        try {
+            Criteria cr = session.createCriteria(Bill.class);
+            cr.add(Restrictions.eq("booking", booking));
+            result = (Bill) cr.uniqueResult();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+
+    public static List<Bill> findBookingsBills(List<Booking> bookings){
+        List<Bill> results = null;
+        for (Booking booking: bookings){
+            results.add(findBookingBill(booking));
         }
         return results;
     }
