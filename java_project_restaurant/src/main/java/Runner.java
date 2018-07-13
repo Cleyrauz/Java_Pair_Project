@@ -3,6 +3,7 @@ import models.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
@@ -59,5 +60,12 @@ public class Runner {
 
         booking.addCustomer(customer);
         DBHelper.save(booking);
+
+        List<Bill> bills = DBHelper.getAll(Bill.class);
+        List<Booking> bookings = DBHelper.getAll(Booking.class);
+        List<Customer> customers = DBHelper.getAll(Customer.class);
+        List<Item> items = DBHelper.getAll(Item.class);
+        List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
+        List<RestaurantTable> tables = DBHelper.getAll(RestaurantTable.class);
     }
 }
