@@ -57,6 +57,18 @@ public class CustomerController {
             return null;
         }, new VelocityTemplateEngine());
 
+        post("/customers/:num/edit", (req,res) -> {
+            String firstName = req.queryParams("firstName");
+            String lastName = req.queryParams("lastName");
+            double budget = Double.parseDouble(req.queryParams("budget"));
+            Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.params(":num")));
+            customer.setFirstName(firstName);
+            customer.setLastName(lastName);
+            customer.setBudget(budget);
+            res.redirect("/customers");
+            return null;
+        }, new VelocityTemplateEngine());
+
         post("/customers/:num/delete", (req,res) -> {
             Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.params(":num")));
             DBHelper.delete(customer);

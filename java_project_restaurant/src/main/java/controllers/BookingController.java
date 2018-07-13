@@ -65,7 +65,7 @@ public class BookingController {
             }
             int bookingLength = Integer.parseInt(req.queryParams("bookingLength"));
             Booking booking = new Booking(restaurant, table, date, bookingLength);
-
+            DBHelper.save(booking);
             res.redirect("/bookings");
             return null;
         }, new VelocityTemplateEngine());
