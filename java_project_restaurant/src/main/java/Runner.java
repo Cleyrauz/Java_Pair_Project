@@ -1,3 +1,4 @@
+import db.DBCustomer;
 import db.DBHelper;
 import models.*;
 
@@ -67,5 +68,7 @@ public class Runner {
         List<Item> items = DBHelper.getAll(Item.class);
         List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
         List<RestaurantTable> tables = DBHelper.getAll(RestaurantTable.class);
+
+        List<Booking> customersBookings = DBCustomer.findCustomerBookings(customer);
     }
 }
