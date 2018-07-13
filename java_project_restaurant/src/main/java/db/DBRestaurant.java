@@ -1,5 +1,6 @@
 package db;
 
+import models.Booking;
 import models.Restaurant;
 import models.RestaurantTable;
 import org.hibernate.Criteria;
@@ -20,6 +21,21 @@ public class DBRestaurant {
         session = HibernateUtil.getSessionFactory().openSession();
         try {
             Criteria cr = session.createCriteria(RestaurantTable.class);
+            cr.add(Restrictions.eq("restaurant", restaurant));
+            results = cr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return results;
+    }
+
+    public static List<Booking> getRestaurantsBookings(Restaurant restaurant){
+        List<Booking> results = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Criteria cr = session.createCriteria(Booking.class);
             cr.add(Restrictions.eq("restaurant", restaurant));
             results = cr.list();
         } catch (HibernateException e) {
