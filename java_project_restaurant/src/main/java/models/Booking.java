@@ -99,7 +99,7 @@ public class Booking {
         this.restaurant = restaurant;
     }
 
-    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL,
+    @OneToOne(mappedBy = "booking",
         fetch = FetchType.LAZY)
     public Bill getBill() {
         return bill;
