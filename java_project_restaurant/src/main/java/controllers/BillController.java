@@ -2,9 +2,11 @@ package controllers;
 
 import db.DBHelper;
 import models.Bill;
+import models.Booking;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,6 +46,15 @@ public class BillController {
             model.put("template", "templates/bills/edit.vtl");
             model.put("bill", bill);
             return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("bills", (req,res) -> {
+//            Booking booking
+            Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.queryParams("booking")));
+            Bill bill = new Bill(booking);
+
+            DBHelper.save(bill);
+            return null;
         }, new VelocityTemplateEngine());
     }
 }

@@ -2,6 +2,7 @@ package controllers;
 
 import db.DBHelper;
 import models.Item;
+import models.ItemType;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -45,5 +46,17 @@ public class ItemController {
             model.put("item", item);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+//        post("items", (req,res) -> {
+////          ItemType type
+//
+//            String type = req.queryParams("type");
+//
+//            Item item = new Item(ItemType.type);
+//
+//            DBHelper.save(item);
+//            res.redirect("items");
+//            return null;
+//        }, new VelocityTemplateEngine());
     }
 }
