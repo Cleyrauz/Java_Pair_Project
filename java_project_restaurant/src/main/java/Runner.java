@@ -1,3 +1,4 @@
+import db.DBCustomer;
 import db.DBHelper;
 import models.*;
 
