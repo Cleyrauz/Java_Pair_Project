@@ -54,7 +54,16 @@ public class ItemController {
             Item item = new Item(ItemType.valueOf(type));
 
             DBHelper.save(item);
-            res.redirect("items");
+            res.redirect("/items");
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("/items/:num/edit", (req,res) -> {
+            Item item = DBHelper.find(Item.class, Integer.parseInt(req.params(":num")));
+            String type = req.queryParams("type");
+            item.setItemType(ItemType.valueOf(type));
+            DBHelper.save(item);
+            res.redirect("/items");
             return null;
         }, new VelocityTemplateEngine());
 
