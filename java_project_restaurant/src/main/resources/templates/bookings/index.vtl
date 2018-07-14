@@ -10,6 +10,7 @@
             <th>Table</th>
             <th>DateTime</th>
             <th>Length (mins)</th>
+            <th>Quantity (people)</th>
             <th>Customer</th>
         </tr>
         #foreach($booking in $bookings)
@@ -17,6 +18,7 @@
             <td>$booking.getRestaurantTable().getTableNumber()</td>
             <td>$booking.getDateTime()</td>
             <td>$booking.getBookingLength()</td>
+            <td>$booking.getQuantity()</td>
             <td>$booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</td>
             <td><a href="/bookings/$booking.getId()" class="button center">Details</a></td>
         <tr>
