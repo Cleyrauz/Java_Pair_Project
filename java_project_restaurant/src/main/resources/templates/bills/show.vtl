@@ -1,0 +1,16 @@
+<div>
+    <p>Item name:</p>
+    <p>Price:</p>
+</div>
+
+#foreach($item in $bill.getItems())
+<div>
+    <p>$item.getItemType().getName()</p>
+    <p>$item.getItemType().getPrice()</p>
+</div>
+
+<a href="/bills/$bill.getId()/edit" class="button center">Edit</a>
+<form action="/bills/$bill.getId()/delete" method="post">
+    <input type="submit" value="Delete" class="button center">
+</form>
+<a href="/home/restaurants/$bill.getBooking().getRestaurant().getId()/bills" class="button center">Back to list</a>

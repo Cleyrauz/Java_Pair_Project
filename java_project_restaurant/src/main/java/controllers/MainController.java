@@ -50,7 +50,7 @@ public class MainController {
             List<Bill> bills = DBBooking.findBookingsBills(bookings);
             model.put("bills", bills);
             model.put("restaurant", restaurant);
-            model.put("template", "templates/home_restaurant.vtl");
+            model.put("template", "templates/bills/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 

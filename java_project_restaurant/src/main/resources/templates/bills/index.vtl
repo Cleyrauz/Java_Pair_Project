@@ -6,9 +6,17 @@
 <div class="container">
     <table>
         <tr>
-            <th>Booking</th>
+            <th>Bill Id</th>
+            <th>Date</th>
+            <th>Table Number</th>
         </tr>
-        #foreach($table in $tables)
-
+        #foreach($bill in $bills))
+        <tr>
+            <td>$bill.getBooking().getId()</td>
+            <td>$bill.getBooking().getDateTime()</td>
+            <td>$bill.getBooking().getRestaurantTable()</td>
+            <td><a href="/bills/$bill.getId()" class="button center">Details</a></td>
+        <tr>
+            #end
     </table>
 </div>
