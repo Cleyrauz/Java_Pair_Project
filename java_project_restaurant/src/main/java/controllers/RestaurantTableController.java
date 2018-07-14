@@ -33,7 +33,7 @@ public class RestaurantTableController {
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
             List<RestaurantTable> tables = DBRestaurant.getRestaurantsTables(restaurant);
-            model.put("template", "templates/tables/tables_by_restaurant.vtl");
+            model.put("template", "templates/tables/index.vtl");
             model.put("tables", tables);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
