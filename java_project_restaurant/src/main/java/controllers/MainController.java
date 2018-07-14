@@ -38,68 +38,7 @@ public class MainController {
             model.put("restaurant", restaurant);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
-
-        get("/home/restaurants/:num/bills", (req,res) -> {
-            int restaurantId = Integer.parseInt(req.params(":num"));
-            HashMap<String, Object> model = new HashMap<>();
-            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
-            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
-            List<Bill> bills = DBBooking.findBookingsBills(bookings);
-            model.put("bills", bills);
-            model.put("bookings", bookings);
-            model.put("restaurant", restaurant);
-            model.put("template", "templates/bills/index.vtl");
-            return new ModelAndView(model, "templates/layout.vtl");
-        }, new VelocityTemplateEngine());
-
-        get("/home/restaurants/:num/bookings", (req,res) -> {
-            int restaurantId = Integer.parseInt(req.params(":num"));
-            HashMap<String, Object> model = new HashMap<>();
-            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
-            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
-            model.put("bookings", bookings);
-            model.put("restaurant", restaurant);
-            model.put("template", "templates/bookings/index.vtl");
-            return new ModelAndView(model, "templates/layout.vtl");
-        }, new VelocityTemplateEngine());
-
-        get("/home/restaurants/:num/customers", (req,res) -> {
-            int restaurantId = Integer.parseInt(req.params(":num"));
-            HashMap<String, Object> model = new HashMap<>();
-            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
-            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
-            List<Customer> customers = DBBooking.findBookingsCustomers(bookings);
-            model.put("customers", customers);
-            model.put("restaurant", restaurant);
-            model.put("template", "templates/customers/index.vtl");
-            return new ModelAndView(model, "templates/layout.vtl");
-        }, new VelocityTemplateEngine());
-
-        get("/home/restaurants/:num/tables", (req,res) -> {
-            int restaurantId = Integer.parseInt(req.params(":num"));
-            HashMap<String, Object> model = new HashMap<>();
-            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
-            List<RestaurantTable> tables = DBRestaurant.getRestaurantsTables(restaurant);
-            model.put("tables", tables);
-            model.put("restaurant", restaurant);
-            model.put("template", "templates/tables/index.vtl");
-            return new ModelAndView(model, "templates/layout.vtl");
-        }, new VelocityTemplateEngine());
-
-        get("/home/restaurants/:num/items", (req,res) -> {
-            int restaurantId = Integer.parseInt(req.params(":num"));
-            HashMap<String, Object> model = new HashMap<>();
-            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
-            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
-            List<Bill> bills = DBBooking.findBookingsBills(bookings);
-            List<Item> items = DBBill.findBillsItems(bills);
-            model.put("items", items);
-            model.put("restaurant", restaurant);
-            model.put("template", "templates/items/index.vtl");
-            return new ModelAndView(model, "templates/layout.vtl");
-        }, new VelocityTemplateEngine());
-
-
+        
         BillController billController = new BillController();
         BookingController bookingController = new BookingController();
         CustomerController customerController = new CustomerController();

@@ -1,8 +1,10 @@
 package controllers;
 
+import db.DBBill;
+import db.DBBooking;
 import db.DBHelper;
-import models.Item;
-import models.ItemType;
+import db.DBRestaurant;
+import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -72,6 +74,19 @@ public class ItemController {
             DBHelper.delete(item);
             res.redirect("/items");
             return null;
+        }, new VelocityTemplateEngine());
+
+        get("/home/restaurants/:num/items", (req,res) -> {
+            int restaurantId = Integer.parseInt(req.params(":num"));
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
+            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
+            List<Bill> bills = DBBooking.findBookingsBills(bookings);
+            List<Item> items = DBBill.findBillsItems(bills);
+            model.put("items", items);
+            model.put("restaurant", restaurant);
+            model.put("template", "templates/items/index.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
     }
 }

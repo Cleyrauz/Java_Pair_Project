@@ -1,7 +1,11 @@
 package controllers;
 
+import db.DBBooking;
 import db.DBHelper;
+import db.DBRestaurant;
+import models.Booking;
 import models.Customer;
+import models.Restaurant;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -74,6 +78,18 @@ public class CustomerController {
             DBHelper.delete(customer);
             res.redirect("/customers");
             return null;
+        }, new VelocityTemplateEngine());
+
+        get("/home/restaurants/:num/customers", (req,res) -> {
+            int restaurantId = Integer.parseInt(req.params(":num"));
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
+            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
+            List<Customer> customers = DBBooking.findBookingsCustomers(bookings);
+            model.put("customers", customers);
+            model.put("restaurant", restaurant);
+            model.put("template", "templates/customers/index.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
     }
 }
