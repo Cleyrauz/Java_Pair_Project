@@ -10,7 +10,7 @@
     <label for="restaurant">Restaurant:</label>
     <select id="restaurant" name="restaurant">
         #foreach( $restaurant in $restaurants )
-        <option value="$restaurant.getId()">$restaurant.getName()</option>
+        <option value="restaurant.getId()" #if ($restaurant.getId() == $selectedRestaurant.getId()) selected #end>$restaurant.getName()</option>
         #end
     </select>
 
