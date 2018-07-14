@@ -12,15 +12,15 @@
     <label for="length">Length:</label>
     <input class="inputbox" type="text" name="length" id = "length" required="true" value="$booking.getBookingLength()">
 
-    <!--<label for="restaurant">Restaurant:</label>-->
-    <!--<select id="restaurant" name="restaurant">-->
-        <!--#foreach( $restaurant in $restaurants )-->
-        <!--<option value="$booking.getRestaurant().getId()"-->
-                <!--#if ($booking.getRestaurant().getId() == $booking.getRestaurant().getId())-->
-                <!--selected="selected"-->
-                <!--#end>-->
-            <!--$booking.getRestaurant().getName()</option>-->
-        <!--#end-->
+    <label for="customer">Customer:</label>
+    <select id="customer" name="customer">
+        #foreach( $customer in $customers )
+        <option value="$booking.getCustomer().getId()"
+                #if ($customer.getId() == $booking.getCustomer().getId())
+                selected="selected"
+                #end>
+            $booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</option>
+        #end
 
         <input type="submit" value="Save" class="button">
     </select>
