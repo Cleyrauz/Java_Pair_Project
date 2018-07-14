@@ -34,7 +34,7 @@ public class MainController {
         }, new VelocityTemplateEngine());
 
         post("/home/restaurant", (req, res) -> {
-            int restaurantId = Integer.parseInt(req.params(":num"));
+            int restaurantId = Integer.parseInt(req.queryParams("restaurant_id"));
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
             model.put("template", "templates/home_restaurant.vtl");
