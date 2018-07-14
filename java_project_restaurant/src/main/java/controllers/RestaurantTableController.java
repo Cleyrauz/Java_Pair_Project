@@ -50,7 +50,7 @@ public class RestaurantTableController {
             HashMap<String, Object> model = new HashMap<>();
             List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
-            model.put("template", "templates/tables/new_by_restaurant.vtl");
+            model.put("template", "templates/tables/new.vtl");
             model.put("restaurants", restaurants);
             model.put("selectedRestaurant", restaurant);
             return new ModelAndView(model, "templates/layout.vtl");
