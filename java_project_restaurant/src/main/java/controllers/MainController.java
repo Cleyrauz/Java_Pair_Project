@@ -1,9 +1,6 @@
 package controllers;
 
-import db.DBBooking;
-import db.DBHelper;
-import db.DBRestaurant;
-import db.Seeds;
+import db.*;
 import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -88,6 +85,19 @@ public class MainController {
             model.put("tables", tables);
             model.put("restaurant", restaurant);
             model.put("template", "templates/tables/index.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("/home/restaurants/:num/items", (req,res) -> {
+            int restaurantId = Integer.parseInt(req.params(":num"));
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
+            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
+            List<Bill> bills = DBBooking.findBookingsBills(bookings);
+            List<Item> items = DBBill.findBillsItems(bills);
+            model.put("items", items);
+            model.put("restaurant", restaurant);
+            model.put("template", "templates/items/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
