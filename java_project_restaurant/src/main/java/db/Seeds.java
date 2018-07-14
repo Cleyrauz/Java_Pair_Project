@@ -48,21 +48,12 @@ public class Seeds {
         DBHelper.save(item2);
 
         Date date1 = new Date(118, 10, 2, 17, 10);
-        Booking booking1 = new Booking(restaurant, restaurantTable1, date1, 120);
-        Booking booking2 = new Booking(restaurant, restaurantTable2, date1, 60);
-        Booking booking3 = new Booking(restaurant, restaurantTable3, date1, 120);
+        Booking booking1 = new Booking(restaurant, restaurantTable1, date1, 120, customer1, 3);
+        Booking booking2 = new Booking(restaurant, restaurantTable2, date1, 60, customer2, 3);
+        Booking booking3 = new Booking(restaurant, restaurantTable3, date1, 120, customer3, 5);
         DBHelper.save(booking1);
         DBHelper.save(booking2);
         DBHelper.save(booking3);
-
-        booking1.addCustomer(customer1);
-        booking2.addCustomer(customer2);
-        booking3.addCustomer(customer3);
-        DBHelper.save(booking1);
-        DBHelper.save(booking2);
-        DBHelper.save(booking3);
-
-
 
         Bill bill1 = new Bill(booking1);
         Bill bill2 = new Bill(booking2);

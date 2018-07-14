@@ -16,15 +16,13 @@ public class DBBooking {
     private static Transaction transaction;
     private static Session session;
 
-    public static List<Customer> findBookingCustomers(Booking booking){
+    public static Customer findBookingCustomer(Booking booking){
         session = HibernateUtil.getSessionFactory().openSession();
-        List<Customer> results = null;
+        Customer results = null;
         try {
             Criteria cr = session.createCriteria(Customer.class);
-            cr.createAlias("bookings", "booking");
-            cr.add(Restrictions.eq("booking.id", booking.getId()));
-            cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-            results = cr.list();
+            cr.add(Restrictions.eq("booking", booking));
+            results = (Customer) cr.uniqueResult();
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
@@ -36,7 +34,7 @@ public class DBBooking {
     public static List<Customer> findBookingsCustomers(List<Booking> bookings){
         List<Customer> results = new ArrayList<>();
         for (Booking booking : bookings) {
-            results.addAll(findBookingCustomers(booking));
+            results.add(findBookingCustomer(booking));
         }
         return results;
     }

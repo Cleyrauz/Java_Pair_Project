@@ -49,7 +49,7 @@ public class BookingTest {
 
         dateTime = new Date(2018, 2,4, 21,0);
 
-        booking = new Booking(restaurant, table1, dateTime, 120);
+        booking = new Booking(restaurant, table1, dateTime, 120, customer1, 3);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class BookingTest {
 
     @Test
     public void hasCustomers() {
-        assertEquals(4, booking.getCustomers().size());
+        assertEquals("Matthew", booking.getCustomer().getFirstName());
     }
 
     @Test

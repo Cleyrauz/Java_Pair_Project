@@ -3,6 +3,7 @@ package controllers;
 import db.DBHelper;
 import db.DBRestaurant;
 import models.Booking;
+import models.Customer;
 import models.Restaurant;
 import models.RestaurantTable;
 import spark.ModelAndView;
@@ -60,6 +61,8 @@ public class BookingController {
 //            Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.queryParams("restaurant")));
             RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.queryParams("restaurantTable")));
+            Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.queryParams("customer_id")));
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
             String stringDate = req.queryParams("date");
             Date date = null;
             try { date = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss").parse(stringDate);
@@ -67,7 +70,7 @@ public class BookingController {
                 e.printStackTrace();
             }
             int bookingLength = Integer.parseInt(req.queryParams("bookingLength"));
-            Booking booking = new Booking(restaurant, table, date, bookingLength);
+            Booking booking = new Booking(restaurant, table, date, bookingLength, customer, quantity);
             DBHelper.save(booking);
             res.redirect("/bookings");
             return null;
