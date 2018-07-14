@@ -10,8 +10,6 @@ public class Bill {
 
     private int id;
     private List<Item> items;
-
-
     private Booking booking;
 
     public Bill(){

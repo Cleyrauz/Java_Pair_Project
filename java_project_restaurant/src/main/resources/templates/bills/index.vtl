@@ -6,8 +6,21 @@
 <div class="container">
     <table>
         <tr>
-            <th>Booking</th>
+            <th>Bill Id</th>
+            <th>Date</th>
+            <th>Table Number</th>
         </tr>
-
+        #foreach ($bill in $bills)
+        <tr>
+            #foreach ($booking in $bookings)
+                #if ($booking.getBill().getId() == $bill.getId())
+                    <td>$bill.getId()</td>
+                    <td>$booking.getDateTime()</td>
+                    <td>$booking.getRestaurantTable().getTableNumber()</td>
+                    <td><a href="/bills/$bill.getId()" class="button center">Details</a></td>
+                #end
+            #end
+        <tr>
+            #end
     </table>
 </div>

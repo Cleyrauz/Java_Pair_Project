@@ -46,6 +46,7 @@ public class MainController {
             List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
             List<Bill> bills = DBBooking.findBookingsBills(bookings);
             model.put("bills", bills);
+            model.put("bookings", bookings);
             model.put("restaurant", restaurant);
             model.put("template", "templates/bills/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
