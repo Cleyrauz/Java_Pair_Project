@@ -57,7 +57,7 @@ public class DBBooking {
     }
 
     public static List<Bill> findBookingsBills(List<Booking> bookings){
-        List<Bill> results = null;
+        List<Bill> results = new ArrayList<>();
         for (Booking booking: bookings){
             results.add(findBookingBill(booking));
         }

@@ -10,12 +10,16 @@
             <th>Date</th>
             <th>Table Number</th>
         </tr>
-        #foreach($bill in $bills))
+        #foreach ($bill in $bills)
         <tr>
-            <td>$bill.getBooking().getId()</td>
-            <td>$bill.getBooking().getDateTime()</td>
-            <td>$bill.getBooking().getRestaurantTable()</td>
-            <td><a href="/bills/$bill.getId()" class="button center">Details</a></td>
+            #foreach ($booking in $bookings)
+                #if ($booking.getBill().getId() == $bill.getId())
+                    <td>$bill.getId()</td>
+                    <td>$booking.getDateTime()</td>
+                    <td>$booking.getRestaurantTable().getTableNumber()</td>
+                    <td><a href="/bills/$bill.getId()" class="button center">Details</a></td>
+                #end
+            #end
         <tr>
             #end
     </table>
