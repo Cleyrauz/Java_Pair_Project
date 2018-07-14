@@ -35,9 +35,9 @@ public class BookingController {
 
         get("/bookings/new", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
-            List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
+            List<Customer> customers = DBHelper.getAll(Customer.class);
             model.put("template", "templates/bookings/new.vtl");
-            model.put("restaurants", restaurants);
+            model.put("customers", customers);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 

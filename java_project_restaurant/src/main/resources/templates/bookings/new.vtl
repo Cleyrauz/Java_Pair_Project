@@ -10,10 +10,10 @@
     <label for="length">Length:</label>
     <input class="inputbox" type="text" name="length" id = "length" required="true">
 
-    <label for="restaurant">Restaurant:</label>
-    <select id="restaurant" name="restaurant">
-        #foreach( $restaurant in $restaurants )
-        <option value="$restaurant.getId()">$restaurant.getName()</option>
+    <label for="customer">Customer:</label>
+    <select id="customer" name="customer">
+        #foreach( $customer in $customers )
+        <option value="$customer.getId()">$customer.getFirstName() $customer.getLastName()</option>
         #end
     </select>
 
@@ -21,3 +21,5 @@
 </form>
 
 <a href="/bookings" class="button center">Cancel</a>
+
+<a href="/customers/new" class="button">Add new Customer</a>
