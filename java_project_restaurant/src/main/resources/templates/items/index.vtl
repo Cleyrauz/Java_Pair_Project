@@ -15,7 +15,11 @@
             <td>$item.getItemType().getName()</td>
             <td>$item.getItemType().getPrice()</td>
             <td>$item.getBill().getId()</td>
-            <td><a href="/items/$item.getId()" class="button center">Details</a></td>
+            <td><a href="#if( ! $restaurant )
+                            /items/$item.getId()
+                         #else
+                            /home/restaurants/$restaurant.getId()/items/$item.getId()
+                         #end" class="button center">Details</a></td>
         <tr>
             #end
     </table>
