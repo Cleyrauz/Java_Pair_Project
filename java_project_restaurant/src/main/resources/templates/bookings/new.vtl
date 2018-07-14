@@ -1,6 +1,6 @@
 <p class="pageHeader">New Booking</p>
 
-<form action="/bookings" method="post">
+<form action="/home/restaurants/$restaurant.getId()/bookings/new" method="post">
 
     <label for="tableNumber">Table Number:</label>
     <select id="tableNumber" name="tableNumber">
@@ -9,11 +9,15 @@
         #end
     </select>
 
-    <label for="dateTime">DateTime:</label>
-    <input class="date" type="datetime-local" name="dateTime" id = "dateTime" required="true">
+    <label for="date">Date:</label>
+    <input class="date" type="date" name="date" id = "date" required="true" min="$today">
+
+    <label for="time">Time:</label>
+    <input class="time" type="time" name="time" id="time" required="true" min="13:00" max="23:00">
 
     <label for="length">Length:</label>
-    <input class="inputbox" type="text" name="length" id = "length" required="true">
+    <input class="inputbox" type="number" name="length" id="length" required="true">
+
 
     <label for="customer">Customer:</label>
     <select id="customer" name="customer">

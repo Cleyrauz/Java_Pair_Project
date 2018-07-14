@@ -12,6 +12,7 @@ import spark.template.velocity.VelocityTemplateEngine;
 import java.awt.print.Book;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,10 +47,15 @@ public class BookingController {
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
             List<RestaurantTable> tables = DBRestaurant.getRestaurantsTables(restaurant);
             List<Customer> customers = DBHelper.getAll(Customer.class);
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(new Date());
+
             model.put("template", "templates/bookings/new.vtl");
             model.put("tables", tables);
             model.put("restaurant", restaurant);
             model.put("customers", customers);
+            model.put("today", date);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
@@ -81,21 +87,35 @@ public class BookingController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/bookings", (req,res) -> {
+        post("/home/restaurants/:num/bookings/new", (req,res) -> {
 //            Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength, Customer customer, int quantity
-            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.queryParams("restaurant")));
-            RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.queryParams("restaurantTable")));
-            Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.queryParams("customer_id")));
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
+            int table_id = Integer.parseInt(req.queryParams("tableNumber"));
+            RestaurantTable table = DBHelper.find(RestaurantTable.class, table_id);
+            int customer_id = Integer.parseInt(req.queryParams("customer"));
+            Customer customer = DBHelper.find(Customer.class, customer_id);
             int quantity = Integer.parseInt(req.queryParams("quantity"));
-            String stringDate = req.queryParams("date");
-            Date date = null;
-            try { date = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss").parse(stringDate);
+            int bookingLength = Integer.parseInt(req.queryParams("length"));
+
+            //timey wimey stuff
+
+            String date = req.queryParams("date");
+            String time = req.queryParams("time");
+            String fullDateTime = date + " " + time;
+            String pattern = "dd-MM-yyyy HH:mm";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            Date dateTime = null;
+            try {
+                dateTime = simpleDateFormat.parse(fullDateTime);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            int bookingLength = Integer.parseInt(req.queryParams("bookingLength"));
-            Booking booking = new Booking(restaurant, table, date, bookingLength, customer, quantity);
+
+            //timey wimey stuff over
+
+            Booking booking = new Booking(restaurant, table, dateTime, bookingLength, customer, quantity);
             DBHelper.save(booking);
+
             res.redirect("/bookings");
             return null;
         }, new VelocityTemplateEngine());
