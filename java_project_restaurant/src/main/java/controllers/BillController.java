@@ -24,7 +24,9 @@ public class BillController {
         get("/bills", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             List<Bill> bills = DBHelper.getAll(Bill.class);
+            List<Booking> bookings = DBHelper.getAll(Booking.class);
             model.put("template", "templates/bills/index.vtl");
+            model.put("bookings", bookings);
             model.put("bills", bills);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -42,6 +44,8 @@ public class BillController {
             model.put("bill", bill);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+
 
         get("/bills/:num/edit", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
@@ -87,6 +91,18 @@ public class BillController {
             model.put("bookings", bookings);
             model.put("restaurant", restaurant);
             model.put("template", "templates/bills/index.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("/home/restaurants/:num1/bills/:num2", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
+            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
+            Bill bill = DBHelper.find(Bill.class, Integer.parseInt(req.params(":num2")));
+            model.put("template", "templates/bills/show.vtl");
+            model.put("restaurant", restaurant);
+            model.put("bookings", bookings);
+            model.put("bill", bill);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
     }
