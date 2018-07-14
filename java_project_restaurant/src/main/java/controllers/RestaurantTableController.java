@@ -104,5 +104,15 @@ public class RestaurantTableController {
             model.put("template", "templates/tables/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        get("/home/restaurants/:num1/tables/:num2", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
+            RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.params(":num2")));
+            model.put("template", "templates/tables/show.vtl");
+            model.put("restaurant", restaurant);
+            model.put("table", table);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
     }
 }
