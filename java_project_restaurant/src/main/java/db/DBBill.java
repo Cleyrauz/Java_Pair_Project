@@ -17,16 +17,12 @@ public class DBBill {
     private static Session session;
 
     public static List<Item> findBillItems(Bill bill){
-        session = HibernateUtil.getSessionFactory().openSession();
-        List<Item> results = null;
-        try {
-            Criteria cr = session.createCriteria(Item.class);
-            cr.add(Restrictions.eq("bill", bill));
-            results = cr.list();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
+        List<Item> results = new ArrayList<>();
+        List<Item> items = DBHelper.getAll(Item.class);
+        for (Item item : items){
+            if (item.getBill().getId() == bill.getId()){
+                results.add(item);
+            }
         }
         return results;
     }
@@ -38,4 +34,5 @@ public class DBBill {
         }
         return results;
     }
+
 }

@@ -75,9 +75,6 @@ public class MainController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-//        get("/home/restaurant/:num/items"
-
-
         get("/home/restaurants/:num/tables", (req,res) -> {
             int restaurantId = Integer.parseInt(req.params(":num"));
             HashMap<String, Object> model = new HashMap<>();

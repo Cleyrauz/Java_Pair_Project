@@ -12,12 +12,12 @@
             <th>Length (mins)</th>
         </tr>
         #foreach($booking in $bookings)
-        <!--<tr>-->
+        <tr>
             <td>$booking.getRestaurantTable().getTableNumber()</td>
-            <!--<td>$booking.getDateTime()</td>-->
-            <!--<td>$booking.getBookingLength()</td>-->
-            <!--<td><a href="/bookings/$booking.getId()" class="button center">Details</a></td>-->
-        <!--<tr>-->
+            <td>$booking.getDateTime()</td>
+            <td>$booking.getBookingLength()</td>
+            <td><a href="/bookings/$booking.getId()" class="button center">Details</a></td>
+        <tr>
         #end
     </table>
 </div>

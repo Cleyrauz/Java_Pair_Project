@@ -8,13 +8,13 @@
         <tr>
             <th>Name:</th>
             <th>Price (£):</th>
-            <th>Bill</th>
+            <th>Bill Id</th>
         </tr>
         #foreach($item in $items)
         <tr>
             <td>$item.getItemType().getName()</td>
-            <td>$item.getItemType().getName()</td>
-            <td>$item.getBill()</td>
+            <td>$item.getItemType().getPrice()</td>
+            <td>$item.getBill().getId()</td>
             <td><a href="/items/$item.getId()" class="button center">Details</a></td>
         <tr>
             #end
