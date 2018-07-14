@@ -39,7 +39,7 @@ public class Item {
         this.itemType = itemType;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bill_id")
     public Bill getBill() {
         return bill;
@@ -48,4 +48,5 @@ public class Item {
     public void setBill(Bill bill) {
         this.bill = bill;
     }
+
 }

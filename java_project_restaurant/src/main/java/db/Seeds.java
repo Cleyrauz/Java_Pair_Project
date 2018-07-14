@@ -62,12 +62,20 @@ public class Seeds {
         DBHelper.save(booking2);
         DBHelper.save(booking3);
 
+
+
         Bill bill1 = new Bill(booking1);
         Bill bill2 = new Bill(booking2);
         Bill bill3 = new Bill(booking3);
+        DBHelper.save(item1);
         DBHelper.save(bill1);
         DBHelper.save(bill2);
         DBHelper.save(bill3);
+
+        item1.setBill(bill1);
+        item2.setBill(bill2);
+        DBHelper.save(item1);
+        DBHelper.save(item2);
 
     }
 }
