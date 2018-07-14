@@ -14,14 +14,12 @@ public class DBCustomer {
     private static Transaction transaction;
     private static Session session;
 
-    public static List<Booking> findCustomerBookings(Customer customer){
+    public static List<Booking> findCustomersBookings(Customer customer){
         session = HibernateUtil.getSessionFactory().openSession();
         List<Booking> results = null;
         try {
             Criteria cr = session.createCriteria(Booking.class);
-            cr.createAlias("customers", "customer");
-            cr.add(Restrictions.eq("customer.id", customer.getId()));
-            cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+            cr.add(Restrictions.eq("customer", customer));
             results = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();

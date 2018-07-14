@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,18 +18,8 @@ public class DBBooking {
     private static Session session;
 
     public static Customer findBookingCustomer(Booking booking){
-        session = HibernateUtil.getSessionFactory().openSession();
-        Customer results = null;
-        try {
-            Criteria cr = session.createCriteria(Customer.class);
-            cr.add(Restrictions.eq("booking", booking));
-            results = (Customer) cr.uniqueResult();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return results;
+        Customer result = DBHelper.find(Customer.class, booking.getCustomer().getId());
+        return result;
     }
 
     public static List<Customer> findBookingsCustomers(List<Booking> bookings){
