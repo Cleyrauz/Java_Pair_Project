@@ -1,0 +1,18 @@
+<p class="pageHeader">Edit Bill</p>
+
+<form action="/bills/$bill.getId()" method="post">
+
+    <label for="firstName">FirstName:</label>
+    <input class="inputbox" type="text" name="firstName" id = "firstName" required="true" value="$customer.getFirstName()">
+
+    <label for="lastName">LastName:</label>
+    <input class="inputbox" type="text" name="lastName" id = "lastName" required="true" value="$customer.getLastName()">
+
+    <label for="budget">Budget(£):</label>
+    <input class="inputbox" type="text" name="budget" id = "budget" required="true" value="$customer.getBudget()">
+
+    <input type="submit" value="Save" class="button">
+    </select>
+</form>
+
+<a href="/customers/$customer.getId()" class="button center">Cancel</a>

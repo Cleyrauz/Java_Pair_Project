@@ -1,13 +1,30 @@
 
+<p class="pageHeader">Edit Booking</p>
 
-<h1> Edit Booking </h1>
+<form action="/bookings/$booking.getId()" method="post">
 
-<form action="bookings/$booking.getId()" method="post">
+    <label for="tableNumber">Table Number:</label>
+    <input class="inputbox" type="text" name="tableNumber" id = "tableNumber" required="true" value="$booking.getRestaurantTable().getTableNumber()">
 
-    <label for="customer">Name:</label>
-    <input class="input" type="text" name="customer" required="true" value="$booking.getCustomer().getName" id ="customer">
+    <label for="dateTime">DateTime:</label>
+    <input class="inputbox" type="text" name="dateTime" id = "dateTime" required="true" value="$booking.getDateTime()">
 
+    <label for="length">Length:</label>
+    <input class="inputbox" type="text" name="length" id = "length" required="true" value="$booking.getBookingLength()">
+
+    <!--<label for="restaurant">Restaurant:</label>-->
+    <!--<select id="restaurant" name="restaurant">-->
+        <!--#foreach( $restaurant in $restaurants )-->
+        <!--<option value="$booking.getRestaurant().getId()"-->
+                <!--#if ($booking.getRestaurant().getId() == $booking.getRestaurant().getId())-->
+                <!--selected="selected"-->
+                <!--#end>-->
+            <!--$booking.getRestaurant().getName()</option>-->
+        <!--#end-->
+
+        <input type="submit" value="Save" class="button">
+    </select>
 </form>
 
-
+<a href="/bookings/$booking.getId()" class="button center">Cancel</a>
 

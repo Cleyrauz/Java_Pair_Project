@@ -1,0 +1,23 @@
+<p class="pageHeader">New Booking</p>
+
+<form action="/bookings" method="post">
+    <label for="tableNumber">Table Number:</label>
+    <input class="inputbox" type="text" name="tableNumber" id = "tableNumber" required="true">
+
+    <label for="dateTime">DateTime:</label>
+    <input class="inputbox" type="text" name="dateTime" id = "dateTime" required="true">
+
+    <label for="length">Length:</label>
+    <input class="inputbox" type="text" name="length" id = "length" required="true">
+
+    <!--<label for="restaurant">Restaurant:</label>-->
+    <!--<select id="restaurant" name="restaurant">-->
+        <!--#foreach( $restaurant in $restaurants )-->
+        <!--<option value="$restaurant.getId()">$restaurant.getName()</option>-->
+        <!--#end-->
+    <!--</select>-->
+
+    <input type="submit" value="Save" class="button">
+</form>
+
+<a href="/bookings" class="button center">Cancel</a>
