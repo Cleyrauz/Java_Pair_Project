@@ -17,7 +17,11 @@
                     <td>$bill.getId()</td>
                     <td>$booking.getDateTime()</td>
                     <td>$booking.getRestaurantTable().getTableNumber()</td>
-                    <td><a href="/bills/$bill.getId()" class="button center">Details</a></td>
+                    <td><a href="#if( ! $restaurant )
+                            /bills/$bill.getId()
+                         #else
+                            /home/restaurants/$restaurant.getId()/bills/$bill.getId()
+                         #end" class="button center">Details</a></td>
                 #end
             #end
         <tr>

@@ -8,9 +8,15 @@
     <p>$item.getItemType().getName()</p>
     <p>$item.getItemType().getPrice()</p>
 </div>
+#end
 
 <a href="/bills/$bill.getId()/edit" class="button center">Edit</a>
 <form action="/bills/$bill.getId()/delete" method="post">
     <input type="submit" value="Delete" class="button center">
 </form>
-<a href="/home/restaurants/$bill.getBooking().getRestaurant().getId()/bills" class="button center">Back to list</a>
+<a href="#if( ! $restaurant )
+            /bills
+        #else
+            /home/restaurants/$restaurant.getId()/bills
+        #end" class="button center">Back to list</a>
+

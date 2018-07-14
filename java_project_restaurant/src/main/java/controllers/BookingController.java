@@ -62,8 +62,10 @@ public class BookingController {
         get("/bookings/:num/edit", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num")));
+            List<Customer> customers = DBHelper.getAll(Customer.class);
             model.put("template", "templates/bookings/edit.vtl");
             model.put("booking", booking);
+            model.put("customers", customers);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
