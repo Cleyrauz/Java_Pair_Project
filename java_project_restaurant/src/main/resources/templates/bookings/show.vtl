@@ -2,11 +2,15 @@
     <p> Table Number: $booking.getRestaurantTable().getTableNumber()</p>
     <p> DateTime: $booking.getDateTime()</p>
     <p> Length: $booking.getBookingLength()</p>
-    <p> Customer: $booking.getCustomer().getFirstName() Customer: $booking.getCustomer().getLastName()</p>
+    <p> Customer: $booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</p>
 </div>
 
 <a href="/bookings/$booking.getId()/edit" class="button center">Edit</a>
 <form action="/bookings/$booking.getId()/delete" method="post">
     <input type="submit" value="Delete" class="button center">
 </form>
-<a href="/bookings/restaurant/$booking.getRestaurant().getId()" class="button center">Back to list</a>
+<a href="#if( ! $restaurant )
+            /bookings
+        #else
+            /home/restaurants/$restaurant.getId()/bookings
+         #end" class="button center">Back to list</a>

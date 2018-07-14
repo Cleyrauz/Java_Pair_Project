@@ -18,7 +18,11 @@
             <td>$booking.getDateTime()</td>
             <td>$booking.getBookingLength()</td>
             <td>$booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</td>
-            <td><a href="/bookings/$booking.getId()" class="button center">Details</a></td>
+            <td><a href="#if( ! $restaurant )
+                            /bookings/$booking.getId()
+                         #else
+                            /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
+                         #end" class="button center">Details</a></td>
         <tr>
         #end
     </table>
