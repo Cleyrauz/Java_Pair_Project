@@ -49,11 +49,23 @@ public class BookingController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/home/restaurants/:num1/bookings/:num2", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
+            Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num2")));
+            model.put("template", "templates/bookings/show.vtl");
+            model.put("restaurant", restaurant);
+            model.put("booking", booking);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
         get("/bookings/:num/edit", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num")));
+            List<Customer> customers = DBHelper.getAll(Customer.class);
             model.put("template", "templates/bookings/edit.vtl");
             model.put("booking", booking);
+            model.put("customers", customers);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 

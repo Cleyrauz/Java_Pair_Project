@@ -1,7 +1,7 @@
 
 <p class="pageHeader">Edit Booking</p>
 
-<form action="/bookings/$booking.getId()" method="post">
+<form action="/bookings" method="post">
 
     <label for="tableNumber">Table Number:</label>
     <input class="inputbox" type="text" name="tableNumber" id = "tableNumber" required="true" value="$booking.getRestaurantTable().getTableNumber()">
@@ -20,9 +20,9 @@
         #foreach( $customer in $customers )
         <option value="$booking.getCustomer().getId()"
                 #if ($customer.getId() == $booking.getCustomer().getId())
-                selected="selected"
+                selected
                 #end>
-            $booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</option>
+            $customer.getFirstName() $customer.getLastName()</option>
         #end
 
         <input type="submit" value="Save" class="button">
