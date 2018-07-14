@@ -18,7 +18,7 @@ public class Booking {
     private RestaurantTable restaurantTable;
     private Date dateTime;
     private int bookingLength;
-    private int quantity;
+    private Integer quantity;
 
 
     private Bill bill;
@@ -26,7 +26,7 @@ public class Booking {
     public Booking(){
     }
 
-    public Booking(Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength, Customer customer, int quantity) {
+    public Booking(Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength, Customer customer, Integer quantity) {
         this.restaurant = restaurant;
         this.customer = customer;
         this.restaurantTable = restaurantTable;
@@ -105,11 +105,11 @@ public class Booking {
     }
 
     @Column(name = "quantity")
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 }
