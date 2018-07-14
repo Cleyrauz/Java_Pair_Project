@@ -18,7 +18,12 @@
             <td>$customer.getLastName()</td>
             <td>$customer.getBudget()</td>
             <!--<td>$customer.getRestaurant().getName()</td>-->
-            <td><a href="/customers/$customer.getId()" class="button center">Details</a></td>
+
+            <td><a href="#if( ! $restaurant )
+                            /customers/$customer.getId()
+                         #else
+                            /home/restaurants/$restaurant.getId()/customers/$customer.getId()
+                         #end" class="button center">Details</a></td>
         <tr>
             #end
     </table>

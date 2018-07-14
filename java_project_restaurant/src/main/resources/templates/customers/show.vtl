@@ -9,6 +9,8 @@
     <input type="submit" value="Delete" class="button center">
 </form>
 
-//This route is not working
-
-<a href="/home/restaurant/$restaurant.getId()/customers" class="button center">Back to list</a>
+<a href="#if( ! $restaurant )
+/customers
+#else
+/home/restaurants/$restaurant.getId()/customers
+#end" class="button center">Back to list</a>
