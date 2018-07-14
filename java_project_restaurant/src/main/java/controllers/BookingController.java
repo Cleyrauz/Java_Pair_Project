@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBHelper;
+import db.DBRestaurant;
 import models.Booking;
 import models.Restaurant;
 import models.RestaurantTable;
@@ -75,6 +76,17 @@ public class BookingController {
             DBHelper.delete(booking);
             res.redirect("/bookings");
             return null;
+        }, new VelocityTemplateEngine());
+
+        get("/home/restaurants/:num/bookings", (req,res) -> {
+            int restaurantId = Integer.parseInt(req.params(":num"));
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
+            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
+            model.put("bookings", bookings);
+            model.put("restaurant", restaurant);
+            model.put("template", "templates/bookings/index.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
     }
 }
