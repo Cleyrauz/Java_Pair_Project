@@ -41,6 +41,18 @@ public class BookingController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/home/restaurants/:num/bookings/new", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
+            List<RestaurantTable> tables = DBRestaurant.getRestaurantsTables(restaurant);
+            List<Customer> customers = DBHelper.getAll(Customer.class);
+            model.put("template", "templates/bookings/new.vtl");
+            model.put("tables", tables);
+            model.put("restaurant", restaurant);
+            model.put("customers", customers);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
         get("/bookings/:num", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num")));
@@ -70,7 +82,7 @@ public class BookingController {
         }, new VelocityTemplateEngine());
 
         post("/bookings", (req,res) -> {
-//            Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength
+//            Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength, Customer customer, int quantity
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.queryParams("restaurant")));
             RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.queryParams("restaurantTable")));
             Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.queryParams("customer_id")));
@@ -84,6 +96,19 @@ public class BookingController {
             int bookingLength = Integer.parseInt(req.queryParams("bookingLength"));
             Booking booking = new Booking(restaurant, table, date, bookingLength, customer, quantity);
             DBHelper.save(booking);
+            res.redirect("/bookings");
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("/bookings/:num/edit", (req,res) -> {
+            //            Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength, Customer customer, int quantity
+//            Restaurant restaurant = req.queryParams("restaurant");
+//            RestaurantTable table = req.queryParams("table");
+//            Date dateTime = req.queryParams("dateTime");
+//            int bookingLength = req.queryParams("bookingLength");
+//            Customer customer = req.queryParams("customer");
+//            int quantity = req.queryParams("quantity");
+
             res.redirect("/bookings");
             return null;
         }, new VelocityTemplateEngine());

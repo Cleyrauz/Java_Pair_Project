@@ -1,11 +1,16 @@
 <p class="pageHeader">New Booking</p>
 
 <form action="/bookings" method="post">
+
     <label for="tableNumber">Table Number:</label>
-    <input class="inputbox" type="text" name="tableNumber" id = "tableNumber" required="true">
+    <select id="tableNumber" name="tableNumber">
+        #foreach( $table in $tables )
+        <option value="$table.getId()">$table.getTableNumber() Seats: $table.getCapacity()</option>
+        #end
+    </select>
 
     <label for="dateTime">DateTime:</label>
-    <input class="inputbox" type="text" name="dateTime" id = "dateTime" required="true">
+    <input class="date" type="datetime-local" name="dateTime" id = "dateTime" required="true">
 
     <label for="length">Length:</label>
     <input class="inputbox" type="text" name="length" id = "length" required="true">
@@ -19,6 +24,11 @@
         <option value="$customer.getId()">$customer.getFirstName() $customer.getLastName()</option>
         #end
     </select>
+
+    <label for="quantity">Quantity:</label>
+    <input class="inputbox" type="number" name="quantity" id="quantity" required="true">
+
+
 
     <input type="submit" value="Save" class="button">
 </form>
