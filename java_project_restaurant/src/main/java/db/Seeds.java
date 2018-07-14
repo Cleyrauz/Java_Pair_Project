@@ -47,7 +47,7 @@ public class Seeds {
         DBHelper.save(item1);
         DBHelper.save(item2);
 
-        Date date1 = new Date(2018, 10, 2, 17, 10);
+        Date date1 = new Date(118, 10, 2, 17, 10);
         Booking booking1 = new Booking(restaurant, restaurantTable1, date1, 120);
         Booking booking2 = new Booking(restaurant, restaurantTable2, date1, 60);
         Booking booking3 = new Booking(restaurant, restaurantTable3, date1, 120);

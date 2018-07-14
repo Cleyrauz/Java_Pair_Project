@@ -14,10 +14,11 @@ public class Booking {
 
     private int id;
     private Restaurant restaurant;
-    private List<Customer> customers;
+    private Customer customer;
     private RestaurantTable restaurantTable;
     private Date dateTime;
     private int bookingLength;
+    private int quantity;
 
 
     private Bill bill;
@@ -25,12 +26,13 @@ public class Booking {
     public Booking(){
     }
 
-    public Booking(Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
+    public Booking(Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength, Customer customer, int quantity) {
         this.restaurant = restaurant;
-        this.customers = new ArrayList<>();
+        this.customer = customer;
         this.restaurantTable = restaurantTable;
         this.dateTime = dateTime;
         this.bookingLength = bookingLength;
+        this.quantity = quantity;
     }
 
     @Id
@@ -44,21 +46,14 @@ public class Booking {
         this.id = id;
     }
 
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="booking_customer",
-            joinColumns = {@JoinColumn(name="booking_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="customer_id", nullable =false, updatable = false)})
-    public List<Customer> getCustomers() {
-        return customers;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id")
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
-    }
-
-    public void addCustomer(Customer customer) {
-        this.customers.add(customer);
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -109,5 +104,12 @@ public class Booking {
         this.bill = bill;
     }
 
+    @Column(name = "quantity")
+    public int getQuantity() {
+        return quantity;
+    }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
