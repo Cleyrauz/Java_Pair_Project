@@ -73,7 +73,7 @@ public class MainController {
             List<Customer> customers = DBBooking.findBookingsCustomers(bookings);
             model.put("customers", customers);
             model.put("restaurant", restaurant);
-            model.put("template", "templates/home_restaurant.vtl");
+            model.put("template", "templates/customers/customers_by_restaurant.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 

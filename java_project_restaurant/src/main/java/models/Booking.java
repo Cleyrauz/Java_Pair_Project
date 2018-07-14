@@ -45,7 +45,7 @@ public class Booking {
     }
 
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="booking_customer",
             joinColumns = {@JoinColumn(name="booking_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name="customer_id", nullable =false, updatable = false)})

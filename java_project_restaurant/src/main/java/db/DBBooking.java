@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DBBooking {
@@ -33,7 +34,7 @@ public class DBBooking {
     }
 
     public static List<Customer> findBookingsCustomers(List<Booking> bookings){
-        List<Customer> results = null;
+        List<Customer> results = new ArrayList<>();
         for (Booking booking : bookings) {
             results.addAll(findBookingCustomers(booking));
         }

@@ -55,6 +55,13 @@ public class Seeds {
         DBHelper.save(booking2);
         DBHelper.save(booking3);
 
+        booking1.addCustomer(customer1);
+        booking2.addCustomer(customer2);
+        booking3.addCustomer(customer3);
+        DBHelper.save(booking1);
+        DBHelper.save(booking2);
+        DBHelper.save(booking3);
+
         Bill bill1 = new Bill(booking1);
         Bill bill2 = new Bill(booking2);
         Bill bill3 = new Bill(booking3);
