@@ -88,5 +88,15 @@ public class ItemController {
             model.put("template", "templates/items/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        get("/home/restaurants/:num1/items/:num2", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
+            Item item = DBHelper.find(Item.class, Integer.parseInt(req.params(":num2")));
+            model.put("template", "templates/items/show.vtl");
+            model.put("restaurant", restaurant);
+            model.put("item", item);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
     }
 }
