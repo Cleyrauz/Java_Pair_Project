@@ -33,7 +33,7 @@ public class MainController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/home/restaurant", (req, res) -> {
+        post("/home/restaurants", (req, res) -> {
             int restaurantId = Integer.parseInt(req.queryParams("restaurant_id"));
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
@@ -42,7 +42,7 @@ public class MainController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/home/restaurant/:num/bills", (req,res) -> {
+        get("/home/restaurants/:num/bills", (req,res) -> {
             int restaurantId = Integer.parseInt(req.params(":num"));
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
@@ -54,7 +54,7 @@ public class MainController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/home/restaurant/:num/bookings", (req,res) -> {
+        get("/home/restaurants/:num/bookings", (req,res) -> {
             int restaurantId = Integer.parseInt(req.params(":num"));
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
@@ -65,7 +65,7 @@ public class MainController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/home/restaurant/:num/customers", (req,res) -> {
+        get("/home/restaurants/:num/customers", (req,res) -> {
             int restaurantId = Integer.parseInt(req.params(":num"));
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
@@ -80,14 +80,14 @@ public class MainController {
 //        get("/home/restaurant/:num/items"
 
 
-        get("/home/restaurant/:num/tables", (req,res) -> {
+        get("/home/restaurants/:num/tables", (req,res) -> {
             int restaurantId = Integer.parseInt(req.params(":num"));
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
             List<RestaurantTable> tables = DBRestaurant.getRestaurantsTables(restaurant);
             model.put("tables", tables);
             model.put("restaurant", restaurant);
-            model.put("template", "templates/home_restaurant.vtl");
+            model.put("template", "templates/tables/tables_by_restaurant.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
