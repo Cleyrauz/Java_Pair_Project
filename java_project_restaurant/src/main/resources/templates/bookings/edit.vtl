@@ -1,10 +1,10 @@
 
 <p class="pageHeader">Edit Booking</p>
 
-<form action="/bookings" method="post">
+<form action="/restaurant/$booking.getRestaurant().getId()/bookings/$booking.getId()/edit" method="post">
 
     <label for="tableNumber">Table Number:</label>
-    <input class="inputbox" type="text" name="tableNumber" id = "tableNumber" required="true" value="$booking.getRestaurantTable().getTableNumber()">
+    <input class="inputbox" type="text" name="tableNumber" id = "tableNumber" required="true" value="$booking.getRestaurantTable().getId()">
 
     <label for="dateTime">DateTime:</label>
     <input class="inputbox" type="text" name="dateTime" id = "dateTime" required="true" value="$booking.getDateTime()">
@@ -18,7 +18,7 @@
     <label for="customer">Customer:</label>
     <select id="customer" name="customer">
         #foreach( $customer in $customers )
-        <option value="$booking.getCustomer().getId()"
+        <option value="$customer.getId()"
                 #if ($customer.getId() == $booking.getCustomer().getId())
                 selected
                 #end>

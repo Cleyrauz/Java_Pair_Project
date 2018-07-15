@@ -69,6 +69,7 @@ public class CustomerController {
             customer.setFirstName(firstName);
             customer.setLastName(lastName);
             customer.setBudget(budget);
+            DBHelper.save(customer);
             res.redirect("/customers");
             return null;
         }, new VelocityTemplateEngine());

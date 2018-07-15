@@ -55,7 +55,7 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="customer", fetch = FetchType.EAGER)
     public List<Booking> getBookings() {
         return bookings;
     }

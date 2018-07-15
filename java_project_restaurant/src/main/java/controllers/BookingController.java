@@ -120,14 +120,34 @@ public class BookingController {
             return null;
         }, new VelocityTemplateEngine());
 
-        post("/bookings/:num/edit", (req,res) -> {
-            //            Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength, Customer customer, int quantity
-//            Restaurant restaurant = req.queryParams("restaurant");
-//            RestaurantTable table = req.queryParams("table");
-//            Date dateTime = req.queryParams("dateTime");
-//            int bookingLength = req.queryParams("bookingLength");
-//            Customer customer = req.queryParams("customer");
-//            int quantity = req.queryParams("quantity");
+        post("/restaurant/:rest_id/bookings/:num/edit", (req,res) -> {
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":rest_id")));
+            Booking bookingToDelete = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num")));
+            int table_id = Integer.parseInt(req.queryParams("tableNumber"));
+            RestaurantTable table = DBHelper.find(RestaurantTable.class, table_id);
+            int customer_id = Integer.parseInt(req.queryParams("customer"));
+            Customer customer = DBHelper.find(Customer.class, customer_id);
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int bookingLength = Integer.parseInt(req.queryParams("length"));
+
+            //timey wimey stuff
+
+            String fullDateTime = req.queryParams("dateTime");
+            String pattern = "dd-MM-yyyy HH:mm";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            Date dateTime = null;
+            try {
+                dateTime = simpleDateFormat.parse(fullDateTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            //timey wimey stuff over
+
+            Booking booking = new Booking(restaurant, table, dateTime, bookingLength, customer, quantity);
+   //         DBHelper.delete(bookingToDelete.getBill());
+            DBHelper.delete(bookingToDelete);
+            DBHelper.save(booking);
 
             res.redirect("/bookings");
             return null;

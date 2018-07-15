@@ -31,7 +31,7 @@ public class Bill {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "bill", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bill", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Item> getItems() {
         return items;
     }
@@ -40,7 +40,7 @@ public class Bill {
         this.items = items;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "booking_id")
     public Booking getBooking() {
         return booking;

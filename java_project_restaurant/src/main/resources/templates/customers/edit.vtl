@@ -1,6 +1,6 @@
 <p class="pageHeader">Edit Customer</p>
 
-<form action="/customers/$customer.getId()" method="post">
+<form action="/customers/$customer.getId()/edit" method="post">
 
     <label for="firstName">FirstName:</label>
     <input class="inputbox" type="text" name="firstName" id = "firstName" required="true" value="$customer.getFirstName()">

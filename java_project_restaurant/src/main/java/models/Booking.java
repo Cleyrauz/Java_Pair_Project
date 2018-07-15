@@ -46,8 +46,8 @@ public class Booking {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_id")
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
     public Customer getCustomer() {
         return customer;
     }
@@ -95,7 +95,7 @@ public class Booking {
     }
 
     @OneToOne(mappedBy = "booking",
-        fetch = FetchType.LAZY)
+        fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Bill getBill() {
         return bill;
     }
