@@ -3,8 +3,8 @@
 
 <form action="/restaurant/$booking.getRestaurant().getId()/bookings/$booking.getId()/edit" method="post">
 
-    <label for="tableNumber">Table Number:</label>
-    <input class="inputbox" type="text" name="tableNumber" id = "tableNumber" required="true" value="$booking.getRestaurantTable().getId()">
+    <label for="tableId">Table Id:</label>
+    <input class="inputbox" type="text" name="tableId" id = "tableId" required="true" value="$booking.getRestaurantTable().getId()">
 
     <label for="dateTime">DateTime:</label>
     <input class="inputbox" type="text" name="dateTime" id = "dateTime" required="true" value="$booking.getDateTime()">
