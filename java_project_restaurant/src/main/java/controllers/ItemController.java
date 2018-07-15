@@ -72,8 +72,19 @@ public class ItemController {
         post("/items/:num/delete", (req,res) -> {
             Item item = DBHelper.find(Item.class, Integer.parseInt(req.params(":num")));
             DBHelper.delete(item);
-            res.redirect("/items");
-            return null;
+            HashMap<String, Object> model = new HashMap<>();
+            res.redirect("/item");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("restaurant/:rest_id/bill/:bill_id/items/:num/delete", (req,res) -> {
+            int restaurantId = Integer.parseInt(req.params(":rest_id"));
+            int billId = Integer.parseInt(req.params(":bill_id"));
+            Item item = DBHelper.find(Item.class, Integer.parseInt(req.params(":num")));
+            DBHelper.delete(item);
+            HashMap<String, Object> model = new HashMap<>();
+            res.redirect("/home/restaurants/"+restaurantId+"/bills/"+billId);
+            return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
         get("/home/restaurants/:num/items", (req,res) -> {

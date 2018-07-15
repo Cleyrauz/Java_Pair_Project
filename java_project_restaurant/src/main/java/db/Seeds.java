@@ -9,8 +9,6 @@ public class Seeds {
 
     public static void seedData() throws ParseException {
 
-        DBHelper.deleteAll(Item.class);
-        DBHelper.deleteAll(Bill.class);
         DBHelper.deleteAll(Customer.class);
         DBHelper.deleteAll(Booking.class);
         DBHelper.deleteAll(RestaurantTable.class);

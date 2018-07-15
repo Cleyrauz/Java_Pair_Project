@@ -1,10 +1,12 @@
 package controllers;
 
+import db.DBBill;
 import db.DBBooking;
 import db.DBHelper;
 import db.DBRestaurant;
 import models.Bill;
 import models.Booking;
+import models.Item;
 import models.Restaurant;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -56,7 +58,6 @@ public class BillController {
         }, new VelocityTemplateEngine());
 
         post("bills", (req,res) -> {
-//            Booking booking
             Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.queryParams("booking")));
             Bill bill = new Bill(booking);
 
@@ -64,15 +65,6 @@ public class BillController {
             return null;
         }, new VelocityTemplateEngine());
 
-//        post("bills/:num/edit", (req,res) -> {
-//            Bill bill = DBHelper.find(Bill.class, Integer.parseInt(req.params(":num")));
-//            bill.setBooking(req.queryParams("booking"));
-//            bill.setItems(req.queryParams("item"));
-//
-//
-//            DBHelper.save(bill);
-//            return null;
-//        }, new VelocityTemplateEngine());
 
         post("bills/:num/delete", (req,res) -> {
             Bill bill = DBHelper.find(Bill.class, Integer.parseInt(req.params(":num")));
@@ -80,6 +72,7 @@ public class BillController {
             res.redirect("/bills");
             return null;
         }, new VelocityTemplateEngine());
+
 
         get("/home/restaurants/:num/bills", (req,res) -> {
             int restaurantId = Integer.parseInt(req.params(":num"));
