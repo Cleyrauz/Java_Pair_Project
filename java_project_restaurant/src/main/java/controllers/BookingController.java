@@ -96,13 +96,11 @@ public class BookingController {
             Customer customer = DBHelper.find(Customer.class, customer_id);
             int quantity = Integer.parseInt(req.queryParams("quantity"));
             int bookingLength = Integer.parseInt(req.queryParams("length"));
-
             //timey wimey stuff
-
             String date = req.queryParams("date");
             String time = req.queryParams("time");
             String fullDateTime = date + " " + time;
-            String pattern = "dd-MM-yyyy HH:mm";
+            String pattern = "yyyy-MM-dd HH:mm";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             Date dateTime = null;
             try {
@@ -110,12 +108,9 @@ public class BookingController {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
             //timey wimey stuff over
-
             Booking booking = new Booking(restaurant, table, dateTime, bookingLength, customer, quantity);
             DBHelper.save(booking);
-
             res.redirect("/bookings");
             return null;
         }, new VelocityTemplateEngine());
