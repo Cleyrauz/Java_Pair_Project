@@ -1,6 +1,10 @@
 <p class="pageHeader">New Booking</p>
 
-<form action="/home/restaurants/$restaurant.getId()/bookings/new" method="post">
+<form action="#if( ! $restaurant )
+/bookings/new
+#else
+/home/restaurants/$restaurant.getId()/bookings/new
+#end" method="post">
 
     <label for="tableNumber">Table Number:</label>
     <select id="tableNumber" name="tableNumber">
@@ -32,6 +36,14 @@
     <input type="submit" value="Save" class="button">
 </form>
 
-<a href="/bookings" class="button center">Cancel</a>
+<a href="#if( ! $restaurant )
+/bookings
+#else
+/home/restaurants/$restaurant.getId()/bookings
+#end" class="button center">Cancel</a>
 
-<a href="/customers/new" class="button">Add new Customer</a>
+<a href="#if( ! $restaurant )
+/customers/new
+#else
+/home/restaurants/$restaurant.getId()/customers/new
+#end" class="button">Add new Customer</a>
