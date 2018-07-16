@@ -168,4 +168,15 @@ font-weight: lighter;
       padding: 10px 20px;
       margin-left: 60px;
       margin-right: 60px;
+}
 
+#customers_image {
+  display: flex;
+  background-image: url("/images/customer.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+}
