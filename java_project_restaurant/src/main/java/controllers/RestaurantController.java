@@ -74,6 +74,7 @@ public class RestaurantController {
             String name = req.queryParams("name");
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
             restaurant.setName(name);
+            DBHelper.save(restaurant);
             res.redirect("/restaurants");
             return null;
         }, new VelocityTemplateEngine());
