@@ -1,22 +1,21 @@
-<h1>Welcome to Booking System</h1>
-
-<form action="/home/restaurants" method="post">
-    <label for="restaurant">Restaurant:</label>
-    <select id="restaurant" name="restaurant_id">
-        #foreach( $restaurant in $restaurants )
-        <option value="$restaurant.getId()">
-            $restaurant.getName()
-        </option>
-        #end
-        <input type="submit" value="Select" class="button">
-    </select>
-</form>
+<h1>Add a new booking!</h1>
 
 <div id="large_image">
-    <!--<a href="/exhibits">Our collection</a>-->
+    <div class="scroll_down_menu">
+    <form action="/home/restaurants" method="post">
+        <label for="restaurant">Select a Restaurant:</label>
+        <select id="restaurant" name="restaurant_id">
+            #foreach( $restaurant in $restaurants )
+            <option value="$restaurant.getId()">
+                $restaurant.getName()
+            </option>
+            #end
+            <input type="submit" value="Select" class="button">
+        </select>
+    </form>
+    </div>
 </div>
 
-<a href="/restaurants">Manage Restaurants</a>
 
 <h3>Our restaurants...</h3>
 

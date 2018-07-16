@@ -1,6 +1,6 @@
 #large_image {
   display: flex;
-  background-image: url("/images/book-a-table.jpg");
+  background-image: url("/images/table-booking.jpg");
   background-repeat: no-repeat;
   width: 100%;
   height: 400px;
@@ -25,4 +25,74 @@ margin-top: 10px;
   margin-left: 80px;
   margin-bottom: 20px;
   font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
+}
+
+body{
+  background-repeat: no-repeat;
+  background-image: white;
+  margin: 0px;
+  background-position: top;
+  background-size: 1024px 768px;
+  padding-top: 0;
+  height: : 100%;
+}
+
+#menu {
+  display: flex;
+  margin: 0 auto;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-item {
+  display: inline-block;
+  flex-grow: 1;
+  font-size: 18px;
+  color: white;
+  font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #ecd9c6;
+}
+
+.scroll_down_menu {
+  font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
+  font-size: 16px;
+  color: white;
+  display: flex;
+  justify-content: left;
+  background-color: rgba(0,0,0,0.6);
+  padding: 14px 16px;
+}
+
+h3 {
+font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
+font-size: 20px;
+color: black;
+margin-left: 80px;
+margin-top: 50px;
+margin-bottom: 30px;
+font-weight: lighter;
 }
