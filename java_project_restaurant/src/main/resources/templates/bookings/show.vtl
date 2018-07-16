@@ -24,7 +24,7 @@
             <td>$item.getItemType().getName()</td>
             <td>$item.getItemType().getPrice()</td>
             <td>
-                <form action="/items/$item.getId()/delete" method="post">
+                <form action="/home/restaurants/$restaurant.getId()/bookings/$booking.getId()/items/$item.getId()/delete" method="post">
                     <input type="submit" value="Delete" class="button center">
                 </form>
             </td>

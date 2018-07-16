@@ -6,8 +6,16 @@
     <p> Restaurant: $table.getRestaurant().getName()</p>
 </div>
 
-<a href="/tables/$table.getId()/edit" class="button center">Edit</a>
-<form action="/tables/$table.getId()/delete" method="post">
+<a href="#if( ! $restaurant )
+/tables/$table.getId()/edit
+#else
+/home/restaurants/$restaurant.getId()/tables/$table.getId()/edit
+#end" class="button center">Edit</a>
+<form action="#if( ! $restaurant )
+/tables/$table.getId()/delete
+#else
+/home/restaurants/$restaurant.getId()/tables/$table.getId()/delete
+#end" method="post">
     <input type="submit" value="Delete" class="button center">
 </form>
 <a href="#if( ! $restaurant )
