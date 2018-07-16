@@ -1,6 +1,10 @@
 <p class="pageHeader">Edit Customer</p>
 
-<form action="/customers/$customer.getId()/edit" method="post">
+<form action="#if( ! $restaurant )
+/customers/$customer.getId()/edit
+#else
+/home/restaurants/$restaurant.getId()/customers/$customer.getId()/edit
+#end" method="post">
 
     <label for="firstName">FirstName:</label>
     <input class="inputbox" type="text" name="firstName" id = "firstName" required="true" value="$customer.getFirstName()">
@@ -15,4 +19,8 @@
     </select>
 </form>
 
-<a href="/customers/$customer.getId()" class="button center">Cancel</a>
+<a href="#if( ! $restaurant )
+/customers/$customer.getId()
+#else
+/home/restaurants/$restaurant.getId()/customers/$customer.getId()
+#end" class="button center">Cancel</a>

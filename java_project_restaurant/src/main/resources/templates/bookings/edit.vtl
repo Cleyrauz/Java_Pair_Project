@@ -1,6 +1,10 @@
 <p class="pageHeader">Edit Booking</p>
 
-<form action="/home/restaurants/$booking.getRestaurant().getId()/bookings/$booking.getId()/edit" method="post">
+<form action="#if( ! $restaurant )
+/bookings/$booking.getId()/edit
+#else
+/home/restaurants/$booking.getRestaurant().getId()/bookings/$booking.getId()/edit
+#end" method="post">
 
     <label for="tableNumber">Table Number:</label>
     <select id="tableNumber" name="tableNumber">

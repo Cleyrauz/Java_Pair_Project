@@ -1,14 +1,9 @@
 package models;
 
 import javax.persistence.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import org.hibernate.annotations.Cascade;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "bookings")

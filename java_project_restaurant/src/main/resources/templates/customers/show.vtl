@@ -6,8 +6,16 @@
     <p> Budget(£): $customer.getBudget()</p>
 </div>
 
-<a href="/customers/$customer.getId()/edit" class="button center">Edit</a>
-<form action="/customers/$customer.getId()/delete" method="post">
+<a href="#if( ! $restaurant )
+/customers/$customer.getId()/edit
+#else
+/home/restaurants/$restaurant.getId()/customers/$customer.getId()/edit
+#end" class="button center">Edit</a>
+<form action="#if( ! $restaurant )
+/customers/$customer.getId()/delete
+#else
+/home/restaurants/$restaurant.getId()/customers/$customer.getId()/delete
+#end" method="post">
     <input type="submit" value="Delete" class="button center">
 </form>
 
@@ -30,7 +38,7 @@
         <td>$booking.prettyDate()</td>
         <td>$booking.prettyTime()</td>
         <td><a href="#if( ! $restaurant )
-                            /bills/$bill.getId()
+                            bookings/$booking.getId()
                          #else
                             /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
                          #end" class="button center">Details</a></td>

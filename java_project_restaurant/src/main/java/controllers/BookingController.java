@@ -69,7 +69,7 @@ public class BookingController {
             List<ItemType> types = DBItem.allItemTypes();
             double totalCost = DBItem.getTotalCost(items);
             model.put("template", "templates/bookings/show.vtl");
-            model.put("showBill", "templates/bills/show.vtl");
+            model.put("showBill", "templates/bills/show_deprecated.vtl");
             model.put("restaurant", restaurant);
             model.put("booking", booking);
             model.put("items", items);
