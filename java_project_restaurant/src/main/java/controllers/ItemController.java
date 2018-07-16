@@ -120,5 +120,13 @@ public class ItemController {
             res.redirect(redirect);
             return null;
         }, new VelocityTemplateEngine());
+
+        post("/home/restaurants/:num1/bookings/:num2/items/:num3/delete", (req, res) -> {
+            Item item = DBHelper.find(Item.class, Integer.parseInt(req.params(":num3")));
+            DBHelper.delete(item);
+            String redirect = "/home/restaurants/" + req.params(":num1") + "/bookings/" + req.params(":num2");
+            res.redirect(redirect);
+            return null;
+        }, new VelocityTemplateEngine());
     }
 }

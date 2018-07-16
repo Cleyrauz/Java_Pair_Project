@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 
 import java.awt.print.Book;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DBBooking {
@@ -49,6 +50,18 @@ public class DBBooking {
         List<Bill> results = new ArrayList<>();
         for (Booking booking: bookings){
             results.add(findBookingBill(booking));
+        }
+        return results;
+    }
+
+    public static List<Booking> findBookingsbyDate(Date startDate, Date endDate, List<Booking> searchGroup){
+        List<Booking> results = new ArrayList<>();
+        for (Booking booking : searchGroup){
+            if (booking.getDateTime().before(endDate)){
+                if (booking.getDateTime().after(startDate)){
+                    results.add(booking);
+                }
+            }
         }
         return results;
     }

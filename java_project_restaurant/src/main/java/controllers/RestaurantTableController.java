@@ -114,5 +114,14 @@ public class RestaurantTableController {
             model.put("table", table);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+
+        post("/home/restaurants/:num1/tables/:num2/delete", (req,res) -> {
+            RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.params(":num2")));
+            DBHelper.delete(table);
+            String redirect = "/home/restaurants/" + req.params(":num1") + "/tables";
+            res.redirect(redirect);
+            return null;
+        }, new VelocityTemplateEngine());
     }
 }
