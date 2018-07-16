@@ -1,17 +1,14 @@
-<p class="pageHeader">New Restaurant</p>
+<h1><p class="pageHeader">New Restaurant</p></h1>
 
+<div id="restaurants_image">
+    <div class="scroll_down_menu" style = "font-color: white;">
 <form action="/restaurants" method="post">
     <label for="name">Name:</label>
     <input class="inputbox" type="text" name="name" id = "name" required="true">
-
-    <!--<label for="restaurant">Restaurant"</label>-->
-    <!--<select id="restaurant" name="restaurant">-->
-        <!--#foreach( $restaurant in $restaurants )-->
-        <!--<option value="$restaurant.getId()">$restaurant.getName()</option>-->
-        <!--#end-->
-    <!--</select>-->
 
     <input type="submit" value="Save" class="button">
 </form>
 
 <a href="/restaurants" class="button center">Cancel</a>
+</div>
+</div>
