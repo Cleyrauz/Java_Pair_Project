@@ -1,18 +1,23 @@
-
 <p class="pageHeader">Bookings</p>
+<div class="container">
+    <p>Find Bookings</p>
+    <form action="/home/restaurants/$restaurant.getId()/bookings/search" method="post">
 
-<div>
-    <a href="#if( ! $restaurant )
-                            /bookings/new
-                         #else
-                            /home/restaurants/$restaurant.getId()/bookings/new
-                         #end" class="button center">New Booking</a>
+        <label for="startDate">StartDate</label>
+        <input class="date" type="date" name="startDate" id = "startDate" required="true">
+
+        <label for="endDate">EndDate</label>
+        <input class="date" type="date" name="endDate" id = "endDate" required="true">
+
+        <input type="submit" value="Search" class="button">
+    </form>
 </div>
 <div class="container">
     <table>
         <tr>
             <th>Table</th>
-            <th>DateTime</th>
+            <th>Date</th>
+            <th>Time</th>
             <th>Length (mins)</th>
             <th>Quantity (people)</th>
             <th>Customer</th>
@@ -20,10 +25,12 @@
         #foreach($booking in $bookings)
         <tr>
             <td>$booking.getRestaurantTable().getTableNumber()</td>
-            <td>$booking.getDateTime()</td>
+            <td>$booking.prettyDate()</td>
+            <td>$booking.prettyTime()</td>
             <td>$booking.getBookingLength()</td>
             <td>$booking.getQuantity()</td>
             <td>$booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</td>
+            <td></td>
             <td><a href="#if( ! $restaurant )
                             /bookings/$booking.getId()
                          #else
@@ -32,4 +39,12 @@
         <tr>
         #end
     </table>
+</div>
+
+<div>
+    <a href="#if( ! $restaurant )
+                            /bookings/new
+                         #else
+                            /home/restaurants/$restaurant.getId()/bookings/new
+                         #end" class="button center">New Booking</a>
 </div>

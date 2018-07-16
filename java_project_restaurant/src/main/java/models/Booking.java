@@ -115,4 +115,18 @@ public class Booking {
         this.quantity = quantity;
     }
 
+    public String prettyDate() {
+        String pattern2 = "dd/MM/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern2);
+        String prettyDate = simpleDateFormat.format(this.dateTime);
+        return prettyDate;
+    }
+
+    public String prettyTime() {
+        String pattern3 = "HH:mm";
+        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat(pattern3);
+        String prettyTime = simpleTimeFormat.format(this.dateTime);
+        return prettyTime;
+    }
+
 }

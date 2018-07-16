@@ -1,33 +1,34 @@
-
 <p class="pageHeader">Edit Booking</p>
 
-<form action="/restaurant/$booking.getRestaurant().getId()/bookings/$booking.getId()/edit" method="post">
+<form action="/home/restaurants/$booking.getRestaurant().getId()/bookings/$booking.getId()/edit" method="post">
 
-    <label for="tableId">Table Id:</label>
-    <input class="inputbox" type="text" name="tableId" id = "tableId" required="true" value="$booking.getRestaurantTable().getId()">
+    <label for="tableNumber">Table Number:</label>
+    <select id="tableNumber" name="tableNumber">
+        #foreach( $table in $tables )
+            <option value="$table.getId()" #if ($table.getId() == $booking.getRestaurantTable().getId()) selected #end>$table.getTableNumber() Seats: $table.getCapacity()</option>
+        #end
+    </select>
 
-    <label for="dateTime">DateTime:</label>
-    <input class="inputbox" type="text" name="dateTime" id = "dateTime" required="true" value="$booking.getDateTime()">
+    <label for="date">Date:</label>
+    <input class="date" type="date" name="date" id = "date" required="true" min="$today" value="$date">
+
+    <label for="time">Time:</label>
+    <input class="time" type="time" name="time" id="time" required="true" min="13:00" max="23:00" value="$time">
 
     <label for="length">Length:</label>
-    <input class="inputbox" type="text" name="length" id = "length" required="true" value="$booking.getBookingLength()">
+    <input class="inputbox" type="number" name="length" id="length" required="true" value="$bookingLength">
 
-    <label for="length">Quantity:</label>
-    <input class="inputbox" type="text" name="quantity" id = "quantity" required="true" value="$booking.getQuantity()">
+
+    <label for="quantity">Quantity:</label>
+    <input class="inputbox" type="text" name="quantity" id = "quantity" required="true" value="$quantity">
 
     <label for="customer">Customer:</label>
     <select id="customer" name="customer">
         #foreach( $customer in $customers )
-        <option value="$customer.getId()"
-                #if ($customer.getId() == $booking.getCustomer().getId())
-                selected
-                #end>
-            $customer.getFirstName() $customer.getLastName()</option>
+            <option value="$customer.getId()" #if ($customer.getId() == $booking.getCustomer().getId()) selected #end>$customer.getFirstName() $customer.getLastName()</option>
         #end
-
-        <input type="submit" value="Save" class="button">
     </select>
-</form>
 
-<a href="/bookings/$booking.getId()" class="button center">Cancel</a>
+    <input type="submit" value="Save Changes" class="button">
+</form>
 

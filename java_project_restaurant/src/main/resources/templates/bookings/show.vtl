@@ -2,14 +2,25 @@
 
 <div>
     <p> Table Number: $booking.getRestaurantTable().getTableNumber()</p>
-    <p> DateTime: $booking.getDateTime()</p>
+    <p> Date: $booking.prettyDate()</p>
+    <p> Time: $booking.prettyTime()</p>
     <p> Length: $booking.getBookingLength()</p>
     <p> Quantity: $booking.getQuantity() people</p>
     <p> Customer: $booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</p>
 </div>
 
-<a href="/bookings/$booking.getId()/edit" class="button center">Edit</a>
-<form action="/bookings/$booking.getId()/delete" method="post">
+<a href="#if( ! $restaurant )
+/bookings/$booking.getId()/edit
+#else
+/home/restaurants/$restaurant.getId()/bookings/$booking.getId()/edit
+#end" class="button center">Edit</a>
+
+
+<form action="#if( ! $restaurant )
+/bookings/$booking.getId()/delete
+#else
+/home/restaurants/$restaurant.getId()/bookings/$booking.getId()/delete
+#end" method="post">
     <input type="submit" value="Delete" class="button center">
 </form>
 
@@ -24,7 +35,7 @@
             <td>$item.getItemType().getName()</td>
             <td>$item.getItemType().getPrice()</td>
             <td>
-                <form action="/items/$item.getId()/delete" method="post">
+                <form action="/home/restaurants/$restaurant.getId()/bookings/$booking.getId()/items/$item.getId()/delete" method="post">
                     <input type="submit" value="Delete" class="button center">
                 </form>
             </td>

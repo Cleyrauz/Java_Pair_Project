@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBBooking;
+import db.DBCustomer;
 import db.DBHelper;
 import db.DBRestaurant;
 import models.Booking;
@@ -97,9 +98,11 @@ public class CustomerController {
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
             Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.params(":num2")));
+            List<Booking> bookings = DBCustomer.findCustomersBookings(customer);
             model.put("template", "templates/customers/show.vtl");
             model.put("restaurant", restaurant);
             model.put("customer", customer);
+            model.put("bookings", bookings);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
     }
