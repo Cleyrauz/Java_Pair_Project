@@ -1,11 +1,7 @@
 package controllers;
 
-import db.DBHelper;
-import db.DBRestaurant;
-import models.Booking;
-import models.Customer;
-import models.Restaurant;
-import models.RestaurantTable;
+import db.*;
+import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -71,9 +67,18 @@ public class BookingController {
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
             Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num2")));
+            Bill bill = DBBooking.findBookingBill(booking);
+            List<Item> items = DBBill.findBillItems(bill);
+            List<ItemType> types = DBItem.allItemTypes();
+            double totalCost = DBItem.getTotalCost(items);
             model.put("template", "templates/bookings/show.vtl");
+            model.put("showBill", "templates/bills/show.vtl");
             model.put("restaurant", restaurant);
             model.put("booking", booking);
+            model.put("items", items);
+            model.put("bill", bill);
+            model.put("itemTypes", types);
+            model.put("totalCost", totalCost);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 

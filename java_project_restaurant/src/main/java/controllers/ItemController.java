@@ -1,9 +1,6 @@
 package controllers;
 
-import db.DBBill;
-import db.DBBooking;
-import db.DBHelper;
-import db.DBRestaurant;
+import db.*;
 import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -29,7 +26,9 @@ public class ItemController {
 
         get("/items/new", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
+            List<ItemType> types = DBItem.allItemTypes();
             model.put("template", "templates/items/new.vtl");
+            model.put("itemTypes", types);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
@@ -77,7 +76,7 @@ public class ItemController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("restaurant/:rest_id/bill/:bill_id/items/:num/delete", (req,res) -> {
+        post("restaurant/:rest_id/bill/:bill_id/items/:num/delete", (req,res) -> {
             int restaurantId = Integer.parseInt(req.params(":rest_id"));
             int billId = Integer.parseInt(req.params(":bill_id"));
             Item item = DBHelper.find(Item.class, Integer.parseInt(req.params(":num")));
@@ -108,6 +107,18 @@ public class ItemController {
             model.put("restaurant", restaurant);
             model.put("item", item);
             return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/home/restaurants/:num1/bookings/:num2/items/new", (req, res) -> {
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
+            Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num2")));
+            Bill bill = DBBooking.findBookingBill(booking);
+            Item item = new Item(ItemType.valueOf(req.queryParams("type")));
+            item.setBill(bill);
+            DBHelper.save(item);
+            String redirect = "/home/restaurants/" + req.params(":num1") + "/bookings/" + req.params(":num2");
+            res.redirect(redirect);
+            return null;
         }, new VelocityTemplateEngine());
     }
 }
