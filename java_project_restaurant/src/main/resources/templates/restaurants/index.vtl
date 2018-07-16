@@ -1,19 +1,27 @@
-<p class="pageHeader">Restaurants</p>
+<h1><p class="pageHeader">Restaurants</p></h1>
 
-<div>
-    <a href="/restaurants/new" class="button center">New Restaurant</a>
-</div>
-<div class="container">
+<div id="restaurants_image">
+<div class="container-table">
     <table>
+        <div style = "margin-top:15%;">
         <tr>
             <th>Name</th>
         </tr>
+            <tr>
+                <th></th>
+            </tr>
         #foreach($restaurant in $restaurants)
         <tr>
             <td>$restaurant.getName()</td>
-            <td><a href="/restaurants/$restaurant.getId()" class="button center">Details</a></td>
+            <td><a href="/restaurants/$restaurant.getId()">Details</a></td>
         <tr>
             #end
+        </div>
+        </div>
     </table>
+    <div class="button-new" style = "margin-top: 20%;">
+        <a href="/restaurants/new">New Restaurant</a>
+</div>
+</div>
 
 </div>
