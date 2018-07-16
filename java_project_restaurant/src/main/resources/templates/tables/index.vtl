@@ -2,7 +2,11 @@
 <p class="pageHeader">Tables</p>
 
 <div>
-    <a href="/tables/new" class="button center">New Table</a>
+    <a href="#if( ! $restaurant )
+    /tables/new
+    #else
+    /home/restaurants/$restaurant.getId()/tables/new
+    #end" class="button center">New Table</a>
 </div>
 <div class="container">
     <table>

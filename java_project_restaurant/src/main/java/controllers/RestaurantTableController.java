@@ -89,6 +89,20 @@ public class RestaurantTableController {
             return null;
         }, new VelocityTemplateEngine());
 
+        post("/home/restaurants/:num/tables", (req,res) -> {
+//          int tableNumber, int capacity, Restaurant restaurant
+
+            int tableNumber = Integer.parseInt(req.queryParams("tableNumber"));
+            int capacity = Integer.parseInt(req.queryParams("capacity"));
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.queryParams("restaurant")));
+
+            RestaurantTable restaurantTable = new RestaurantTable(tableNumber, capacity, restaurant);
+            DBHelper.save(restaurantTable);
+            String redirect = "/home/restaurants/" + req.queryParams("restaurant") + "/tables";
+            res.redirect(redirect);
+            return null;
+        }, new VelocityTemplateEngine());
+
         post("/tables/:num/delete", (req,res) -> {
             RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.params(":num")));
             DBHelper.delete(table);
