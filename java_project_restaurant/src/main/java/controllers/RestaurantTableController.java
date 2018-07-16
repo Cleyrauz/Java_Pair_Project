@@ -2,6 +2,8 @@ package controllers;
 
 import db.DBHelper;
 import db.DBRestaurant;
+import db.DBRestaurantTable;
+import models.Booking;
 import models.Restaurant;
 import models.RestaurantTable;
 import spark.ModelAndView;
@@ -109,9 +111,11 @@ public class RestaurantTableController {
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
             RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.params(":num2")));
+            List<Booking> bookings = DBRestaurantTable.getTableBookings(table);
             model.put("template", "templates/tables/show.vtl");
             model.put("restaurant", restaurant);
             model.put("table", table);
+            model.put("bookings", bookings);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 

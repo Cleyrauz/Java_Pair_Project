@@ -113,6 +113,8 @@ public class BookingController {
             //timey wimey stuff over
             Booking booking = new Booking(restaurant, table, dateTime, bookingLength, customer, quantity);
             DBHelper.save(booking);
+            Bill bill = new Bill(booking);
+            DBHelper.save(bill);
             res.redirect("/bookings");
             return null;
         }, new VelocityTemplateEngine());
@@ -172,7 +174,6 @@ public class BookingController {
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
             List<Booking> restaurantBookings = DBRestaurant.getRestaurantsBookings(restaurant);
-
             String startDateTime = req.queryParams("startDate");
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -189,10 +190,7 @@ public class BookingController {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
             List<Booking> bookingsByDate = DBBooking.findBookingsbyDate(startDate, endDate, restaurantBookings);
-
-
             model.put("bookings", bookingsByDate);
             model.put("restaurant", restaurant);
             model.put("template", "templates/bookings/index.vtl");
