@@ -1,26 +1,38 @@
-<p class="pageHeader">Bill $bill.getId()</p>
-
-<div class ="container">
-    <table>
-        <tr>
+#foreach ($item in $items)
+<table>
+    <tr>
         <th>Item</th>
-        <th>Price</th>
-    </table>
+        <th>Price (£)</th>
     </tr>
-#foreach($item in $bill.getItems())
-<tr>
-    <td>$item.getItemType().getName()</td>
-    <td>$item.getItemType().getPrice()</td>
-</tr>
+    <tr>
+        <td>$item.getItemType().getName()</td>
+        <td>$item.getItemType().getPrice()</td>
+        <td>
+            <form action="/items/$item.getId()/delete" method="post">
+            <input type="submit" value="Delete" class="button center">
+            </form>
+        </td>
+    </tr>
+</table>
 #end
-</div>
+<form action="/" method="post">
+    <label for="type">Item:</label>
+    <select id="type" name="type">
+        #foreach( $itemType in $itemTypes )
+        <option value="$itemType">$itemType.getName()</option>
+        #end
+    </select>
 
-<a href="/bills/$bill.getId()/edit" class="button center">Edit</a>
-<form action="/bills/$bill.getId()/delete" method="post">
-    <input type="submit" value="Delete" class="button center">
+    <input type="submit" value="Add Item" class="button">
 </form>
-<a href="#if( ! $restaurant )
-            /bills
-        #else
-            /home/restaurants/$restaurant.getId()/bills
-        #end" class="button center">Back to list</a>
+
+<table>
+    <tr>
+        <th>Total</th>
+    </tr>
+    <tr>
+        <td>$totalCost</td>
+    </tr>
+</table>
+
+
