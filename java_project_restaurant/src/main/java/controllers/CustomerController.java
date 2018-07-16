@@ -1,9 +1,7 @@
 package controllers;
 
-import db.DBBooking;
 import db.DBCustomer;
 import db.DBHelper;
-import db.DBRestaurant;
 import models.Booking;
 import models.Customer;
 import models.Restaurant;
@@ -31,6 +29,14 @@ public class CustomerController {
         get("/customers/new", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             model.put("template", "templates/customers/new.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("home/restaurants/:num/customers/new", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
+            model.put("template", "templates/customers/new.vtl");
+            model.put("restaurant", restaurant);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
@@ -62,6 +68,19 @@ public class CustomerController {
             return null;
         }, new VelocityTemplateEngine());
 
+        post("/home/restaurants/:num/customers", (req,res) -> {
+//            String firstName, String lastName, double budget
+            String firstName = req.queryParams("firstName");
+            String lastName = req.queryParams("lastName");
+            double budget = Double.parseDouble(req.queryParams("budget"));
+
+            Customer customer = new Customer(firstName, lastName, budget);
+            DBHelper.save(customer);
+            String redirect = "/home/restaurants/" + req.params(":num") + "/customers";
+            res.redirect(redirect);
+            return null;
+        }, new VelocityTemplateEngine());
+
         post("/customers/:num/edit", (req,res) -> {
             String firstName = req.queryParams("firstName");
             String lastName = req.queryParams("lastName");
@@ -86,8 +105,7 @@ public class CustomerController {
             int restaurantId = Integer.parseInt(req.params(":num"));
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
-            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
-            List<Customer> customers = DBBooking.findBookingsCustomers(bookings);
+            List<Customer> customers = DBHelper.getAll(Customer.class);
             model.put("customers", customers);
             model.put("restaurant", restaurant);
             model.put("template", "templates/customers/index.vtl");

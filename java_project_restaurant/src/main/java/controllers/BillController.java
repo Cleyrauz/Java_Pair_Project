@@ -5,7 +5,6 @@ import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
-import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,14 +28,14 @@ public class BillController {
 
         get("/bills/new", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
-            model.put("template", "templates/bills/new.vtl");
+            model.put("template", "templates/bills/new_deprecated.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
         get("/bills/:num", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Bill bill = DBHelper.find(Bill.class, Integer.parseInt(req.params(":num")));
-            model.put("template", "templates/bills/show.vtl");
+            model.put("template", "templates/bills/show_deprecated.vtl");
             model.put("bill", bill);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -46,7 +45,7 @@ public class BillController {
         get("/bills/:num/edit", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Bill bill = DBHelper.find(Bill.class, Integer.parseInt(req.params(":num")));
-            model.put("template", "templates/bills/edit.vtl");
+            model.put("template", "templates/bills/edit_deprecated.vtl");
             model.put("bill", bill);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -88,7 +87,7 @@ public class BillController {
             Bill bill = DBHelper.find(Bill.class, Integer.parseInt(req.params(":num2")));
             List<Item> items = DBBill.findBillItems(bill);
             List<ItemType> types = DBItem.allItemTypes();
-            model.put("template", "templates/bills/show.vtl");
+            model.put("template", "templates/bills/show_deprecated.vtl");
             model.put("restaurant", restaurant);
             model.put("bookings", bookings);
             model.put("bill", bill);

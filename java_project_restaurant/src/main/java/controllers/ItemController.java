@@ -24,13 +24,13 @@ public class ItemController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/items/new", (req,res) -> {
-            HashMap<String, Object> model = new HashMap<>();
-            List<ItemType> types = DBItem.allItemTypes();
-            model.put("template", "templates/items/new.vtl");
-            model.put("itemTypes", types);
-            return new ModelAndView(model, "templates/layout.vtl");
-        }, new VelocityTemplateEngine());
+//        get("/items/new", (req,res) -> {
+//            HashMap<String, Object> model = new HashMap<>();
+//            List<ItemType> types = DBItem.allItemTypes();
+//            model.put("template", "templates/items/new_deprecated.vtl");
+//            model.put("itemTypes", types);
+//            return new ModelAndView(model, "templates/layout.vtl");
+//        }, new VelocityTemplateEngine());
 
         get("/items/:num", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
@@ -43,7 +43,7 @@ public class ItemController {
         get("/items/:num/edit", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Item item = DBHelper.find(Item.class, Integer.parseInt(req.params(":num")));
-            model.put("template", "templates/items/edit.vtl");
+            model.put("template", "templates/items/edit_deprecated.vtl");
             model.put("item", item);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());

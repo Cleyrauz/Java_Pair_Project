@@ -1,8 +1,5 @@
 package models;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

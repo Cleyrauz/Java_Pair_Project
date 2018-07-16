@@ -2,7 +2,11 @@
 <p class="pageHeader">Customers</p>
 
 <div>
-    <a href="/customers/new" class="button center">New Customer</a>
+    <a href="#if( ! $restaurant )
+                            /customers/new
+                         #else
+                            /home/restaurants/$restaurant.getId()/customers/new
+                         #end" class="button center">New Customer</a>
 </div>
 <div class="container">
     <table>
@@ -17,7 +21,6 @@
             <td>$customer.getFirstName()</td>
             <td>$customer.getLastName()</td>
             <td>$customer.getBudget()</td>
-            <!--<td>$customer.getRestaurant().getName()</td>-->
 
             <td><a href="#if( ! $restaurant )
                             /customers/$customer.getId()
