@@ -1,14 +1,19 @@
-<div>
-    <p>Item name:</p>
-    <p>Price:</p>
-</div>
+<!--<p class="pageHeader">Bills</p>-->
 
+<div class ="container">
+    <table>
+        <tr>
+        <th>Item</th>
+        <th>Price</th>
+    </table>
+    </tr>
 #foreach($item in $bill.getItems())
-<div>
-    <p>$item.getItemType().getName()</p>
-    <p>$item.getItemType().getPrice()</p>
-</div>
+<tr>
+    <td>$item.getItemType().getName()</td>
+    <td>$item.getItemType().getPrice()</td>
+</tr>
 #end
+</div>
 
 <a href="/bills/$bill.getId()/edit" class="button center">Edit</a>
 <form action="/bills/$bill.getId()/delete" method="post">
@@ -19,4 +24,3 @@
         #else
             /home/restaurants/$restaurant.getId()/bills
         #end" class="button center">Back to list</a>
-
