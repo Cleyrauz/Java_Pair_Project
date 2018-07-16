@@ -89,6 +89,41 @@ public class BookingController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("home/restaurants/:num1/bookings/:num2/edit", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
+            List<RestaurantTable> tables = DBRestaurant.getRestaurantsTables(restaurant);
+            Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num2")));
+            int quantity = booking.getQuantity();
+            int bookingLength = booking.getBookingLength();
+            List<Customer> customers = DBHelper.getAll(Customer.class);
+
+            Date fullDateTime = booking.getDateTime();
+
+
+
+            String pattern2 = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern2);
+            String date = simpleDateFormat.format(fullDateTime);
+            String today = simpleDateFormat.format(new Date());
+
+            String pattern3 = "HH:mm";
+            SimpleDateFormat simpleTimeFormat = new SimpleDateFormat(pattern3);
+            String time = simpleTimeFormat.format(fullDateTime);
+
+            model.put("template", "templates/bookings/edit.vtl");
+            model.put("booking", booking);
+            model.put("customers", customers);
+            model.put("restaurant", restaurant);
+            model.put("tables", tables);
+            model.put("quantity", quantity);
+            model.put("bookingLength", bookingLength);
+            model.put("date", date);
+            model.put("time", time);
+            model.put("today", today);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
         post("/home/restaurants/:num/bookings/new", (req,res) -> {
 //            Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength, Customer customer, int quantity
             Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
@@ -119,9 +154,9 @@ public class BookingController {
             return null;
         }, new VelocityTemplateEngine());
 
-        post("/restaurant/:rest_id/bookings/:num/edit", (req,res) -> {
-            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":rest_id")));
-            Booking bookingToDelete = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num")));
+        post("/home/restaurants/:num1/bookings/:num2/edit", (req,res) -> {
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
+            Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num2")));
             int table_id = Integer.parseInt(req.queryParams("tableNumber"));
             RestaurantTable table = DBHelper.find(RestaurantTable.class, table_id);
             int customer_id = Integer.parseInt(req.queryParams("customer"));
@@ -130,9 +165,10 @@ public class BookingController {
             int bookingLength = Integer.parseInt(req.queryParams("length"));
 
             //timey wimey stuff
-
-            String fullDateTime = req.queryParams("dateTime");
-            String pattern = "dd-MM-yyyy HH:mm";
+            String date = req.queryParams("date");
+            String time = req.queryParams("time");
+            String fullDateTime = date + " " + time;
+            String pattern = "yyyy-MM-dd" + " " + "HH:mm";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             Date dateTime = null;
             try {
@@ -143,12 +179,24 @@ public class BookingController {
 
             //timey wimey stuff over
 
-            Booking booking = new Booking(restaurant, table, dateTime, bookingLength, customer, quantity);
-   //         DBHelper.delete(bookingToDelete.getBill());
-            DBHelper.delete(bookingToDelete);
-            DBHelper.save(booking);
+            booking.setBookingLength(bookingLength);
+            booking.setCustomer(customer);
+            booking.setDateTime(dateTime);
+            booking.setQuantity(quantity);
+            booking.setRestaurantTable(table);
 
-            res.redirect("/bookings");
+
+            DBHelper.save(booking);
+            String redirect = "/home/restaurants/" + Integer.parseInt(req.params(":num1")) + "/bookings";
+            res.redirect(redirect);
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("/home/restaurants/:num1/bookings/:num2/delete", (req,res) -> {
+            Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num2")));
+            DBHelper.delete(booking);
+            String redirect = "/home/restaurants/" + Integer.parseInt(req.params(":num1")) + "/bookings";
+            res.redirect(redirect);
             return null;
         }, new VelocityTemplateEngine());
 

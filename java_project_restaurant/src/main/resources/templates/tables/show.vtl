@@ -26,13 +26,14 @@
 <table>
     <tr>
         <th>Booking ID</th>
-        <th>DateTime</th>
-        <th></th>
+        <th>Date</th>
+        <th>Time</th>
     </tr>
 #foreach ($booking in $bookings)
 <tr>
 <td>$booking.getId()</td>
-<td>$booking.getDateTime()</td>
+<td>$booking.prettyDate()</td>
+<td>$booking.prettyTime()</td>
 <td><a href="#if( ! $restaurant )
                             /bills/$bill.getId()
                          #else
