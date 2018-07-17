@@ -42,7 +42,7 @@ public class Restaurant {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<Booking> getBookings() {
         return bookings;
     }
@@ -55,7 +55,7 @@ public class Restaurant {
         this.bookings.add(booking);
     }
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<RestaurantTable> getRestaurantTables() {
         return restaurantTables;
     }

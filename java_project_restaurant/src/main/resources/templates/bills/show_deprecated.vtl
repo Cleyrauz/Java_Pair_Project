@@ -1,0 +1,38 @@
+#foreach ($item in $items)
+<table>
+    <tr>
+        <th>Item</th>
+        <th>Price (£)</th>
+    </tr>
+    <tr>
+        <td>$item.getItemType().getName()</td>
+        <td>$item.getItemType().getPrice()</td>
+        <td>
+            <form action="/items/$item.getId()/delete" method="post">
+            <input type="submit" value="Delete" class="button center">
+            </form>
+        </td>
+    </tr>
+</table>
+#end
+<form action="/" method="post">
+    <label for="type">Item:</label>
+    <select id="type" name="type">
+        #foreach( $itemType in $itemTypes )
+        <option value="$itemType">$itemType.getName()</option>
+        #end
+    </select>
+
+    <input type="submit" value="Add Item" class="button">
+</form>
+
+<table>
+    <tr>
+        <th>Total</th>
+    </tr>
+    <tr>
+        <td>$totalCost</td>
+    </tr>
+</table>
+
+

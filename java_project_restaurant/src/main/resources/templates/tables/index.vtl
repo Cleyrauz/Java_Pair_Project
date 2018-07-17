@@ -1,0 +1,32 @@
+
+<p class="pageHeader">Tables</p>
+
+<div>
+    <a href="#if( ! $restaurant )
+    /tables/new
+    #else
+    /home/restaurants/$restaurant.getId()/tables/new
+    #end" class="button center">New Table</a>
+</div>
+<div class="container">
+    <table>
+        <tr>
+            <th>Table Number</th>
+            <th>Capacity</th>
+            <th>Restaurant</th>
+            <th></th>
+        </tr>
+        #foreach($table in $tables)
+        <tr>
+            <td>$table.getTableNumber()</td>
+            <td>$table.getCapacity()</td>
+            <td>$table.getRestaurant().getName()</td>
+            <td><a href="#if( ! $restaurant )
+                            /tables/$table.getId()
+                         #else
+                            /home/restaurants/$restaurant.getId()/tables/$table.getId()
+                         #end" class="button center">Details</a></td>
+        <tr>
+            #end
+    </table>
+</div>

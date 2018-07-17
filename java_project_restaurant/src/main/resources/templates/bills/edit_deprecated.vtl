@@ -1,0 +1,16 @@
+<p class="pageHeader">Edit Bill</p>
+
+
+#foreach( $item in $bill.getItems())
+    <label for="itemId">Item Id:</label>
+    <input class="inputbox" type="text" name="item_id" id = "itemId" required="true" value="$item.getId()">
+
+    <label for="itemName">Item Name:</label>
+    <input class="inputbox" type="text" name="item_name" id = "itemName" required="true" value="$item.getItemType().getName()">
+
+    <label for="price">Price:</label>
+    <input class="inputbox" type="text" name="item_price" id = "price" required="true" value="$item.getItemType().getPrice()">
+    <a href="/restaurant/$bill.getBooking().getRestaurant().getId()/bill/$bill.getId()/items/$item.getId()/delete" class="button center">Delete</a>
+#end
+
+<a href="/bills/$bill.getId()" class="button center">Cancel</a>

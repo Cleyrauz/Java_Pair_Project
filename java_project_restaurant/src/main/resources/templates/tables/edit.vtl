@@ -1,0 +1,33 @@
+<p class="pageHeader">Edit Table</p>
+
+<form action="#if( ! $selectedRestaurant )
+/tables/$table.getId()
+#else
+/home/restaurants/$selectedRestaurant.getId()/tables/$table.getId()
+#end" method="post">
+
+    <label for="tableNumber">Table Number:</label>
+    <input class="inputbox" type="text" name="tableNumber" id = "tableNumber" required="true" value="$table.getTableNumber()">
+
+    <label for="capacity">Capacity:</label>
+    <input class="inputbox" type="text" name="capacity" id = "capacity" required="true" value="$table.getCapacity()">
+
+       <label for="restaurant">Restaurant:</label>
+    <select id="restaurant" name="restaurant">
+        #foreach( $restaurant in $restaurants )
+        <option value="$restaurant.getId()"
+                #if ($restaurant.getId() == $table.getRestaurant().getId())
+                selected="selected"
+                #end>
+            $restaurant.getName()</option>
+        #end
+
+        <input type="submit" value="Save" class="button">
+    </select>
+</form>
+
+<a href="#if( ! $selectedRestaurant )
+/tables/$table.getId()
+#else
+/home/restaurants/$selectedRestaurant.getId()/tables/$tables.getId()
+#end" class="button center">Cancel</a>

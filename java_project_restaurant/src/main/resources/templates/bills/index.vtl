@@ -1,0 +1,27 @@
+<div class="container">
+    <table>
+        <tr>
+            <th>Bill Id</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Table Number</th>
+        </tr>
+        #foreach ($bill in $bills)
+        <tr>
+            #foreach ($booking in $bookings)
+                #if ($booking.getBill().getId() == $bill.getId())
+                    <td>$bill.getId()</td>
+                    <td>$booking.prettyDate()</td>
+                    <td>$booking.prettyTime()</td>
+                    <td>$booking.getRestaurantTable().getTableNumber()</td>
+                    <td><a href="#if( ! $restaurant )
+                            /bills/$bill.getId()
+                         #else
+                            /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
+                         #end" class="button center">Details</a></td>
+                #end
+            #end
+        <tr>
+            #end
+    </table>
+</div>

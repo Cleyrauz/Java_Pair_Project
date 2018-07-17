@@ -1,7 +1,5 @@
 package models;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,11 +53,7 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany
-    @JoinTable(name="booking_customer",
-            joinColumns = {@JoinColumn(name="customer_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="booking_id", nullable =false, updatable = false)})
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="customer", fetch = FetchType.EAGER)
     public List<Booking> getBookings() {
         return bookings;
     }

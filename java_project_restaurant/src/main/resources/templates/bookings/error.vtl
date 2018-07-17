@@ -1,0 +1,56 @@
+<p class="pageHeader">Bookings</p>
+<div class="container">
+    <p>Find Bookings</p>
+    <form action="#if( ! $restaurant )
+    /bookings/search
+    #else
+    /home/restaurants/$restaurant.getId()/bookings/search
+    #end" method="post">
+
+        <label for="startDate">StartDate</label>
+        <input class="date" type="date" name="startDate" id = "startDate" required="true">
+
+        <label for="endDate">EndDate</label>
+        <input class="date" type="date" name="endDate" id = "endDate" required="true">
+
+        <input type="submit" value="Search" class="button">
+    </form>
+</div>
+
+<div><p>Unfortunately this table is already booked for this time, please try a different time</p></div>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Table</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Length (mins)</th>
+            <th>Quantity (people)</th>
+            <th>Customer</th>
+        </tr>
+        #foreach($booking in $bookings)
+        <tr>
+            <td>$booking.getRestaurantTable().getTableNumber()</td>
+            <td>$booking.prettyDate()</td>
+            <td>$booking.prettyTime()</td>
+            <td>$booking.getBookingLength()</td>
+            <td>$booking.getQuantity()</td>
+            <td>$booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</td>
+            <td></td>
+            <td><a href="#if( ! $restaurant )
+                            /home/restaurants/$booking.getRestaurant().getId()/bookings/$booking.getId()
+                         #else
+                            /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
+                         #end" class="button center">Details</a></td>
+        <tr>
+            #end
+    </table>
+</div>
+#if( ! $restaurant )
+
+#else
+<div>
+    <a href="/home/restaurants/$restaurant.getId()/bookings/new" class="button center">New Booking</a>
+</div>
+#end

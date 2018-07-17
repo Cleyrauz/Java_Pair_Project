@@ -1,0 +1,41 @@
+<h1>Add a new booking!</h1>
+
+<div id="large_image">
+    <div class="scroll_down_menu">
+    <form action="/home/restaurants" method="post">
+        <label for="restaurant">Select a Restaurant:</label>
+        <select id="restaurant" name="restaurant_id">
+            #foreach( $restaurant in $restaurants )
+            <option value="$restaurant.getId()">
+                $restaurant.getName()
+            </option>
+            #end
+            <input type="submit" value="Select" class="button">
+        </select>
+    </form>
+    </div>
+</div>
+
+
+<h3>Our restaurants...</h3>
+
+<div class="gallery">
+    <a target="_blank" href="/images/arepitas.jpg">
+        <img src="/images/arepitas.jpg" alt="Fjords" width="300" height="200">
+    </a>
+    <div class="desc">The taste of Venezuelan food in Glasgow!</div>
+</div>
+
+<div class="gallery">
+    <a target="_blank" href="/images/pie.jpg">
+        <img src="/images/pie.jpg" alt="Forest" width="300" height="200">
+    </a>
+    <div class="desc">The award winning Scottish pie!</div>
+</div>
+
+<div class="gallery">
+    <a target="_blank" href="/images/burger.jpg">
+        <img src="/images/burger.jpg" alt="Northern Lights" width="300" height="200">
+    </a>
+    <div class="desc">A masterpiece of street food!</div>
+</div>

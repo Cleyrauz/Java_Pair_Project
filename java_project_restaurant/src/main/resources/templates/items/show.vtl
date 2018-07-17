@@ -1,0 +1,15 @@
+<div>
+    <p> Name: $item.getItemType().getName()</p>
+    <p> Price (£): $item.getItemType().getPrice()</p>
+    <p> Bill: $item.getBill().getId()</p>
+</div>
+<a href="#if( ! $selectedRestaurant )
+/bookings/$item.getBill().getBooking().getId()
+#else
+/home/restaurants/$restaurant.getId()/bookings/$item.getBill().getBooking().getId()
+#end">Go to Booking</a>
+<a href="#if( ! $restaurant )
+            /items
+        #else
+            /home/restaurants/$restaurant.getId()/items
+         #end" class="button center">Back to list</a>

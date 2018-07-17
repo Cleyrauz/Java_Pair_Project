@@ -1,0 +1,16 @@
+<h1><p class="pageHeader">Edit Restaurant</p></h1>
+
+<div id="restaurants_image">
+    <div class="scroll_down_menu" style = "font-color: white;">
+<form action="/restaurants/$restaurant.getId()/edit" method="post">
+
+    <label for="name">Name:</label>
+    <input class="inputbox" type="text" name="name" id = "name" required="true" value="$restaurant.getName()">
+
+        <input type="submit" value="Save" class="button">
+    </select>
+</form>
+
+<a href="/restaurants/$restaurant.getId()" class="button center">Cancel</a>
+</div>
+</div>

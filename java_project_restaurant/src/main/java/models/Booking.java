@@ -1,12 +1,9 @@
 package models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import org.hibernate.annotations.Cascade;
+import java.text.SimpleDateFormat;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "bookings")
@@ -14,10 +11,11 @@ public class Booking {
 
     private int id;
     private Restaurant restaurant;
-    private List<Customer> customers;
+    private Customer customer;
     private RestaurantTable restaurantTable;
     private Date dateTime;
     private int bookingLength;
+    private int quantity;
 
 
     private Bill bill;
@@ -25,12 +23,13 @@ public class Booking {
     public Booking(){
     }
 
-    public Booking(Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength) {
+    public Booking(Restaurant restaurant, RestaurantTable restaurantTable, Date dateTime, int bookingLength, Customer customer, int quantity) {
         this.restaurant = restaurant;
-        this.customers = new ArrayList<>();
+        this.customer = customer;
         this.restaurantTable = restaurantTable;
         this.dateTime = dateTime;
         this.bookingLength = bookingLength;
+        this.quantity = quantity;
     }
 
     @Id
@@ -44,24 +43,17 @@ public class Booking {
         this.id = id;
     }
 
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany
-    @JoinTable(name="booking_customer",
-            joinColumns = {@JoinColumn(name="booking_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="customer_id", nullable =false, updatable = false)})
-    public List<Customer> getCustomers() {
-        return customers;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public void addCustomer(Customer customer) {
-        this.customers.add(customer);
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_table_id")
     public RestaurantTable getRestaurantTable() {
         return restaurantTable;
@@ -89,7 +81,7 @@ public class Booking {
         this.bookingLength = bookingLength;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     public Restaurant getRestaurant() {
         return restaurant;
@@ -99,8 +91,8 @@ public class Booking {
         this.restaurant = restaurant;
     }
 
-    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "booking",
+        fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Bill getBill() {
         return bill;
     }
@@ -109,5 +101,27 @@ public class Booking {
         this.bill = bill;
     }
 
+    @Column(name = "quantity")
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String prettyDate() {
+        String pattern2 = "dd/MM/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern2);
+        String prettyDate = simpleDateFormat.format(this.dateTime);
+        return prettyDate;
+    }
+
+    public String prettyTime() {
+        String pattern3 = "HH:mm";
+        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat(pattern3);
+        String prettyTime = simpleTimeFormat.format(this.dateTime);
+        return prettyTime;
+    }
 
 }

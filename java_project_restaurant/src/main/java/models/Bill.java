@@ -10,8 +10,6 @@ public class Bill {
 
     private int id;
     private List<Item> items;
-
-
     private Booking booking;
 
     public Bill(){
@@ -33,7 +31,7 @@ public class Bill {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "bill")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill", fetch = FetchType.EAGER, orphanRemoval = true)
     public List<Item> getItems() {
         return items;
     }
@@ -42,11 +40,7 @@ public class Bill {
         this.items = items;
     }
 
-    public void addItem(Item item) {
-        this.items.add(item);
-    }
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "booking_id")
     public Booking getBooking() {
         return booking;

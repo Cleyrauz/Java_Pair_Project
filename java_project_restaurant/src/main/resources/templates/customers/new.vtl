@@ -1,0 +1,29 @@
+<h1><p class="pageHeader">New Customer</p></h1>
+
+<div id="customers_image">
+    <div class="scroll_down_menu" style = "font-color: white;">
+<form action="#if( ! $restaurant )
+/customers
+#else
+/home/restaurants/$restaurant.getId()/customers
+#end" method="post">
+    <label for="firstName">First name:</label>
+    <input class="inputbox" type="text" name="firstName" id = "firstName" required="true">
+
+    <label for="lastName">Last name:</label>
+    <input class="inputbox" type="text" name="lastName" id = "lastName" required="true">
+
+    <label for="budget">Budget(£):</label>
+    <input class="inputbox" type="number" name="budget" id = "budget" required="true">
+
+
+    <input type="submit" value="Save" class="button">
+</form>
+
+<a href="#if( ! $restaurant )
+/customers
+#else
+/home/restaurants/$restaurant.getId()/customers
+#end" class="button center">Cancel</a>
+</div>
+</div>

@@ -1,0 +1,12 @@
+<p class="pageHeader">New Item</p>
+
+<form action="/items" method="post">
+    <label for="type">Item:</label>
+    <select id="type" name="type">
+    #foreach( $itemType in $itemTypes )
+    <option value="$itemType">$itemType.getName()</option>
+    #end
+    </select>
+
+    <input type="submit" value="Save" class="button">
+</form>

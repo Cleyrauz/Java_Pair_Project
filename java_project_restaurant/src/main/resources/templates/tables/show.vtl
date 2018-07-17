@@ -1,0 +1,44 @@
+<p class="pageHeader">Table Id: $table.getId()</p>
+
+<div>
+    <p> Table Number: $table.getTableNumber()</p>
+    <p> Capacity: $table.getCapacity() people </p>
+    <p> Restaurant: $table.getRestaurant().getName()</p>
+</div>
+
+<a href="#if( ! $restaurant )
+/tables/$table.getId()/edit
+#else
+/home/restaurants/$restaurant.getId()/tables/$table.getId()/edit
+#end" class="button center">Edit</a>
+<form action="#if( ! $restaurant )
+/tables/$table.getId()/delete
+#else
+/home/restaurants/$restaurant.getId()/tables/$table.getId()/delete
+#end" method="post">
+    <input type="submit" value="Delete" class="button center">
+</form>
+<a href="#if( ! $restaurant )
+                            /tables
+                         #else
+                            /home/restaurants/$restaurant.getId()/tables
+                         #end" class="button center">Back to list</a>
+<table>
+    <tr>
+        <th>Booking ID</th>
+        <th>Date</th>
+        <th>Time</th>
+    </tr>
+#foreach ($booking in $bookings)
+<tr>
+<td>$booking.getId()</td>
+<td>$booking.prettyDate()</td>
+<td>$booking.prettyTime()</td>
+<td><a href="#if( ! $restaurant )
+                            /bills/$bill.getId()
+                         #else
+                            /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
+                         #end" class="button center">Details</a></td>
+</tr>
+#end
+</table>
