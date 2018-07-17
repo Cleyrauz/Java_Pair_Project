@@ -15,6 +15,8 @@
 
 <h1><p class="pageHeader">Edit Booking</p></h1>
 
+<div id="bookings_image">
+    <div class="scroll_down_menu" style = "font-color: white;">
 <form action="#if( ! $restaurant )
 /bookings/$booking.getId()/edit
 #else
@@ -48,6 +50,7 @@
         #end
     </select>
 
-    <input type="submit" value="Save Changes" class="button">
+    <input type="submit" value="Update" class="button">
 </form>
-
+    </div>
+</div>

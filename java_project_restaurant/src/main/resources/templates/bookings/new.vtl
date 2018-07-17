@@ -13,8 +13,10 @@
 </nav>
 #end
 
-<p class="pageHeader">New Booking</p>
+<h1><p class="pageHeader">New Booking</p></h1>
 
+<div id="bookings_image">
+    <div class="scroll_down_menu" style = "font-color: white;">
 <form action="#if( ! $restaurant )
 /bookings/new
 #else
@@ -50,7 +52,7 @@
 
     <input type="submit" value="Save" class="button">
 </form>
-
+    </div>
 <a href="#if( ! $restaurant )
 /bookings
 #else
@@ -62,3 +64,4 @@
 #else
 /home/restaurants/$restaurant.getId()/customers/new
 #end" class="button">Add new Customer</a>
+</div>
