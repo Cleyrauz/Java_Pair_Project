@@ -32,6 +32,15 @@
         <input type="submit" value="Search" class="button">
     </form>
 </div>
+#if( ! $restaurant )
+
+#else
+<div>
+    <div style = "margin-top: 2%; display: flex-inline;">
+        <a href="/home/restaurants/$restaurant.getId()/bookings/new" class="button center">New Booking</a>
+    </div>
+</div>
+#end
 <div class="container-table">
     <table class="flex-center">
         <tr>
@@ -55,18 +64,10 @@
                             /home/restaurants/$booking.getRestaurant().getId()/bookings/$booking.getId()
                          #else
                             /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
-                         #end" class="text">Details</a></td>
+                         #end" class="button center">Details</a></td>
         <tr>
         #end
     </table>
 
 </div>
-#if( ! $restaurant )
 
-    #else
-        <div>
-            <div style = "margin-top: 2%; display: flex-inline;">
-            <a href="/home/restaurants/$restaurant.getId()/bookings/new" class="button center">New Booking</a>
-            </div>
-        </div>
-#end
