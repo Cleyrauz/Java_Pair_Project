@@ -1,8 +1,23 @@
-<h1><p class="pageHeader">Restaurants</p></h1>
+#if( ! $restaurant )
+#else
+<h1><p class="restaurant">$restaurant.getName()</p></h1>
 
+<nav id="menu">
+    <ul>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/customers">All Customers</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/bookings">All Bookings</a>
+        <li class="menu-item"><a class="button"href="/home/restaurants/$restaurant.getId()/bills">All Bills</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/tables">All Tables</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/items">All Items</a>
+    </ul>
+</nav>
+#end
+
+
+<h1><p class="pageHeader">Restaurants</p></h1>
 <div id="restaurants_image">
-<div class="container-table">
-    <table>
+    <div class="container-table">
+        <table class="flex-center">
         <div style = "margin-top:25%;">
         <tr>
             <th>Name</th>
@@ -20,7 +35,6 @@
     </table>
     <div class="button-new" style = "margin-top: 20%;">
         <a href="/restaurants/new">New Restaurant</a>
-</div>
-</div>
-
+    </div>
+    </div>
 </div>

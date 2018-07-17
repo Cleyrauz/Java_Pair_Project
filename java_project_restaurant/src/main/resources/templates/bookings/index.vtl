@@ -1,23 +1,49 @@
-<p class="pageHeader">Bookings</p>
-<div class="container">
-    <p>Find Bookings</p>
+#if( ! $restaurant )
+#else
+<h1><p class="restaurant">$restaurant.getName()</p></h1>
+
+<nav id="menu">
+    <ul>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/customers">All Customers</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/bookings">All Bookings</a>
+        <li class="menu-item"><a class="button"href="/home/restaurants/$restaurant.getId()/bills">All Bills</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/tables">All Tables</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/items">All Items</a>
+    </ul>
+</nav>
+#end
+
+<h1><p class="pageHeader">Bookings</p></h1>
+#if( ! $restaurant )
+
+#else
+<div class="action_button">
+    <a href="/home/restaurants/$restaurant.getId()/bookings/new" class="button center">New Booking</a>
+</div>
+#end
+<div id="bookings_image">
+<div class="container-table">
+<div class="flex-center">
     <form action="#if( ! $restaurant )
     /bookings/search
     #else
     /home/restaurants/$restaurant.getId()/bookings/search
     #end" method="post">
 
-        <label for="startDate">StartDate</label>
+
+        <label for="startDate">Start Date:</label>
         <input class="date" type="date" name="startDate" id = "startDate" required="true">
 
-        <label for="endDate">EndDate</label>
+        <label for="endDate">End Date:</label>
         <input class="date" type="date" name="endDate" id = "endDate" required="true">
 
         <input type="submit" value="Search" class="button">
     </form>
 </div>
-<div class="container">
-    <table>
+</div>
+
+<div class="container-table">
+    <table class="flex-center">
         <tr>
             <th>Table</th>
             <th>Date</th>
@@ -43,11 +69,6 @@
         <tr>
         #end
     </table>
-</div>
-#if( ! $restaurant )
 
-    #else
-        <div>
-            <a href="/home/restaurants/$restaurant.getId()/bookings/new" class="button center">New Booking</a>
-        </div>
-#end
+</div>
+</div>

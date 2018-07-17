@@ -1,21 +1,43 @@
-<p class="pageHeader">Booking $booking.getId()</p>
+#if( ! $restaurant )
+#else
+<h1><p class="restaurant">$restaurant.getName()</p></h1>
 
-<div>
-    <p> Table Number: $booking.getRestaurantTable().getTableNumber()</p>
-    <p> Date: $booking.prettyDate()</p>
-    <p> Time: $booking.prettyTime()</p>
-    <p> Length: $booking.getBookingLength()</p>
-    <p> Quantity: $booking.getQuantity() people</p>
-    <p> Customer: $booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</p>
-</div>
+<nav id="menu">
+    <ul>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/customers">All Customers</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/bookings">All Bookings</a>
+        <li class="menu-item"><a class="button"href="/home/restaurants/$restaurant.getId()/bills">All Bills</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/tables">All Tables</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/items">All Items</a>
+    </ul>
+</nav>
+#end
 
-<a href="#if( ! $restaurant )
+<h1><p class="pageHeader">Booking $booking.getId()</p></h1>
+<div class="action_button"><a href="#if( ! $restaurant )
+            /bookings
+        #else
+            /home/restaurants/$restaurant.getId()/bookings
+         #end" class="button center">Back to list</a></div>
+<div id="bookings_image_show">
+    <div class="container-table">
+        <div>
+            <p> Table Number: $booking.getRestaurantTable().getTableNumber()</p>
+            <p> Date: $booking.prettyDate()</p>
+            <p> Time: $booking.prettyTime()</p>
+            <p> Length: $booking.getBookingLength()</p>
+            <p> Quantity: $booking.getQuantity() people</p>
+            <p> Customer: $booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</p>
+
+    </div>
+
+        <form action="#if( ! $restaurant )
 /bookings/$booking.getId()/edit
 #else
 /home/restaurants/$restaurant.getId()/bookings/$booking.getId()/edit
-#end" class="button center">Edit</a>
-
-
+#end" method="get">
+            <input type="submit" value="Edit" class="button center">
+        </form>
 <form action="#if( ! $restaurant )
 /bookings/$booking.getId()/delete
 #else
@@ -23,9 +45,19 @@
 #end" method="post">
     <input type="submit" value="Delete" class="button center">
 </form>
+</div>
+    <div>
+    <form action="/home/restaurants/$restaurant.getId()/bookings/$booking.getId()/items/new" method="post" class="container-table">
+        <label for="type"></label>
+        <select id="type" name="type" class="item_drop_menu">
+            #foreach( $itemType in $itemTypes )
+            <option value="$itemType">$itemType.getName()</option>
+            #end
+        </select>
 
-<div class="container">
-    <table>
+        <input type="submit" value="Add Item" class="button">
+    </form>
+    <table class="container-table">
         <tr>
             <th>Item</th>
             <th>Price (£)</th>
@@ -41,32 +73,12 @@
             </td>
         </tr>
     #end
-    </table>
-    <form action="/home/restaurants/$restaurant.getId()/bookings/$booking.getId()/items/new" method="post">
-        <label for="type">Item:</label>
-        <select id="type" name="type">
-            #foreach( $itemType in $itemTypes )
-            <option value="$itemType">$itemType.getName()</option>
-            #end
-        </select>
-
-        <input type="submit" value="Add Item" class="button">
-    </form>
-
-    <table>
         <tr>
             <th>Total</th>
-        </tr>
-        <tr>
             <td>$totalCost</td>
         </tr>
     </table>
+    </div>
+
 </div>
-
-<a href="#if( ! $restaurant )
-            /bookings
-        #else
-            /home/restaurants/$restaurant.getId()/bookings
-         #end" class="button center">Back to list</a>
-
-
+</div>
