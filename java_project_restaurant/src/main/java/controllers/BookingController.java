@@ -52,6 +52,16 @@ public class BookingController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/home/restaurants/:num/bookings/error", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
+            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
+            model.put("bookings", bookings);
+            model.put("restaurant", restaurant);
+            model.put("template", "templates/bookings/error.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
         get("/bookings/:num", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num")));
@@ -147,10 +157,17 @@ public class BookingController {
             }
             //timey wimey stuff over
             Booking booking = new Booking(restaurant, table, dateTime, bookingLength, customer, quantity);
-            DBHelper.save(booking);
-            Bill bill = new Bill(booking);
-            DBHelper.save(bill);
-            res.redirect("/bookings");
+            if (DBRestaurantTable.checkForDoubleBooking(table, booking)){
+                DBHelper.save(booking);
+                Bill bill = new Bill(booking);
+                DBHelper.save(bill);
+                String redirect = "/home/restaurants/"+ restaurant.getId() +"/bookings";
+                res.redirect(redirect);
+                return null;
+            }
+
+            String redirect = "/home/restaurants/"+ restaurant.getId() +"/bookings/error";
+            res.redirect(redirect);
             return null;
         }, new VelocityTemplateEngine());
 
@@ -244,5 +261,32 @@ public class BookingController {
             model.put("template", "templates/bookings/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        post("/bookings/search", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            List<Booking> allBookings = DBHelper.getAll(Booking.class);
+            String startDateTime = req.queryParams("startDate");
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            Date startDate = null;
+            try {
+                startDate = simpleDateFormat.parse(startDateTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String endDateTime = req.queryParams("endDate");
+            Date endDate = null;
+            try {
+                endDate = simpleDateFormat.parse(endDateTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            List<Booking> bookingsByDate = DBBooking.findBookingsbyDate(startDate, endDate, allBookings);
+            model.put("bookings", bookingsByDate);
+            model.put("template", "templates/bookings/index.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
     }
+
+
 }

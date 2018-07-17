@@ -9,6 +9,11 @@
     <ul>
         <li class="menu-item"><a href="/home" class="button center">HOME</a></li>
         <li class="menu-item"><a href="/restaurants" class="button center">MANAGE RESTAURANTS</a></li>
+        <li class="menu-item"><a href="#if( ! $restaurant )
+    /bookings
+    #else
+    /home/restaurants/$restaurant.getId()/bookings
+    #end" class="button center">SEARCH</a></li>
     </ul>
 </nav>
 <div class="container">
