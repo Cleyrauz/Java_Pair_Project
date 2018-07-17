@@ -52,6 +52,16 @@ public class BookingController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/home/restaurants/:num/bookings/error", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num")));
+            List<Booking> bookings = DBRestaurant.getRestaurantsBookings(restaurant);
+            model.put("bookings", bookings);
+            model.put("restaurant", restaurant);
+            model.put("template", "templates/bookings/error.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
         get("/bookings/:num", (req,res) -> {
             HashMap<String, Object> model = new HashMap<>();
             Booking booking = DBHelper.find(Booking.class, Integer.parseInt(req.params(":num")));
@@ -151,9 +161,12 @@ public class BookingController {
                 DBHelper.save(booking);
                 Bill bill = new Bill(booking);
                 DBHelper.save(bill);
+                String redirect = "/home/restaurants/"+ restaurant.getId() +"/bookings";
+                res.redirect(redirect);
+                return null;
             }
 
-            String redirect = "/home/restaurants/"+ restaurant.getId() +"/bookings";
+            String redirect = "/home/restaurants/"+ restaurant.getId() +"/bookings/error";
             res.redirect(redirect);
             return null;
         }, new VelocityTemplateEngine());
@@ -274,4 +287,6 @@ public class BookingController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
     }
+
+
 }

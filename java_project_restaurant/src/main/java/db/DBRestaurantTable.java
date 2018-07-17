@@ -34,7 +34,7 @@ public class DBRestaurantTable {
     }
 
     public static boolean checkForDoubleBooking(RestaurantTable table, Booking bookingToCheck){
-        boolean result = false;
+        boolean result = true;
             Date dateTime = bookingToCheck.getDateTime();
             int length = bookingToCheck.getBookingLength();
             Calendar cal = Calendar.getInstance();
@@ -51,11 +51,11 @@ public class DBRestaurantTable {
                 cal2.add(Calendar.MINUTE, length2);
                 Date bookingEndDateTime = cal2.getTime();
 
-                if (bookingEndDateTime.before(dateTime)){
-                    result = true;
+                if (dateTime.after(bookingDateTime) && dateTime.before(bookingEndDateTime)){
+                    result = false;
                 }
-                if (bookingDateTime.after(endDateTime)){
-                    result = true;
+                if (endDateTime.before(bookingEndDateTime) && endDateTime.after(bookingDateTime)){
+                    result = false;
                 }
             }
             return result;

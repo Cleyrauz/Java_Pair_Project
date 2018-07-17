@@ -123,5 +123,37 @@ public class CustomerController {
             model.put("bookings", bookings);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        get("/home/restaurants/:num1/customers/:num2/edit", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.params(":num2")));
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params("num1")));
+            model.put("template", "templates/customers/edit.vtl");
+            model.put("customer", customer);
+            model.put("restaurant", restaurant);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/home/restaurants/:num1/customers/:num2/edit", (req,res) -> {
+            String firstName = req.queryParams("firstName");
+            String lastName = req.queryParams("lastName");
+            double budget = Double.parseDouble(req.queryParams("budget"));
+            Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.params(":num2")));
+            customer.setFirstName(firstName);
+            customer.setLastName(lastName);
+            customer.setBudget(budget);
+            DBHelper.save(customer);
+            String redirect = "/home/restaurants/"+req.params(":num1")+"/customers";
+            res.redirect(redirect);
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("/home/restaurants/:num1/customers/:num2/delete", (req,res) -> {
+            Customer customer = DBHelper.find(Customer.class, Integer.parseInt(req.params(":num2")));
+            DBHelper.delete(customer);
+            String redirect = "/home/restaurants/"+req.params(":num1")+"/customers";
+            res.redirect(redirect);
+            return null;
+        }, new VelocityTemplateEngine());
     }
 }
