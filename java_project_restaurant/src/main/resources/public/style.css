@@ -175,8 +175,46 @@ font-weight: lighter;
   background-image: url("/images/customer.jpg");
   background-repeat: no-repeat;
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   background-size: cover;
   justify-content: center;
   align-items: center;
+}
+
+#bookings_image {
+  display: flex;
+  background-image: url("/images/booking.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 400px;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color : white;
+}
+
+#container-booking{
+background-color: rgba(0,0,0,0.6);
+color: white;
+margin-bottom: 20px;
+}
+
+#container-bookings-show {
+background-color: rgba(0,0,0,0.6);
+color: white;
+margin-bottom: 20px;
+}
+
+#bookings_image_show {
+  display: flex;
+  background-image: url("/images/booking.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 400px;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color : white;
 }
