@@ -126,10 +126,6 @@ font-weight: lighter;
 
 .container-table {
   border: 20px;
-  padding-top: 40 px;
-  padding-left: 20px;
-  width: 300px;
-  height: 300px;
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
@@ -139,9 +135,8 @@ font-weight: lighter;
   font-size: 18px;
   text-align: center;
   color: white;
-
+  width: fit-content;
   display: flex;
-  margin: 0 auto;
   justify-content: center;
 }
 
@@ -159,8 +154,8 @@ font-weight: lighter;
     margin-top: 5px;
 }
 
-.button: hover {
-    color: blue;
+.button:hover {
+    background-color: #ecd8c6;
   }
 
 .button-new {
@@ -252,7 +247,7 @@ margin-bottom: 20px;
 .flex-center {
   width: 100%;
   display: flex;
-  margin: 0 auto;
+  margin: 1em;
   justify-content: center;
 }
 
@@ -270,3 +265,8 @@ padding-bottom: 2em;
   justify-content: center;
   align-items: center;
 }
+
+th{
+padding-bottom: 2em;
+}
+
