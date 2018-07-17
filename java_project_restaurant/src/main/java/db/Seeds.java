@@ -127,6 +127,8 @@ public class Seeds {
         DBHelper.save(bill9);
 
         item1.setBill(bill1);
+        item5.setBill(bill1);
+        item9.setBill(bill1);
         item4.setBill(bill2);
         item3.setBill(bill3);
         item7.setBill(bill7);
@@ -143,20 +145,6 @@ public class Seeds {
         DBHelper.save(item7);
         DBHelper.save(item8);
 
-//        item1.setBill(bill1);
-//        item2.setBill(bill2);
-//        item3.setBill(bill4);
-//        item4.setBill(bill3);
-//        item5.setBill(bill5);
-//        item6.setBill(bill6);
-//        item7.setBill(bill7);
-//        item9.setBill(bill9);
-
-//        DBHelper.save(item4);
-//        DBHelper.save(item5);
-//        DBHelper.save(item6);
-//        DBHelper.save(item8);
-//        DBHelper.save(item9);
 
     }
 }
