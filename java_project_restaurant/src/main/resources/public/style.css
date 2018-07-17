@@ -131,6 +131,7 @@ font-weight: lighter;
   margin-right: auto;
   margin-bottom: 20px;
   margin-top: 20px;
+  padding: 1em;
   background-color: rgba(0,0,0,0.6);
   font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
   font-size: 18px;
@@ -287,4 +288,8 @@ padding:0.4em
 .action_button{
     display: flex;
     margin-left: 2%;
+}
+
+.item_drop_menu{
+      margin-top: 1.5em;
 }

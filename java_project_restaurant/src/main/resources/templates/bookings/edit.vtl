@@ -28,27 +28,27 @@
         #foreach( $table in $tables )
             <option value="$table.getId()" #if ($table.getId() == $booking.getRestaurantTable().getId()) selected #end>$table.getTableNumber() Seats: $table.getCapacity()</option>
         #end
-    </select>
+    </select></br>
 
     <label for="date">Date:</label>
-    <input class="date" type="date" name="date" id = "date" required="true" min="$today" value="$date">
+    <input class="date" type="date" name="date" id = "date" required="true" min="$today" value="$date"></br>
 
     <label for="time">Time:</label>
-    <input class="time" type="time" name="time" id="time" required="true" min="13:00" max="23:00" value="$time">
+    <input class="time" type="time" name="time" id="time" required="true" min="13:00" max="23:00" value="$time"></br>
 
     <label for="length">Length:</label>
-    <input class="inputbox" type="number" name="length" id="length" required="true" value="$bookingLength">
+    <input class="inputbox" type="number" name="length" id="length" required="true" value="$bookingLength"></br>
 
 
     <label for="quantity">Quantity:</label>
-    <input class="inputbox" type="text" name="quantity" id = "quantity" required="true" value="$quantity">
+    <input class="inputbox" type="text" name="quantity" id = "quantity" required="true" value="$quantity"></br>
 
     <label for="customer">Customer:</label>
     <select id="customer" name="customer">
         #foreach( $customer in $customers )
             <option value="$customer.getId()" #if ($customer.getId() == $booking.getCustomer().getId()) selected #end>$customer.getFirstName() $customer.getLastName()</option>
         #end
-    </select>
+    </select></br>
 
     <input type="submit" value="Update" class="button">
 </form>
