@@ -1,13 +1,28 @@
+#if( ! $restaurant )
+#else
+<h1><p class="restaurant">$restaurant.getName()</p></h1>
+
+<nav id="menu">
+    <ul>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/customers">All Customers</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/bookings">All Bookings</a>
+        <li class="menu-item"><a class="button"href="/home/restaurants/$restaurant.getId()/bills">All Bills</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/tables">All Tables</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/items">All Items</a>
+    </ul>
+</nav>
+#end
+
 <h1><p class="pageHeader">Booking $booking.getId()</p></h1>
 <div id="bookings_image_show">
     <div class="container" style = "background-color: rgba(0,0,0,0.6);">
-<div>
     <p> Table Number: $booking.getRestaurantTable().getTableNumber()</p>
     <p> Date: $booking.prettyDate()</p>
     <p> Time: $booking.prettyTime()</p>
     <p> Length: $booking.getBookingLength()</p>
     <p> Quantity: $booking.getQuantity() people</p>
     <p> Customer: $booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</p>
+    </div>
 </div>
 
 <a href="#if( ! $restaurant )

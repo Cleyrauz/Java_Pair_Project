@@ -50,6 +50,7 @@ body{
   background-size: 1024px 768px;
   padding-top: 0;
   height: : 100%;
+  font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
 
 #menu {
@@ -138,6 +139,10 @@ font-weight: lighter;
   font-size: 18px;
   text-align: center;
   color: white;
+
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 
@@ -181,6 +186,17 @@ font-weight: lighter;
   align-items: center;
 }
 
+#tables_image {
+  display: flex;
+  background-image: url("/images/table.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+}
+
 #bookings_image {
   display: flex;
   background-image: url("/images/booking.jpg");
@@ -218,3 +234,29 @@ margin-bottom: 20px;
   flex-direction: row;
   color : white;
 }
+
+.restaurant {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.pageHeader {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.flex-center {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+td{
+padding-bottom: 2em;
+}
+

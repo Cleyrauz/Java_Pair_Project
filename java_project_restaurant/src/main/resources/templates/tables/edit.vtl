@@ -1,5 +1,20 @@
-<p class="pageHeader">Edit Table</p>
+#if( ! $restaurant )
+#else
+<h1><p class="restaurant">$restaurant.getName()</p></h1>
 
+<nav id="menu">
+    <ul>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/customers">All Customers</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/bookings">All Bookings</a>
+        <li class="menu-item"><a class="button"href="/home/restaurants/$restaurant.getId()/bills">All Bills</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/tables">All Tables</a>
+        <li class="menu-item"><a class="button" href="/home/restaurants/$restaurant.getId()/items">All Items</a>
+    </ul>
+</nav>
+#end
+
+<p class="pageHeader">Edit Table</p>
+<div id="tables_image">
 <form action="#if( ! $selectedRestaurant )
 /tables/$table.getId()
 #else
@@ -31,3 +46,4 @@
 #else
 /home/restaurants/$selectedRestaurant.getId()/tables/$tables.getId()
 #end" class="button center">Cancel</a>
+</div>
