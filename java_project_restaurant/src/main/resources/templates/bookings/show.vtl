@@ -1,5 +1,6 @@
-<p class="pageHeader">Booking $booking.getId()</p>
-
+<h1><p class="pageHeader">Booking $booking.getId()</p></h1>
+<div id="bookings_image_show">
+    <div class="container" style = "background-color: rgba(0,0,0,0.6);">
 <div>
     <p> Table Number: $booking.getRestaurantTable().getTableNumber()</p>
     <p> Date: $booking.prettyDate()</p>
@@ -23,8 +24,8 @@
 #end" method="post">
     <input type="submit" value="Delete" class="button center">
 </form>
-
-<div class="container">
+    </div>
+<div class="container" style = "background-color: rgba(0,0,0,0.6);">
     <table>
         <tr>
             <th>Item</th>
@@ -61,12 +62,13 @@
             <td>$totalCost</td>
         </tr>
     </table>
-</div>
 
 <a href="#if( ! $restaurant )
             /bookings
         #else
             /home/restaurants/$restaurant.getId()/bookings
          #end" class="button center">Back to list</a>
-
-
+    <div>
+    </div>
+</div>
+</div>
