@@ -133,6 +133,33 @@ public class RestaurantTableController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/home/restaurants/:num1/tables/:num2/edit", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.params(":num1")));
+            RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.params(":num2")));
+            List<Restaurant> restaurants = DBHelper.getAll(Restaurant.class);
+            model.put("template", "templates/tables/edit.vtl");
+            model.put("table", table);
+            model.put("selectedRestaurant", restaurant);
+            model.put("restaurants", restaurants);
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/home/restaurants/:num1/tables/:num2" , (req,res) -> {
+            RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.params(":num2")));
+            int tableNumber = Integer.parseInt(req.queryParams("tableNumber"));
+            int capacity = Integer.parseInt(req.queryParams("capacity"));
+            Restaurant restaurant = DBHelper.find(Restaurant.class, Integer.parseInt(req.queryParams("restaurant")));
+
+            table.setCapacity(capacity);
+            table.setRestaurant(restaurant);
+            table.setTableNumber(tableNumber);
+            DBHelper.save(table);
+
+            String redirect = "/home/restaurants/" + restaurant.getId() + "/tables/" + req.params(":num2");
+            res.redirect(redirect);
+            return null;
+        }, new VelocityTemplateEngine());
 
         post("/home/restaurants/:num1/tables/:num2/delete", (req,res) -> {
             RestaurantTable table = DBHelper.find(RestaurantTable.class, Integer.parseInt(req.params(":num2")));
