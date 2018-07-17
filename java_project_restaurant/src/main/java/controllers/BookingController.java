@@ -147,10 +147,14 @@ public class BookingController {
             }
             //timey wimey stuff over
             Booking booking = new Booking(restaurant, table, dateTime, bookingLength, customer, quantity);
-            DBHelper.save(booking);
-            Bill bill = new Bill(booking);
-            DBHelper.save(bill);
-            res.redirect("/bookings");
+            if (DBRestaurantTable.checkForDoubleBooking(table, booking)){
+                DBHelper.save(booking);
+                Bill bill = new Bill(booking);
+                DBHelper.save(bill);
+            }
+
+            String redirect = "/home/restaurants/"+ restaurant.getId() +"/bookings";
+            res.redirect(redirect);
             return null;
         }, new VelocityTemplateEngine());
 

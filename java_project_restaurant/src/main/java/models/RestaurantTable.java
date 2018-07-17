@@ -62,7 +62,7 @@ public class RestaurantTable {
         this.bookings = bookings;
     }
 
-    public void addBoooking(Booking booking){
+    public void addBooking(Booking booking){
         this.bookings.add(booking);
     }
 
