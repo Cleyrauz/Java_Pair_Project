@@ -260,3 +260,13 @@ td{
 padding-bottom: 2em;
 }
 
+#item_image {
+  display: flex;
+  background-image: url("/images/items.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 400px;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+}
