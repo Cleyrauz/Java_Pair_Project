@@ -1,5 +1,7 @@
-<p class="pageHeader">New Customer</p>
+<h1><p class="pageHeader">New Customer</p></h1>
 
+<div id="customers_image">
+    <div class="scroll_down_menu" style = "font-color: white;">
 <form action="#if( ! $restaurant )
 /customers
 #else
@@ -23,3 +25,5 @@
 #else
 /home/restaurants/$restaurant.getId()/customers
 #end" class="button center">Cancel</a>
+</div>
+</div>

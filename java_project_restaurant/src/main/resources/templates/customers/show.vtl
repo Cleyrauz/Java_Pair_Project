@@ -1,10 +1,12 @@
-<p class="pageHeader">Customer $customer.getId()</p>
-<div>
-    <p> First Name: $customer.getFirstName()</p>
-    <p> Last Name: $customer.getLastName()</p>
-    <p> Budget(£): $customer.getBudget()</p>
-</div>
+<h1><p class="pageHeader">Customer $customer.getId()</p></h1>
 
+<div id="customers_image">
+<div class="scroll_down_menu">
+    <div>
+        <p> First Name: $customer.getFirstName()</p>
+        <p> Last Name: $customer.getLastName()</p>
+        <p> Budget(£): $customer.getBudget()</p>
+    </div>
 <a href="#if( ! $restaurant )
 /customers/$customer.getId()/edit
 #else
@@ -23,7 +25,8 @@
 #else
 /home/restaurants/$restaurant.getId()/customers
 #end" class="button center">Back to list</a>
-
+</div>
+    <div class="scroll_down_menu">
 <table>
     <tr>
         <th>Booking ID</th>
@@ -44,4 +47,6 @@
     </tr>
     #end
 </table>
+    </div>
+</div>
 </div>
