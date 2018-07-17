@@ -12,11 +12,10 @@
     </ul>
 </nav>
 #end
-
-<p class="pageHeader">Items</p>
-
-<div class="container">
-    <table>
+<h1><p class="pageHeader">Items</p></h1>
+<div id="item_image">
+<div class="container-table">
+    <table class="flex-center">
         <tr>
             <th>Name:</th>
             <th>Price (£):</th>
@@ -27,8 +26,9 @@
             <td>$item.getItemType().getName()</td>
             <td>$item.getItemType().getPrice()</td>
             <td>$item.getBill().getId()</td>
-            <td><a href="/home/restaurants/$restaurant.getId()/bookings/$item.getBill().getBooking().getId()">Go to Booking</a></td>
+            <td><a href="/home/restaurants/$restaurant.getId()/bookings/$item.getBill().getBooking().getId()" class="button center">Booking</a></td>
         <tr>
             #end
     </table>
+</div>
 </div>

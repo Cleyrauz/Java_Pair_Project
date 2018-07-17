@@ -13,17 +13,19 @@
 </nav>
 #end
 
-<p class="pageHeader">Tables</p>
-<div id="tables_image">
-<div>
+
+<h1><p class="pageHeader">Tables</p></h1>
+<div class="action_button">
     <a href="#if( ! $restaurant )
     /tables/new
     #else
     /home/restaurants/$restaurant.getId()/tables/new
     #end" class="button center">New Table</a>
 </div>
-<div class="container">
-    <table>
+<div id="tables_image">
+
+    <div class="container-table">
+        <table class="flex-center">
         <tr>
             <th>Table Number</th>
             <th>Capacity</th>
@@ -39,7 +41,7 @@
                             /tables/$table.getId()
                          #else
                             /home/restaurants/$restaurant.getId()/tables/$table.getId()
-                         #end" class="text">Details</a></td>
+                         #end" class="button center">Details</a></td>
         <tr>
             #end
     </table>

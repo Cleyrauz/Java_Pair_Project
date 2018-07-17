@@ -14,7 +14,7 @@
 #end
 
 <h1><p class="pageHeader">Customers</p></h1>
-<div>
+<div class="action_button">
     <a href="#if( ! $restaurant )
                             /customers/new
                          #else
@@ -24,7 +24,7 @@
 
 <div id="customers_image">
     <div class="container-table">
-    <table>
+        <table class="flex-center">
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
@@ -40,16 +40,9 @@
                             /customers/$customer.getId()
                          #else
                             /home/restaurants/$restaurant.getId()/customers/$customer.getId()
-                         #end" class="text">Details</a></td>
+                         #end" class="button center">Details</a></td>
         <tr>
             #end
     </table>
-    <div style = "margin-top: 35%; display: flex-inline;">
-        <a href="#if( ! $restaurant )
-                            /customers/new
-                         #else
-                            /home/restaurants/$restaurant.getId()/customers/new
-                         #end" class="button centre">New Customer</a>
-    </div>
     </div>
 </div>

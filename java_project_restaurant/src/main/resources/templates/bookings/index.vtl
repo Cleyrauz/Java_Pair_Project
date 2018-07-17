@@ -14,8 +14,16 @@
 #end
 
 <h1><p class="pageHeader">Bookings</p></h1>
-<div class="container">
-    <p>Find Bookings</p>
+#if( ! $restaurant )
+
+#else
+<div class="action_button">
+    <a href="/home/restaurants/$restaurant.getId()/bookings/new" class="button center">New Booking</a>
+</div>
+#end
+<div id="bookings_image">
+<div class="container-table">
+<div class="flex-center">
     <form action="#if( ! $restaurant )
     /bookings/search
     #else
@@ -23,23 +31,19 @@
     #end" method="post">
 
 
-        <label for="startDate">StartDate</label>
+        <label for="startDate">Start Date:</label>
         <input class="date" type="date" name="startDate" id = "startDate" required="true">
 
-        <label for="endDate">EndDate</label>
+        <label for="endDate">End Date:</label>
         <input class="date" type="date" name="endDate" id = "endDate" required="true">
 
         <input type="submit" value="Search" class="button">
     </form>
-<<<<<<< HEAD
 </div>
+</div>
+
 <div class="container-table">
     <table class="flex-center">
-=======
-    </div>
-<div class="container" style="background-color: rgba(0,0,0,0.6)";>
-    <table>
->>>>>>> develop
         <tr>
             <th>Table</th>
             <th>Date</th>
@@ -61,29 +65,10 @@
                             /home/restaurants/$booking.getRestaurant().getId()/bookings/$booking.getId()
                          #else
                             /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
-                         #end" class="text">Details</a></td>
+                         #end" class="button center">Details</a></td>
         <tr>
         #end
     </table>
-<<<<<<< HEAD
-    <div>
-        <div style = "margin-top: 2%; display: flex-inline;">
-            <a href="#if( ! $restaurant )
-                            /bookings/new
-                         #else
-                            /home/restaurants/$restaurant.getId()/bookings/new
-                         #end" class="button-new">New Booking</a>
-        </div>
-    </div>
-</div>
-</div>
-=======
-</div>
-#if( ! $restaurant )
 
-    #else
-        <div>
-            <a href="/home/restaurants/$restaurant.getId()/bookings/new" class="button center">New Booking</a>
-        </div>
-#end
->>>>>>> develop
+</div>
+</div>

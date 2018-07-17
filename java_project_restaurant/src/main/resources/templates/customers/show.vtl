@@ -15,53 +15,58 @@
 
 <h1><p class="pageHeader">Customer $customer.getId()</p></h1>
 
+<form action="#if( ! $restaurant )
+/customers
+#else
+/home/restaurants/$restaurant.getId()/customers
+#end" method="get">
+    <input type="submit" value="Back to list" class="button center">
+</form>
+
 <div id="customers_image">
-<div class="scroll_down_menu">
+<div class="container-table">
     <div>
         <p> First Name: $customer.getFirstName()</p>
         <p> Last Name: $customer.getLastName()</p>
         <p> Budget(£): $customer.getBudget()</p>
     </div>
-<a href="#if( ! $restaurant )
+
+    <form action="#if( ! $restaurant )
 /customers/$customer.getId()/edit
 #else
 /home/restaurants/$restaurant.getId()/customers/$customer.getId()/edit
-#end" class="button center">Edit</a>
-<form action="#if( ! $restaurant )
+#end" method="get" class="toppadding customer_action">
+        <input type="submit" value="Edit" class="button center">
+    </form>
+
+    <form action="#if( ! $restaurant )
 /customers/$customer.getId()/delete
 #else
 /home/restaurants/$restaurant.getId()/customers/$customer.getId()/delete
-#end" method="post">
+#end" method="post" class="toppadding customer_action">
     <input type="submit" value="Delete" class="button center">
 </form>
-
-<a href="#if( ! $restaurant )
-/customers
-#else
-/home/restaurants/$restaurant.getId()/customers
-#end" class="button center">Back to list</a>
 </div>
-    <div class="scroll_down_menu">
-<table>
-    <tr>
-        <th>Booking ID</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th></th>
-    </tr>
-    #foreach ($booking in $bookings)
-    <tr>
-        <td>$booking.getId()</td>
-        <td>$booking.prettyDate()</td>
-        <td>$booking.prettyTime()</td>
-        <td><a href="#if( ! $restaurant )
+    <div class="container-table">
+        <table class="flex-center">
+            <tr>
+                <th>Booking ID</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th></th>
+            </tr>
+            #foreach ($booking in $bookings)
+            <tr>
+                <td>$booking.getId()</td>
+                <td>$booking.prettyDate()</td>
+                <td>$booking.prettyTime()</td>
+                <td><a href="#if( ! $restaurant )
                             bookings/$booking.getId()
                          #else
                             /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
                          #end" class="button center">Details</a></td>
-    </tr>
-    #end
-</table>
+            </tr>
+            #end
+        </table>
     </div>
-</div>
 </div>
