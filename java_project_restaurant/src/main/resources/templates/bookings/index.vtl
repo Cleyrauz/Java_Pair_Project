@@ -31,15 +31,9 @@
 
         <input type="submit" value="Search" class="button">
     </form>
-<<<<<<< HEAD
 </div>
 <div class="container-table">
     <table class="flex-center">
-=======
-    </div>
-<div class="container" style="background-color: rgba(0,0,0,0.6)";>
-    <table>
->>>>>>> develop
         <tr>
             <th>Table</th>
             <th>Date</th>
@@ -65,25 +59,14 @@
         <tr>
         #end
     </table>
-<<<<<<< HEAD
-    <div>
-        <div style = "margin-top: 2%; display: flex-inline;">
-            <a href="#if( ! $restaurant )
-                            /bookings/new
-                         #else
-                            /home/restaurants/$restaurant.getId()/bookings/new
-                         #end" class="button-new">New Booking</a>
-        </div>
-    </div>
-</div>
-</div>
-=======
+
 </div>
 #if( ! $restaurant )
 
     #else
         <div>
+            <div style = "margin-top: 2%; display: flex-inline;">
             <a href="/home/restaurants/$restaurant.getId()/bookings/new" class="button center">New Booking</a>
+            </div>
         </div>
 #end
->>>>>>> develop
