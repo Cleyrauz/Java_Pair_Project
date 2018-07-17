@@ -251,6 +251,10 @@ margin-bottom: 20px;
   justify-content: center;
 }
 
+.toppadding {
+padding-top: 2em;
+}
+
 td{
 padding-bottom: 2em;
 }
@@ -268,5 +272,9 @@ padding-bottom: 2em;
 
 th{
 padding-bottom: 2em;
+}
+
+p{
+padding:0.4em
 }
 

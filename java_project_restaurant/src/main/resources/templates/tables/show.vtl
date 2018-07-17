@@ -14,30 +14,35 @@
 #end
 
 <h1><p class="pageHeader">Table Id: $table.getId()</p></h1>
-<div id="tables_image">
-<div>
-    <p> Table Number: $table.getTableNumber()</p>
-    <p> Capacity: $table.getCapacity() people </p>
-    <p> Restaurant: $table.getRestaurant().getName()</p>
-</div>
-
-<a href="#if( ! $restaurant )
-/tables/$table.getId()/edit
-#else
-/home/restaurants/$restaurant.getId()/tables/$table.getId()/edit
-#end" class="button center">Edit</a>
-<form action="#if( ! $restaurant )
-/tables/$table.getId()/delete
-#else
-/home/restaurants/$restaurant.getId()/tables/$table.getId()/delete
-#end" method="post">
-    <input type="submit" value="Delete" class="button center">
-</form>
 <a href="#if( ! $restaurant )
                             /tables
                          #else
                             /home/restaurants/$restaurant.getId()/tables
                          #end" class="button center">Back to list</a>
+<div id="tables_image">
+        <div class="container-table">
+            <div>
+                <p> Table Number: $table.getTableNumber()</p>
+                <p> Capacity: $table.getCapacity() people </p>
+                <p> Restaurant: $table.getRestaurant().getName()</p>
+            </div>
+
+    <form action="#if( ! $restaurant )
+/tables/$table.getId()/edit
+#else
+/home/restaurants/$restaurant.getId()/tables/$table.getId()/edit
+#end" method="get" class="toppadding">
+        <input type="submit" value="Edit" class="button center">
+    </form>
+<form action="#if( ! $restaurant )
+/tables/$table.getId()/delete
+#else
+/home/restaurants/$restaurant.getId()/tables/$table.getId()/delete
+#end" method="post" class="toppadding">
+    <input type="submit" value="Delete" class="button center">
+</form>
+        </div>
+
 
     <div class="container-table">
         <table class="flex-center">
@@ -51,13 +56,14 @@
 <td>$booking.getId()</td>
 <td>$booking.prettyDate()</td>
 <td>$booking.prettyTime()</td>
-<td><a href="#if( ! $restaurant )
+<td><form action="#if( ! $restaurant )
                             /bills/$bill.getId()
                          #else
                             /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
-                         #end" class="text">Details</a></td>
+                         #end" method="get">
+        <input type="submit" value="Edit" class="button center">
+    </form></td>
 </tr>
 #end
-</table>
-</div>
+        </table></div>
 </div>
