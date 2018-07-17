@@ -1,7 +1,11 @@
 <p class="pageHeader">Bookings</p>
 <div class="container">
     <p>Find Bookings</p>
-    <form action="/home/restaurants/$restaurant.getId()/bookings/search" method="post">
+    <form action="#if( ! $restaurant )
+    /bookings/search
+    #else
+    /home/restaurants/$restaurant.getId()/bookings/search
+    #end" method="post">
 
         <label for="startDate">StartDate</label>
         <input class="date" type="date" name="startDate" id = "startDate" required="true">
@@ -32,7 +36,7 @@
             <td>$booking.getCustomer().getFirstName() $booking.getCustomer().getLastName()</td>
             <td></td>
             <td><a href="#if( ! $restaurant )
-                            /bookings/$booking.getId()
+                            /home/restaurants/$booking.getRestaurant().getId()/bookings/$booking.getId()
                          #else
                             /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
                          #end" class="button center">Details</a></td>
@@ -40,11 +44,10 @@
         #end
     </table>
 </div>
+#if( ! $restaurant )
 
-<div>
-    <a href="#if( ! $restaurant )
-                            /bookings/new
-                         #else
-                            /home/restaurants/$restaurant.getId()/bookings/new
-                         #end" class="button center">New Booking</a>
-</div>
+    #else
+        <div>
+            <a href="/home/restaurants/$restaurant.getId()/bookings/new" class="button center">New Booking</a>
+        </div>
+#end

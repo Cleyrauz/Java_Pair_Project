@@ -248,5 +248,30 @@ public class BookingController {
             model.put("template", "templates/bookings/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        post("/bookings/search", (req,res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            List<Booking> allBookings = DBHelper.getAll(Booking.class);
+            String startDateTime = req.queryParams("startDate");
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            Date startDate = null;
+            try {
+                startDate = simpleDateFormat.parse(startDateTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String endDateTime = req.queryParams("endDate");
+            Date endDate = null;
+            try {
+                endDate = simpleDateFormat.parse(endDateTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            List<Booking> bookingsByDate = DBBooking.findBookingsbyDate(startDate, endDate, allBookings);
+            model.put("bookings", bookingsByDate);
+            model.put("template", "templates/bookings/index.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
     }
 }
