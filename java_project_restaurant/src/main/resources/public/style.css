@@ -130,6 +130,7 @@ font-weight: lighter;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
+  margin-top: 20px;
   background-color: rgba(0,0,0,0.6);
   font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
   font-size: 18px;
@@ -186,7 +187,7 @@ font-weight: lighter;
   background-image: url("/images/table.jpg");
   background-repeat: no-repeat;
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   background-size: cover;
   justify-content: center;
   align-items: center;
@@ -278,3 +279,12 @@ p{
 padding:0.4em
 }
 
+.customer_action{
+    margin-top: 2em;
+    margin-right: 1em;
+}
+
+.action_button{
+    display: flex;
+    margin-left: 2%;
+}

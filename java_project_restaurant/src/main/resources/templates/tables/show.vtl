@@ -13,12 +13,14 @@
 </nav>
 #end
 
-<h1><p class="pageHeader">Table Id: $table.getId()</p></h1>
+<h1><p class="pageHeader">Table $table.getId()</p></h1>
+<div class="action_button">
 <a href="#if( ! $restaurant )
                             /tables
                          #else
                             /home/restaurants/$restaurant.getId()/tables
                          #end" class="button center">Back to list</a>
+</div>
 <div id="tables_image">
         <div class="container-table">
             <div>
@@ -31,14 +33,14 @@
 /tables/$table.getId()/edit
 #else
 /home/restaurants/$restaurant.getId()/tables/$table.getId()/edit
-#end" method="get" class="toppadding">
+#end" method="get" class="toppadding customer_action">
         <input type="submit" value="Edit" class="button center">
     </form>
 <form action="#if( ! $restaurant )
 /tables/$table.getId()/delete
 #else
 /home/restaurants/$restaurant.getId()/tables/$table.getId()/delete
-#end" method="post" class="toppadding">
+#end" method="post" class="toppadding customer_action">
     <input type="submit" value="Delete" class="button center">
 </form>
         </div>
@@ -61,7 +63,7 @@
                          #else
                             /home/restaurants/$restaurant.getId()/bookings/$booking.getId()
                          #end" method="get">
-        <input type="submit" value="Edit" class="button center">
+        <input type="submit" value="Details" class="button center">
     </form></td>
 </tr>
 #end
