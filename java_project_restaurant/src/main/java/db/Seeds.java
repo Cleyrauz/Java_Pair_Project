@@ -86,16 +86,25 @@ public class Seeds {
         DBHelper.save(item9);
         DBHelper.save(item10);
 
-        Date date1 = new Date(118, 10, 2, 17, 10);
+        Date date1 = new Date(118, 6, 1, 17, 0);
+        Date date2 = new Date(118, 6, 7, 14, 30);
+        Date date3 = new Date(118, 6, 3, 19, 15);
+        Date date4 = new Date(118, 6, 8, 20, 55);
+        Date date5 = new Date(118, 6, 18, 22, 45);
         Booking booking1 = new Booking(restaurant1, restaurantTable1, date1, 120, customer1, 3);
-        Booking booking2 = new Booking(restaurant1, restaurantTable2, date1, 60, customer2, 3);
-        Booking booking3 = new Booking(restaurant1, restaurantTable3, date1, 120, customer3, 5);
-        Booking booking4 = new Booking(restaurant2, restaurantDelPie1, date1, 120, customer1, 3);
-        Booking booking5 = new Booking(restaurant2, restaurantDelPie2, date1, 60, customer2, 3);
-        Booking booking6 = new Booking(restaurant2, restaurantDelPie3, date1, 120, customer3, 5);
-        Booking booking7 = new Booking(restaurant3, restaurantBurger1, date1, 120, customer1, 3);
-        Booking booking8 = new Booking(restaurant3, restaurantBurger2, date1, 60, customer2, 3);
-        Booking booking9 = new Booking(restaurant3, restaurantBurger3, date1, 120, customer3, 5);
+        Booking booking2 = new Booking(restaurant1, restaurantTable2, date2, 60, customer2, 3);
+        Booking booking3 = new Booking(restaurant1, restaurantTable3, date3, 120, customer3, 5);
+        Booking booking4 = new Booking(restaurant1, restaurantTable1, date4, 120, customer1, 5);
+        Booking booking5 = new Booking(restaurant1, restaurantTable2, date5, 120, customer2, 5);
+        Booking booking6 = new Booking(restaurant1, restaurantTable3, date1, 120, customer3, 5);
+        Booking booking7 = new Booking(restaurant1, restaurantTable1, date2, 120, customer1, 5);
+        Booking booking8 = new Booking(restaurant1, restaurantTable2, date3, 120, customer2, 5);
+        Booking booking9 = new Booking(restaurant2, restaurantDelPie1, date4, 120, customer1, 3);
+        Booking booking10 = new Booking(restaurant2, restaurantDelPie2, date5, 60, customer2, 3);
+        Booking booking11 = new Booking(restaurant2, restaurantDelPie3, date2, 120, customer3, 5);
+        Booking booking12 = new Booking(restaurant3, restaurantBurger1, date4, 120, customer1, 3);
+        Booking booking13 = new Booking(restaurant3, restaurantBurger2, date2, 60, customer2, 3);
+        Booking booking14 = new Booking(restaurant3, restaurantBurger3, date3, 120, customer3, 5);
         DBHelper.save(booking1);
         DBHelper.save(booking2);
         DBHelper.save(booking3);
@@ -105,6 +114,11 @@ public class Seeds {
         DBHelper.save(booking7);
         DBHelper.save(booking8);
         DBHelper.save(booking9);
+        DBHelper.save(booking10);
+        DBHelper.save(booking11);
+        DBHelper.save(booking12);
+        DBHelper.save(booking13);
+        DBHelper.save(booking14);
 
         Bill bill1 = new Bill(booking1);
         Bill bill2 = new Bill(booking2);
@@ -115,6 +129,11 @@ public class Seeds {
         Bill bill7 = new Bill(booking7);
         Bill bill8 = new Bill(booking8);
         Bill bill9 = new Bill(booking9);
+        Bill bill10 = new Bill(booking10);
+        Bill bill11 = new Bill(booking11);
+        Bill bill12 = new Bill(booking12);
+        Bill bill13 = new Bill(booking13);
+        Bill bill14 = new Bill(booking14);
         DBHelper.save(item1);
         DBHelper.save(bill1);
         DBHelper.save(bill2);
@@ -125,6 +144,11 @@ public class Seeds {
         DBHelper.save(bill7);
         DBHelper.save(bill8);
         DBHelper.save(bill9);
+        DBHelper.save(bill10);
+        DBHelper.save(bill11);
+        DBHelper.save(bill12);
+        DBHelper.save(bill13);
+        DBHelper.save(bill14);
 
         item1.setBill(bill1);
         item5.setBill(bill1);
