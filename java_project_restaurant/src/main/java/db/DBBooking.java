@@ -47,9 +47,9 @@ public class DBBooking {
 
     public static List<Bill> findBookingsBills(List<Booking> bookings){
         List<Bill> results = new ArrayList<>();
+        Bill result = null;
         for (Booking booking: bookings){
             session = HibernateUtil.getSessionFactory().openSession();
-            Bill result = null;
             try {
                 Criteria cr = session.createCriteria(Bill.class);
                 cr.add(Restrictions.eq("booking", booking));
