@@ -129,10 +129,10 @@ font-weight: lighter;
 .container-table {
   border: 20px;
   display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 20px;
   margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
   padding: 1em;
   background-color: rgba(0,0,0,0.6);
   font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
@@ -176,9 +176,10 @@ flex-wrap: wrap;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
-    margin-bottom: 20px;
-    margin-left: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-right: 2px;
+    margin-bottom: 10px;
+    margin-left: 20px;
 }
 
 .button:hover {
@@ -287,7 +288,7 @@ padding-top: 2em;
 }
 
 td{
-padding-bottom: 2em;
+    padding-top: 1em;
 }
 
 #item_image {
@@ -303,7 +304,7 @@ padding-bottom: 2em;
 }
 
 th{
-padding-bottom: 2em;
+padding-bottom: 0.5em;
 }
 
 p{
@@ -321,5 +322,23 @@ padding:0.4em
 }
 
 .item_drop_menu{
-      margin-top: 1.5em;
+      margin-top: 1.8em;
+}
+
+.total {
+    padding-bottom: 0em;
+    padding-top: 0.8em;
+}
+
+.item_list_button{
+margin: 0px;
+}
+
+.booking-edit{
+  text-align: left;
+}
+
+.edit-option{
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
