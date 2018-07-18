@@ -308,3 +308,12 @@ padding:0.4em
 .item_list_button{
 margin: 0px;
 }
+
+.booking-edit{
+  text-align: left;
+}
+
+.edit-option{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
