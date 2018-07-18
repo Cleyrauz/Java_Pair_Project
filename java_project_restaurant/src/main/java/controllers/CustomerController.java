@@ -105,7 +105,7 @@ public class CustomerController {
             int restaurantId = Integer.parseInt(req.params(":num"));
             HashMap<String, Object> model = new HashMap<>();
             Restaurant restaurant = DBHelper.find(Restaurant.class, restaurantId);
-            List<Customer> customers = DBHelper.getAll(Customer.class);
+            List<Customer> customers = DBCustomer.orderAllByBookingsNumber();
             model.put("customers", customers);
             model.put("restaurant", restaurant);
             model.put("template", "templates/customers/index.vtl");
