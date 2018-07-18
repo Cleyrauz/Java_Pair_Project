@@ -16,41 +16,48 @@
 <h1><p class="pageHeader">Edit Booking</p></h1>
 
 <div id="bookings_image">
-    <div class="scroll_down_menu" style = "font-color: white;">
+    <div class="container-table">
+        <div class="flex-center booking-edit">
 <form action="#if( ! $restaurant )
 /bookings/$booking.getId()/edit
 #else
 /home/restaurants/$booking.getRestaurant().getId()/bookings/$booking.getId()/edit
 #end" method="post">
 
+    <div class="edit-option">
     <label for="tableNumber">Table Number:</label>
     <select id="tableNumber" name="tableNumber">
         #foreach( $table in $tables )
             <option value="$table.getId()" #if ($table.getId() == $booking.getRestaurantTable().getId()) selected #end>$table.getTableNumber() Seats: $table.getCapacity()</option>
         #end
     </select></br>
-
+    </div>
+    <div class="edit-option">
     <label for="date">Date:</label>
     <input class="date" type="date" name="date" id = "date" required="true" min="$today" value="$date"></br>
-
+    </div>
+    <div class="edit-option">
     <label for="time">Time:</label>
     <input class="time" type="time" name="time" id="time" required="true" min="13:00" max="23:00" value="$time"></br>
-
+    </div>
+    <div class="edit-option">
     <label for="length">Length:</label>
     <input class="inputbox" type="number" name="length" id="length" required="true" value="$bookingLength"></br>
-
-
+    </div>
+    <div class="edit-option">
     <label for="quantity">Quantity:</label>
     <input class="inputbox" type="text" name="quantity" id = "quantity" required="true" value="$quantity"></br>
-
+    </div>
+    <div class="edit-option">
     <label for="customer">Customer:</label>
     <select id="customer" name="customer">
         #foreach( $customer in $customers )
             <option value="$customer.getId()" #if ($customer.getId() == $booking.getCustomer().getId()) selected #end>$customer.getFirstName() $customer.getLastName()</option>
         #end
     </select></br>
-
+    </div>
     <input type="submit" value="Update" class="button">
 </form>
     </div>
+</div>
 </div>
