@@ -59,8 +59,8 @@
     </form>
     <table class="container-table">
         <tr>
-            <th>Item</th>
-            <th>Price (£)</th>
+            <th class="total">Item</th>
+            <th class="total">Price (£)</th>
         </tr>
     #foreach ($item in $items)
         <tr>
@@ -68,14 +68,14 @@
             <td>$item.getItemType().getPrice()</td>
             <td>
                 <form action="/home/restaurants/$restaurant.getId()/bookings/$booking.getId()/items/$item.getId()/delete" method="post">
-                    <input type="submit" value="Delete" class="button center">
+                    <input type="submit" value="Delete" class="button center item_list_button">
                 </form>
             </td>
         </tr>
     #end
         <tr>
-            <th>Total</th>
-            <td>$totalCost</td>
+            <th class="total">Total</th>
+            <td class="total">$totalCost</td>
         </tr>
     </table>
     </div>

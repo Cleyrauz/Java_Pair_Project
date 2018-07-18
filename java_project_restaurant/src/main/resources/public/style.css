@@ -3,7 +3,7 @@
   background-image: url("/images/table-booking.jpg");
   background-repeat: no-repeat;
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   background-size: cover;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,7 @@ margin-top: 10px;
   display:inline-grid;
   border: 1px solid black;
   margin-left: 80px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
 
@@ -50,6 +50,7 @@ body{
   background-size: 1024px 768px;
   padding-top: 0;
   height: : 100%;
+  min-width: 500px;
   font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
 
@@ -118,30 +119,54 @@ font-weight: lighter;
   background-image: url("/images/restaurant.jpg");
   background-repeat: no-repeat;
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   background-size: cover;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 .container-table {
   border: 20px;
   display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 20px;
   margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
   padding: 1em;
   background-color: rgba(0,0,0,0.6);
   font-family: Tate regular,Arial,"Helvetica Neue",Helvetica,sans-serif;
   font-size: 18px;
   text-align: center;
   color: white;
-  width: fit-content;
+  width: -webkit-fill-available;
   display: flex;
   justify-content: center;
 }
 
+@media all and (max-width: 700px) {
+ .container-table  {
+display: column;
+}
+}
+
+@media all and (max-width: 700px) {
+ #bookings_image_show  {
+flex-wrap: wrap;
+}
+}
+
+@media all and (max-width: 700px) {
+ #customers_image  {
+flex-wrap: wrap;
+}
+}
+
+@media all and (max-width: 700px) {
+ #tables_image  {
+flex-wrap: wrap;
+}
+}
 
 .button{
     background-color: white;
@@ -151,9 +176,10 @@ font-weight: lighter;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
-    margin-bottom: 20px;
-    margin-left: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-right: 2px;
+    margin-bottom: 10px;
+    margin-left: 20px;
 }
 
 .button:hover {
@@ -181,6 +207,7 @@ font-weight: lighter;
   background-size: cover;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 #tables_image {
@@ -192,6 +219,7 @@ font-weight: lighter;
   background-size: cover;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 #bookings_image {
@@ -205,6 +233,7 @@ font-weight: lighter;
   align-items: center;
   flex-direction: column;
   color : white;
+  margin-bottom: 40px;
 }
 
 #container-booking{
@@ -230,6 +259,7 @@ margin-bottom: 20px;
   align-items: center;
   flex-direction: row;
   color : white;
+  margin-bottom: 40px;
 }
 
 .restaurant {
@@ -258,7 +288,7 @@ padding-top: 2em;
 }
 
 td{
-padding-bottom: 2em;
+    padding-top: 1em;
 }
 
 #item_image {
@@ -270,10 +300,11 @@ padding-bottom: 2em;
   background-size: cover;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 th{
-padding-bottom: 2em;
+padding-bottom: 0.5em;
 }
 
 p{
@@ -291,5 +322,23 @@ padding:0.4em
 }
 
 .item_drop_menu{
-      margin-top: 1.5em;
+      margin-top: 1.8em;
+}
+
+.total {
+    padding-bottom: 0em;
+    padding-top: 0.8em;
+}
+
+.item_list_button{
+margin: 0px;
+}
+
+.booking-edit{
+  text-align: left;
+}
+
+.edit-option{
+    margin-top: 20px;
+    margin-bottom: 10px;
 }

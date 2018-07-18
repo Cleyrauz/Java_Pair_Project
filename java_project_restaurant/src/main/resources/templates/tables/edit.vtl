@@ -15,6 +15,7 @@
 
 <p class="pageHeader">Edit Table</p>
 <div id="tables_image">
+    <div class="container-table">
 <form action="#if( ! $selectedRestaurant )
 /tables/$table.getId()
 #else
@@ -46,4 +47,5 @@
 #else
 /home/restaurants/$selectedRestaurant.getId()/tables/$tables.getId()
 #end" class="button center">Cancel</a>
+</div>
 </div>
