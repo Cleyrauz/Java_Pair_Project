@@ -13,6 +13,7 @@ public class Customer {
     private String lastName;
     private List<Booking> bookings;
     private double budget;
+//    private int bookings_size;
 
     public Customer(){
     }
@@ -22,6 +23,7 @@ public class Customer {
         this.lastName = lastName;
         this.budget = budget;
         this.bookings = new ArrayList<>();
+//        this.bookings_size = 0;
     }
 
     @Id
@@ -74,6 +76,16 @@ public class Customer {
     public void setBudget(double budget) {
         this.budget = budget;
     }
+
+//    @Column(name = "bookings_size")
+//    public int getBookings_size() {
+//        return bookings_size;
+//    }
+//
+//    public void setBookings_size(int size) {
+//        this.bookings_size = size;
+//    }
+
 
 
 }

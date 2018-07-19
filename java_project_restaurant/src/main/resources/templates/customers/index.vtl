@@ -29,12 +29,14 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Budget(£)</th>
+            <th>Bookings</th>
         </tr>
         #foreach($customer in $customers)
         <tr>
             <td>$customer.getFirstName()</td>
             <td>$customer.getLastName()</td>
             <td>$customer.getBudget()</td>
+            <td>$customer.getBookings().size()</td>
 
             <td><a href="#if( ! $restaurant )
                             /customers/$customer.getId()

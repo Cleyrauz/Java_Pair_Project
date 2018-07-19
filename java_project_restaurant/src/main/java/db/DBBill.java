@@ -28,8 +28,15 @@ public class DBBill {
 
     public static List<Item> findBillsItems(List<Bill> bills){
         List<Item> results = new ArrayList<>();
+        List<Item> items = DBHelper.getAll(Item.class);
         for (Bill bill : bills) {
-            results.addAll(findBillItems(bill));
+            for (Item item : items){
+                if(item.getBill() != null) {
+                    if (item.getBill().getId() == bill.getId()) {
+                        results.add(item);
+                    }
+                }
+            }
         }
         return results;
     }

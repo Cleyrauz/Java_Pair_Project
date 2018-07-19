@@ -34,11 +34,12 @@
 
     <input type="submit" value="Save" class="button">
 </form>
-
-<a href="#if( ! $restaurant )
+        <form action="#if( ! $restaurant )
 /customers
 #else
 /home/restaurants/$restaurant.getId()/customers
-#end" class="button center">Cancel</a>
+#end" method="get">
+            <input type="submit" value="Cancel" class="button"></form>
+
 </div>
 </div>
